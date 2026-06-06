@@ -20,8 +20,11 @@ env = cdk.Environment(
 network = EvhNetworkStack(app, "EvhNetworkStack", env=env)
 data = EvhDataStack(app, "EvhDataStack", network=network, env=env)
 auth = EvhAuthStack(app, "EvhAuthStack", env=env)
-EvhIngestStack(app, "EvhIngestStack", data=data, env=env)
-compute = EvhComputeStack(app, "EvhComputeStack", network=network, data=data, env=env)
+ingest = EvhIngestStack(app, "EvhIngestStack", data=data, env=env)
+compute = EvhComputeStack(
+    app, "EvhComputeStack",
+    network=network, data=data, auth=auth, ingest=ingest, env=env,
+)
 EvhCicdStack(app, "EvhCicdStack", compute=compute, env=env)
 
 cdk.Tags.of(app).add("Project", "EVHacks")

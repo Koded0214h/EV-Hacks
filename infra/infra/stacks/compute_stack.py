@@ -8,11 +8,13 @@ from constructs import Construct
 
 from infra.stacks.network_stack import EvhNetworkStack
 from infra.stacks.data_stack import EvhDataStack
+from infra.stacks.auth_stack import EvhAuthStack
+from infra.stacks.ingest_stack import EvhIngestStack
 
 
 BOOTSTRAP_SCRIPT = '''#!/bin/bash
 # /opt/evhacks/bootstrap.sh
-# Run this on the EC2 host AFTER `git clone`-ing the backend repo into /opt/evhacks/app
+# Run this on the EC2 host AFTER `git clone`-ing the backend into /opt/evhacks/app.
 # CI/CD calls this same script on every deploy.
 set -e
 source /etc/profile.d/evhacks.sh
@@ -23,42 +25,38 @@ DB_PW=$(aws secretsmanager get-secret-value --secret-id "$DB_SECRET_ARN" \\
 DJANGO_KEY=$(aws secretsmanager get-secret-value --secret-id "$DJANGO_SECRET_ARN" \\
   --query SecretString --output text)
 
+# Single .env consumed by docker-compose. No override file needed —
+# docker-compose.yml has profiles=["local"] on the db service so it stays off in production.
 cat > .env <<EOF
 SECRET_KEY=$DJANGO_KEY
 DEBUG=False
+ALLOWED_HOSTS=*
+
 DB_NAME=evh
 DB_USER=evhmaster
 DB_PASSWORD=$DB_PW
 DB_HOST=$DB_HOST
 DB_PORT=5432
+
 REDIS_URL=redis://redis:6379/0
+
 AWS_REGION=$AWS_REGION
 AWS_S3_BUCKET=$DATA_BUCKET
-ECR_REGISTRY=$ECR_REGISTRY
+AWS_S3_ASSETS_BUCKET=$ASSETS_BUCKET
+
+COGNITO_USER_POOL_ID=$COGNITO_USER_POOL_ID
+COGNITO_PWA_CLIENT_ID=$COGNITO_PWA_CLIENT_ID
+COGNITO_API_CLIENT_ID=$COGNITO_API_CLIENT_ID
+COGNITO_TOKEN_ISSUER=$COGNITO_TOKEN_ISSUER
+
+KINESIS_STREAM_NAME=evh-pings
+INGEST_API_URL=$INGEST_API_URL
+
+ECR_REGISTRY=$ECR_REGISTRY/evh
+IMAGE_TAG=latest
 EOF
 
-cat > docker-compose.override.yml <<EOF
-services:
-  db:
-    profiles: ["disabled"]
-  api:
-    image: $ECR_REGISTRY/evh/api:latest
-    pull_policy: always
-    build: !reset null
-    environment:
-      DB_HOST: $DB_HOST
-      DB_USER: evhmaster
-      DB_PASSWORD: $DB_PW
-      DB_NAME: evh
-      SECRET_KEY: $DJANGO_KEY
-      DEBUG: "False"
-      AWS_REGION: $AWS_REGION
-      AWS_S3_BUCKET: $DATA_BUCKET
-    depends_on: !override
-      - redis
-EOF
-
-# ECR login (token valid for 12h — CI/CD re-runs this each deploy)
+# ECR login (token valid 12h — CI/CD re-runs this each deploy)
 aws ecr get-login-password --region "$AWS_REGION" \\
   | docker login --username AWS --password-stdin "$ECR_REGISTRY"
 
@@ -78,6 +76,8 @@ class EvhComputeStack(Stack):
         *,
         network: EvhNetworkStack,
         data: EvhDataStack,
+        auth: EvhAuthStack,
+        ingest: EvhIngestStack,
         **kwargs,
     ) -> None:
         super().__init__(scope, construct_id, **kwargs)
@@ -122,11 +122,17 @@ class EvhComputeStack(Stack):
             # Persist runtime context for whoever SSHes in next
             f"cat > /etc/profile.d/evhacks.sh <<'EOF'\n"
             f"export DATA_BUCKET={data.data_bucket.bucket_name}\n"
+            f"export ASSETS_BUCKET={data.frontend_assets_bucket.bucket_name}\n"
             f"export DB_HOST={data.db.db_instance_endpoint_address}\n"
             f"export DB_SECRET_ARN={data.db.secret.secret_arn}\n"
             f"export DJANGO_SECRET_ARN={network.django_secret.secret_arn}\n"
             f"export AWS_REGION={self.region}\n"
             f"export ECR_REGISTRY={self.account}.dkr.ecr.{self.region}.amazonaws.com\n"
+            f"export COGNITO_USER_POOL_ID={auth.user_pool.user_pool_id}\n"
+            f"export COGNITO_PWA_CLIENT_ID={auth.pwa_client.user_pool_client_id}\n"
+            f"export COGNITO_API_CLIENT_ID={auth.api_client.user_pool_client_id}\n"
+            f"export COGNITO_TOKEN_ISSUER=https://cognito-idp.{self.region}.amazonaws.com/{auth.user_pool.user_pool_id}\n"
+            f"export INGEST_API_URL={ingest.api.api_endpoint}/ingest\n"
             "EOF",
             "chmod +x /etc/profile.d/evhacks.sh",
             # Drop the bootstrap script
