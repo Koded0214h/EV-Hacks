@@ -1,0 +1,417 @@
+{
+  "/EvhCicdStack": [
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "Kernel._Kernel_create (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:61224)",
+        "Kernel.create (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:51955)",
+        "KernelHost.processRequest (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:212065)",
+        "KernelHost.run (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:211120)",
+        "Immediate._onImmediate (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:211164)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/EvhCicdStack/ApiRepo": [
+    {
+      "type": "aws:cdk:analytics:construct",
+      "data": {
+        "emptyOnDelete": true,
+        "imageScanOnPush": true,
+        "lifecycleRules": [
+          {
+            "description": "*",
+            "maxImageCount": "*"
+          }
+        ],
+        "removalPolicy": "destroy",
+        "repositoryName": "*"
+      }
+    },
+    {
+      "type": "aws:cdk:analytics:method",
+      "data": {
+        "addLifecycleRule": [
+          {
+            "description": "*",
+            "maxImageCount": "*"
+          },
+          "*",
+          "*"
+        ]
+      }
+    }
+  ],
+  "/EvhCicdStack/GitHubOidc": [
+    {
+      "type": "aws:cdk:analytics:construct",
+      "data": {
+        "url": "*",
+        "clientIds": "*"
+      }
+    }
+  ],
+  "/EvhCicdStack/Custom::AWSCDKOpenIdConnectProviderCustomResourceProvider": [
+    {
+      "type": "aws:cdk:is-custom-resource-handler-customResourceProvider",
+      "data": true
+    }
+  ],
+  "/EvhCicdStack/GitHubActionsRole": [
+    {
+      "type": "aws:cdk:analytics:construct",
+      "data": {
+        "assumedBy": {
+          "principalAccount": "*",
+          "assumeRoleAction": "*"
+        },
+        "description": "*",
+        "roleName": "*"
+      }
+    },
+    {
+      "type": "aws:cdk:analytics:method",
+      "data": {
+        "addToPrincipalPolicy": [
+          {}
+        ]
+      }
+    },
+    {
+      "type": "aws:cdk:analytics:method",
+      "data": {
+        "attachInlinePolicy": [
+          "*"
+        ]
+      }
+    },
+    {
+      "type": "aws:cdk:analytics:method",
+      "data": {
+        "attachInlinePolicy": [
+          "*"
+        ]
+      }
+    },
+    {
+      "type": "aws:cdk:analytics:method",
+      "data": {
+        "addToPrincipalPolicy": [
+          {}
+        ]
+      }
+    },
+    {
+      "type": "aws:cdk:analytics:method",
+      "data": {
+        "addToPolicy": [
+          {}
+        ]
+      }
+    },
+    {
+      "type": "aws:cdk:analytics:method",
+      "data": {
+        "addToPrincipalPolicy": [
+          {}
+        ]
+      }
+    },
+    {
+      "type": "aws:cdk:analytics:method",
+      "data": {
+        "addToPolicy": [
+          {}
+        ]
+      }
+    },
+    {
+      "type": "aws:cdk:analytics:method",
+      "data": {
+        "addToPrincipalPolicy": [
+          {}
+        ]
+      }
+    },
+    {
+      "type": "aws:cdk:analytics:method",
+      "data": {
+        "addToPolicy": [
+          {}
+        ]
+      }
+    },
+    {
+      "type": "aws:cdk:analytics:method",
+      "data": {
+        "addToPrincipalPolicy": [
+          {}
+        ]
+      }
+    },
+    {
+      "type": "aws:cdk:analytics:method",
+      "data": {
+        "addToPolicy": [
+          {}
+        ]
+      }
+    },
+    {
+      "type": "aws:cdk:analytics:method",
+      "data": {
+        "addToPrincipalPolicy": [
+          {}
+        ]
+      }
+    }
+  ],
+  "/EvhCicdStack/EcrRepoUri": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "EcrRepoUri"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "Kernel._Kernel_create (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:61224)",
+        "Kernel.create (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:51955)",
+        "KernelHost.processRequest (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:212065)",
+        "KernelHost.run (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:211120)",
+        "Immediate._onImmediate (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:211164)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/EvhCicdStack/GitHubRoleArn": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "GitHubRoleArn"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "Kernel._Kernel_create (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:61224)",
+        "Kernel.create (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:51955)",
+        "KernelHost.processRequest (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:212065)",
+        "KernelHost.run (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:211120)",
+        "Immediate._onImmediate (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:211164)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/EvhCicdStack/BootstrapVersion": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "BootstrapVersion"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/EvhCicdStack/CheckBootstrapVersion": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CheckBootstrapVersion"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/EvhCicdStack/ApiRepo/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ApiRepoEFA7BA97"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Repository2 in aws-cdk-lib...",
+        "Kernel._Kernel_create (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:61224)",
+        "Kernel.create (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:51955)",
+        "KernelHost.processRequest (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:212065)",
+        "KernelHost.run (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:211120)",
+        "Immediate._onImmediate (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:211164)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/EvhCicdStack/GitHubOidc/Resource": [
+    {
+      "type": "aws:cdk:analytics:construct",
+      "data": "*"
+    }
+  ],
+  "/EvhCicdStack/Custom::AWSCDKOpenIdConnectProviderCustomResourceProvider/Role": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CustomAWSCDKOpenIdConnectProviderCustomResourceProviderRole517FED65"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new OpenIdConnectProvider2 in aws-cdk-lib...",
+        "Kernel._Kernel_create (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:61224)",
+        "Kernel.create (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:51955)",
+        "KernelHost.processRequest (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:212065)",
+        "KernelHost.run (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:211120)"
+      ]
+    }
+  ],
+  "/EvhCicdStack/Custom::AWSCDKOpenIdConnectProviderCustomResourceProvider/Handler": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CustomAWSCDKOpenIdConnectProviderCustomResourceProviderHandlerF2C543E0"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new OpenIdConnectProvider2 in aws-cdk-lib...",
+        "Kernel._Kernel_create (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:61224)",
+        "Kernel.create (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:51955)",
+        "KernelHost.processRequest (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:212065)",
+        "KernelHost.run (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:211120)"
+      ]
+    }
+  ],
+  "/EvhCicdStack/GitHubActionsRole/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "GitHubActionsRole4F1BBA26"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Role2 in aws-cdk-lib...",
+        "Kernel._Kernel_create (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:61224)",
+        "Kernel.create (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:51955)",
+        "KernelHost.processRequest (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:212065)",
+        "KernelHost.run (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:211120)",
+        "Immediate._onImmediate (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:211164)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/EvhCicdStack/GitHubActionsRole/DefaultPolicy": [
+    {
+      "type": "aws:cdk:analytics:construct",
+      "data": "*"
+    },
+    {
+      "type": "aws:cdk:analytics:method",
+      "data": {
+        "attachToRole": [
+          "*"
+        ]
+      }
+    },
+    {
+      "type": "aws:cdk:analytics:method",
+      "data": {
+        "attachToRole": [
+          "*"
+        ]
+      }
+    },
+    {
+      "type": "aws:cdk:analytics:method",
+      "data": {
+        "addStatements": [
+          {}
+        ]
+      }
+    },
+    {
+      "type": "aws:cdk:analytics:method",
+      "data": {
+        "addStatements": [
+          {}
+        ]
+      }
+    },
+    {
+      "type": "aws:cdk:analytics:method",
+      "data": {
+        "addStatements": [
+          {}
+        ]
+      }
+    },
+    {
+      "type": "aws:cdk:analytics:method",
+      "data": {
+        "addStatements": [
+          {}
+        ]
+      }
+    },
+    {
+      "type": "aws:cdk:analytics:method",
+      "data": {
+        "addStatements": [
+          {}
+        ]
+      }
+    },
+    {
+      "type": "aws:cdk:analytics:method",
+      "data": {
+        "addStatements": [
+          {}
+        ]
+      }
+    }
+  ],
+  "/EvhCicdStack/CDKMetadata/Default": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CDKMetadata"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...App.synth in aws-cdk-lib...",
+        "/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:542 (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:5429)",
+        "Kernel._Kernel_ensureSync (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:69840)"
+      ]
+    }
+  ],
+  "/EvhCicdStack/GitHubOidc/Resource/Default": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "GitHubOidcA2A496A3"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new OpenIdConnectProvider2 in aws-cdk-lib...",
+        "Kernel._Kernel_create (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:61224)",
+        "Kernel.create (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:51955)",
+        "KernelHost.processRequest (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:212065)",
+        "KernelHost.run (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:211120)",
+        "Immediate._onImmediate (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:211164)"
+      ]
+    }
+  ],
+  "/EvhCicdStack/GitHubActionsRole/DefaultPolicy/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "GitHubActionsRoleDefaultPolicy69DA0189"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.grantPullPush in aws-cdk-lib...",
+        "/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:542 (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:5429)"
+      ]
+    }
+  ]
+}

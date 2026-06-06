@@ -1,0 +1,595 @@
+{
+  "/EvhDataStack": [
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "Kernel._Kernel_create (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:61224)",
+        "Kernel.create (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:51955)",
+        "KernelHost.processRequest (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:212065)",
+        "KernelHost.run (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:211120)",
+        "Immediate._onImmediate (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:211164)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/EvhDataStack/EvhRds": [
+    {
+      "type": "aws:cdk:analytics:construct",
+      "data": {
+        "vpc": "*",
+        "backupRetention": "*",
+        "cloudwatchLogsExports": "*",
+        "deletionProtection": false,
+        "maxAllocatedStorage": "*",
+        "multiAz": false,
+        "publiclyAccessible": false,
+        "removalPolicy": "destroy",
+        "securityGroups": [
+          "*"
+        ],
+        "storageType": "gp3",
+        "vpcSubnets": {
+          "subnetType": "Isolated"
+        },
+        "engine": {
+          "engineType": "*",
+          "engineVersion": {
+            "fullVersion": "*",
+            "majorVersion": "*"
+          },
+          "parameterGroupFamily": "*",
+          "singleUserRotationApplication": "*",
+          "engineFamily": "*",
+          "supportsReadReplicaBackups": "*",
+          "defaultUsername": "*"
+        },
+        "allocatedStorage": "*",
+        "databaseName": "*",
+        "instanceType": "*",
+        "credentials": "*"
+      }
+    }
+  ],
+  "/EvhDataStack/DataBucket": [
+    {
+      "type": "aws:cdk:analytics:construct",
+      "data": {
+        "autoDeleteObjects": true,
+        "blockPublicAccess": "*",
+        "bucketName": "*",
+        "encryption": "S3_MANAGED",
+        "enforceSSL": true,
+        "lifecycleRules": [
+          {
+            "id": "*",
+            "prefix": "*",
+            "transitions": "*"
+          }
+        ],
+        "removalPolicy": "destroy",
+        "versioned": true
+      }
+    },
+    {
+      "type": "aws:cdk:analytics:method",
+      "data": {
+        "addLifecycleRule": [
+          {
+            "id": "*",
+            "prefix": "*",
+            "transitions": "*"
+          },
+          "*",
+          "*"
+        ]
+      }
+    }
+  ],
+  "/EvhDataStack/Custom::S3AutoDeleteObjectsCustomResourceProvider": [
+    {
+      "type": "aws:cdk:is-custom-resource-handler-customResourceProvider",
+      "data": true
+    }
+  ],
+  "/EvhDataStack/FrontendAssetsBucket": [
+    {
+      "type": "aws:cdk:analytics:construct",
+      "data": {
+        "autoDeleteObjects": true,
+        "blockPublicAccess": "*",
+        "bucketName": "*",
+        "encryption": "S3_MANAGED",
+        "enforceSSL": true,
+        "removalPolicy": "destroy"
+      }
+    }
+  ],
+  "/EvhDataStack/DbSecretArn": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "DbSecretArn"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "Kernel._Kernel_create (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:61224)",
+        "Kernel.create (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:51955)",
+        "KernelHost.processRequest (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:212065)",
+        "KernelHost.run (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:211120)",
+        "Immediate._onImmediate (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:211164)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/EvhDataStack/DbEndpoint": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "DbEndpoint"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "Kernel._Kernel_create (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:61224)",
+        "Kernel.create (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:51955)",
+        "KernelHost.processRequest (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:212065)",
+        "KernelHost.run (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:211120)",
+        "Immediate._onImmediate (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:211164)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/EvhDataStack/DbPort": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "DbPort"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "Kernel._Kernel_create (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:61224)",
+        "Kernel.create (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:51955)",
+        "KernelHost.processRequest (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:212065)",
+        "KernelHost.run (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:211120)",
+        "Immediate._onImmediate (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:211164)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/EvhDataStack/DataBucketName": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "DataBucketName"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "Kernel._Kernel_create (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:61224)",
+        "Kernel.create (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:51955)",
+        "KernelHost.processRequest (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:212065)",
+        "KernelHost.run (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:211120)",
+        "Immediate._onImmediate (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:211164)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/EvhDataStack/DataBucketArn": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "DataBucketArn"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "Kernel._Kernel_create (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:61224)",
+        "Kernel.create (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:51955)",
+        "KernelHost.processRequest (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:212065)",
+        "KernelHost.run (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:211120)",
+        "Immediate._onImmediate (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:211164)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/EvhDataStack/FrontendAssetsBucketName": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "FrontendAssetsBucketName"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "Kernel._Kernel_create (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:61224)",
+        "Kernel.create (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:51955)",
+        "KernelHost.processRequest (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:212065)",
+        "KernelHost.run (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:211120)",
+        "Immediate._onImmediate (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:211164)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/EvhDataStack/BootstrapVersion": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "BootstrapVersion"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/EvhDataStack/CheckBootstrapVersion": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CheckBootstrapVersion"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/EvhDataStack/EvhRds/SubnetGroup": [
+    {
+      "type": "aws:cdk:analytics:construct",
+      "data": {
+        "description": "*",
+        "vpc": "*",
+        "vpcSubnets": {
+          "subnetType": "Isolated"
+        },
+        "removalPolicy": "*"
+      }
+    }
+  ],
+  "/EvhDataStack/EvhRds/Secret": [
+    {
+      "type": "aws:cdk:analytics:construct",
+      "data": {
+        "encryptionKey": "*",
+        "secretName": "*",
+        "replicaRegions": "*"
+      }
+    },
+    {
+      "type": "aws:cdk:analytics:construct",
+      "data": {
+        "username": "*",
+        "secretName": "*",
+        "encryptionKey": "*",
+        "excludeCharacters": "*",
+        "replaceOnPasswordCriteriaChanges": true,
+        "replicaRegions": "*"
+      }
+    }
+  ],
+  "/EvhDataStack/EvhRds/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "EvhRds728D5ABC"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new DatabaseInstance2 in aws-cdk-lib...",
+        "Kernel._Kernel_create (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:61224)",
+        "Kernel.create (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:51955)",
+        "KernelHost.processRequest (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:212065)",
+        "KernelHost.run (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:211120)",
+        "Immediate._onImmediate (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:211164)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/EvhDataStack/DataBucket/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "DataBucketE3889A50"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Bucket2 in aws-cdk-lib...",
+        "Kernel._Kernel_create (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:61224)",
+        "Kernel.create (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:51955)",
+        "KernelHost.processRequest (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:212065)",
+        "KernelHost.run (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:211120)",
+        "Immediate._onImmediate (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:211164)",
+        "...node internals..."
+      ]
+    },
+    {
+      "type": "aws:cdk:analytics:mixin",
+      "data": {
+        "mixin": "aws-cdk-lib.aws_s3.mixins.BucketAutoDeleteObjects"
+      }
+    }
+  ],
+  "/EvhDataStack/DataBucket/Policy": [
+    {
+      "type": "aws:cdk:analytics:construct",
+      "data": {
+        "bucket": "*"
+      }
+    }
+  ],
+  "/EvhDataStack/DataBucket/AutoDeleteObjectsCustomResource": [
+    {
+      "type": "aws:cdk:analytics:construct",
+      "data": "*"
+    }
+  ],
+  "/EvhDataStack/Custom::S3AutoDeleteObjectsCustomResourceProvider/Role": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CustomS3AutoDeleteObjectsCustomResourceProviderRole3B1BD092"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/EvhDataStack/Custom::S3AutoDeleteObjectsCustomResourceProvider/Handler": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CustomS3AutoDeleteObjectsCustomResourceProviderHandler9D90184F"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/EvhDataStack/FrontendAssetsBucket/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "FrontendAssetsBucket52F4AD30"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Bucket2 in aws-cdk-lib...",
+        "Kernel._Kernel_create (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:61224)",
+        "Kernel.create (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:51955)",
+        "KernelHost.processRequest (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:212065)",
+        "KernelHost.run (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:211120)",
+        "Immediate._onImmediate (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:211164)",
+        "...node internals..."
+      ]
+    },
+    {
+      "type": "aws:cdk:analytics:mixin",
+      "data": {
+        "mixin": "aws-cdk-lib.aws_s3.mixins.BucketAutoDeleteObjects"
+      }
+    }
+  ],
+  "/EvhDataStack/FrontendAssetsBucket/Policy": [
+    {
+      "type": "aws:cdk:analytics:construct",
+      "data": {
+        "bucket": "*"
+      }
+    }
+  ],
+  "/EvhDataStack/FrontendAssetsBucket/AutoDeleteObjectsCustomResource": [
+    {
+      "type": "aws:cdk:analytics:construct",
+      "data": "*"
+    }
+  ],
+  "/EvhDataStack/CDKMetadata/Default": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CDKMetadata"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...App.synth in aws-cdk-lib...",
+        "/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:542 (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:5429)",
+        "Kernel._Kernel_ensureSync (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:69840)"
+      ]
+    }
+  ],
+  "/EvhDataStack/Exports/Output{\"Fn::GetAtt\":[\"DataBucketE3889A50\",\"Arn\"]}": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ExportsOutputFnGetAttDataBucketE3889A50Arn98F8399F"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...App.synth in aws-cdk-lib...",
+        "/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:542 (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:5429)",
+        "Kernel._Kernel_ensureSync (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:69840)"
+      ]
+    }
+  ],
+  "/EvhDataStack/Exports/Output{\"Ref\":\"EvhRdsSecretAttachment426BF723\"}": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ExportsOutputRefEvhRdsSecretAttachment426BF723EEA745FF"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...App.synth in aws-cdk-lib...",
+        "/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:542 (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:5429)",
+        "Kernel._Kernel_ensureSync (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:69840)"
+      ]
+    }
+  ],
+  "/EvhDataStack/Exports/Output{\"Ref\":\"DataBucketE3889A50\"}": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ExportsOutputRefDataBucketE3889A50250F5285"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...App.synth in aws-cdk-lib...",
+        "/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:542 (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:5429)",
+        "Kernel._Kernel_ensureSync (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:69840)"
+      ]
+    }
+  ],
+  "/EvhDataStack/Exports/Output{\"Ref\":\"FrontendAssetsBucket52F4AD30\"}": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ExportsOutputRefFrontendAssetsBucket52F4AD30A5EFCA84"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...App.synth in aws-cdk-lib...",
+        "/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:542 (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:5429)",
+        "Kernel._Kernel_ensureSync (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:69840)"
+      ]
+    }
+  ],
+  "/EvhDataStack/Exports/Output{\"Fn::GetAtt\":[\"EvhRds728D5ABC\",\"Endpoint.Address\"]}": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ExportsOutputFnGetAttEvhRds728D5ABCEndpointAddressDC71C6BC"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...App.synth in aws-cdk-lib...",
+        "/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:542 (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:5429)",
+        "Kernel._Kernel_ensureSync (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:69840)"
+      ]
+    }
+  ],
+  "/EvhDataStack/EvhRds/SubnetGroup/Default": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "EvhRdsSubnetGroup4065F1C4"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new DatabaseInstance2 in aws-cdk-lib...",
+        "Kernel._Kernel_create (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:61224)",
+        "Kernel.create (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:51955)",
+        "KernelHost.processRequest (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:212065)",
+        "KernelHost.run (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:211120)"
+      ]
+    }
+  ],
+  "/EvhDataStack/EvhRds/Secret/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "EvhDataStackEvhRdsSecretF6F7C0AD3fdaad7efa858a3daf9490cf0a702aeb"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new DatabaseInstance2 in aws-cdk-lib...",
+        "Kernel._Kernel_create (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:61224)",
+        "Kernel.create (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:51955)"
+      ]
+    }
+  ],
+  "/EvhDataStack/EvhRds/Secret/Attachment": [
+    {
+      "type": "aws:cdk:analytics:construct",
+      "data": {
+        "secret": "*",
+        "target": "*"
+      }
+    }
+  ],
+  "/EvhDataStack/DataBucket/Policy/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "DataBucketPolicy3231C704"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Bucket2 in aws-cdk-lib...",
+        "Kernel._Kernel_create (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:61224)",
+        "Kernel.create (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:51955)"
+      ]
+    },
+    {
+      "type": "aws:cdk:analytics:mixin",
+      "data": {
+        "mixin": "aws-cdk-lib.aws_s3.mixins.BucketPolicyStatements"
+      }
+    }
+  ],
+  "/EvhDataStack/DataBucket/AutoDeleteObjectsCustomResource/Default": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "DataBucketAutoDeleteObjectsCustomResource9FB51BF3"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/EvhDataStack/FrontendAssetsBucket/Policy/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "FrontendAssetsBucketPolicyC3DA97EC"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Bucket2 in aws-cdk-lib...",
+        "Kernel._Kernel_create (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:61224)",
+        "Kernel.create (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:51955)"
+      ]
+    },
+    {
+      "type": "aws:cdk:analytics:mixin",
+      "data": {
+        "mixin": "aws-cdk-lib.aws_s3.mixins.BucketPolicyStatements"
+      }
+    }
+  ],
+  "/EvhDataStack/FrontendAssetsBucket/AutoDeleteObjectsCustomResource/Default": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "FrontendAssetsBucketAutoDeleteObjectsCustomResource81511928"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/EvhDataStack/EvhRds/Secret/Attachment/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "EvhRdsSecretAttachment426BF723"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new DatabaseInstance2 in aws-cdk-lib...",
+        "Kernel._Kernel_create (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:61224)",
+        "Kernel.create (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:51955)",
+        "KernelHost.processRequest (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:212065)",
+        "KernelHost.run (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:211120)",
+        "Immediate._onImmediate (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:211164)"
+      ]
+    }
+  ]
+}

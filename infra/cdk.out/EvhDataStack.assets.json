@@ -1,0 +1,36 @@
+{
+  "version": "54.0.0",
+  "files": {
+    "faa95a81ae7d7373f3e1f242268f904eb748d8d0fdd306e8a6fe515a1905a7d6": {
+      "displayName": "EvhDataStack/Custom::S3AutoDeleteObjectsCustomResourceProvider Code",
+      "source": {
+        "path": "asset.faa95a81ae7d7373f3e1f242268f904eb748d8d0fdd306e8a6fe515a1905a7d6",
+        "packaging": "zip"
+      },
+      "destinations": {
+        "487054650567-eu-west-1-0a2b5b91": {
+          "bucketName": "cdk-hnb659fds-assets-487054650567-eu-west-1",
+          "objectKey": "faa95a81ae7d7373f3e1f242268f904eb748d8d0fdd306e8a6fe515a1905a7d6.zip",
+          "region": "eu-west-1",
+          "assumeRoleArn": "arn:${AWS::Partition}:iam::487054650567:role/cdk-hnb659fds-file-publishing-role-487054650567-eu-west-1"
+        }
+      }
+    },
+    "0c23a7b3f90f188705fcfbf3368ee74250221489f08adc96a220f2aa3bc0a879": {
+      "displayName": "EvhDataStack Template",
+      "source": {
+        "path": "EvhDataStack.template.json",
+        "packaging": "file"
+      },
+      "destinations": {
+        "487054650567-eu-west-1-f55bcb08": {
+          "bucketName": "cdk-hnb659fds-assets-487054650567-eu-west-1",
+          "objectKey": "0c23a7b3f90f188705fcfbf3368ee74250221489f08adc96a220f2aa3bc0a879.json",
+          "region": "eu-west-1",
+          "assumeRoleArn": "arn:${AWS::Partition}:iam::487054650567:role/cdk-hnb659fds-file-publishing-role-487054650567-eu-west-1"
+        }
+      }
+    }
+  },
+  "dockerImages": {}
+}

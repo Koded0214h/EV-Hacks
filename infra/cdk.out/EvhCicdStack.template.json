@@ -1,0 +1,358 @@
+{
+ "Resources": {
+  "ApiRepoEFA7BA97": {
+   "Type": "AWS::ECR::Repository",
+   "Properties": {
+    "EmptyOnDelete": true,
+    "ImageScanningConfiguration": {
+     "ScanOnPush": true
+    },
+    "LifecyclePolicy": {
+     "LifecyclePolicyText": "{\"rules\":[{\"rulePriority\":1,\"description\":\"Keep last 10 images\",\"selection\":{\"tagStatus\":\"any\",\"countType\":\"imageCountMoreThan\",\"countNumber\":10},\"action\":{\"type\":\"expire\"}}]}"
+    },
+    "RepositoryName": "evh/api",
+    "Tags": [
+     {
+      "Key": "Hackathon",
+      "Value": "OneWithAI-2026"
+     },
+     {
+      "Key": "Owner",
+      "Value": "240404075@live.unilag.edu.ng"
+     },
+     {
+      "Key": "Project",
+      "Value": "EVHacks"
+     },
+     {
+      "Key": "Team",
+      "Value": "EVHacks"
+     }
+    ]
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "EvhCicdStack/ApiRepo/Resource"
+   }
+  },
+  "GitHubOidcA2A496A3": {
+   "Type": "Custom::AWSCDKOpenIdConnectProvider",
+   "Properties": {
+    "ServiceToken": {
+     "Fn::GetAtt": [
+      "CustomAWSCDKOpenIdConnectProviderCustomResourceProviderHandlerF2C543E0",
+      "Arn"
+     ]
+    },
+    "ClientIDList": [
+     "sts.amazonaws.com"
+    ],
+    "Url": "https://token.actions.githubusercontent.com",
+    "RejectUnauthorized": true,
+    "CodeHash": "c0d9f24649426c60a1bc01108070535a40353ae6cd8ceccb812969319b936e5d"
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "EvhCicdStack/GitHubOidc/Resource/Default"
+   }
+  },
+  "CustomAWSCDKOpenIdConnectProviderCustomResourceProviderRole517FED65": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Version": "2012-10-17",
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ]
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Sub": "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+     }
+    ],
+    "Policies": [
+     {
+      "PolicyName": "Inline",
+      "PolicyDocument": {
+       "Version": "2012-10-17",
+       "Statement": [
+        {
+         "Effect": "Allow",
+         "Resource": "*",
+         "Action": [
+          "iam:CreateOpenIDConnectProvider",
+          "iam:DeleteOpenIDConnectProvider",
+          "iam:UpdateOpenIDConnectProviderThumbprint",
+          "iam:AddClientIDToOpenIDConnectProvider",
+          "iam:RemoveClientIDFromOpenIDConnectProvider"
+         ]
+        }
+       ]
+      }
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "EvhCicdStack/Custom::AWSCDKOpenIdConnectProviderCustomResourceProvider/Role"
+   }
+  },
+  "CustomAWSCDKOpenIdConnectProviderCustomResourceProviderHandlerF2C543E0": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Code": {
+     "S3Bucket": "cdk-hnb659fds-assets-487054650567-eu-west-1",
+     "S3Key": "c0d9f24649426c60a1bc01108070535a40353ae6cd8ceccb812969319b936e5d.zip"
+    },
+    "Timeout": 900,
+    "MemorySize": 128,
+    "Handler": "__entrypoint__.handler",
+    "Role": {
+     "Fn::GetAtt": [
+      "CustomAWSCDKOpenIdConnectProviderCustomResourceProviderRole517FED65",
+      "Arn"
+     ]
+    },
+    "Runtime": "nodejs22.x"
+   },
+   "DependsOn": [
+    "CustomAWSCDKOpenIdConnectProviderCustomResourceProviderRole517FED65"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "EvhCicdStack/Custom::AWSCDKOpenIdConnectProviderCustomResourceProvider/Handler",
+    "aws:asset:path": "asset.c0d9f24649426c60a1bc01108070535a40353ae6cd8ceccb812969319b936e5d",
+    "aws:asset:property": "Code"
+   }
+  },
+  "GitHubActionsRole4F1BBA26": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRoleWithWebIdentity",
+       "Condition": {
+        "StringEquals": {
+         "token.actions.githubusercontent.com:aud": "sts.amazonaws.com"
+        },
+        "StringLike": {
+         "token.actions.githubusercontent.com:sub": "repo:semilores/EV-Hacks:ref:refs/heads/main"
+        }
+       },
+       "Effect": "Allow",
+       "Principal": {
+        "Federated": {
+         "Ref": "GitHubOidcA2A496A3"
+        }
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "Description": "GitHub Actions deploy role for EV Hacks",
+    "RoleName": "evh-github-actions",
+    "Tags": [
+     {
+      "Key": "Hackathon",
+      "Value": "OneWithAI-2026"
+     },
+     {
+      "Key": "Owner",
+      "Value": "240404075@live.unilag.edu.ng"
+     },
+     {
+      "Key": "Project",
+      "Value": "EVHacks"
+     },
+     {
+      "Key": "Team",
+      "Value": "EVHacks"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "EvhCicdStack/GitHubActionsRole/Resource"
+   }
+  },
+  "GitHubActionsRoleDefaultPolicy69DA0189": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": [
+        "ecr:BatchCheckLayerAvailability",
+        "ecr:BatchGetImage",
+        "ecr:CompleteLayerUpload",
+        "ecr:GetDownloadUrlForLayer",
+        "ecr:InitiateLayerUpload",
+        "ecr:PutImage",
+        "ecr:UploadLayerPart"
+       ],
+       "Effect": "Allow",
+       "Resource": {
+        "Fn::GetAtt": [
+         "ApiRepoEFA7BA97",
+         "Arn"
+        ]
+       }
+      },
+      {
+       "Action": [
+        "ec2:DescribeInstances",
+        "ecr:GetAuthorizationToken",
+        "ssm:GetCommandInvocation"
+       ],
+       "Effect": "Allow",
+       "Resource": "*"
+      },
+      {
+       "Action": "ssm:SendCommand",
+       "Effect": "Allow",
+       "Resource": [
+        "arn:aws:ssm:eu-west-1::document/AWS-RunShellScript",
+        {
+         "Fn::Join": [
+          "",
+          [
+           "arn:aws:ec2:eu-west-1:487054650567:instance/",
+           {
+            "Fn::ImportValue": "EvhComputeStack:ExportsOutputRefAppHostFF64211A980FDAB5"
+           }
+          ]
+         ]
+        }
+       ]
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "GitHubActionsRoleDefaultPolicy69DA0189",
+    "Roles": [
+     {
+      "Ref": "GitHubActionsRole4F1BBA26"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "EvhCicdStack/GitHubActionsRole/DefaultPolicy/Resource"
+   }
+  },
+  "CDKMetadata": {
+   "Type": "AWS::CDK::Metadata",
+   "Properties": {
+    "Analytics": "v2:deflate64:H4sIAAAAAAAA/9VSy27bMBD8luwxoNW8ChS6Oe7FQFELcm6CUbDkxt6ED4FcJhEI/XshKXLbJGh7CtATgRnOzsySF8XFx0/F2Yl8jAul7xeGvhd5y1LdC/kYv2VUocg1tj4S+9A1GdC23G3cZzTICCWHhALIyj1ulXQbV6V4mGFDt6g6ZbBOBiOUTQaNUQVqmbyDEk5BgJVP60G+8snxiPU7AQGtf5Cm8oZUB+Wg4+A7GJg5zVdpcRKIDFLrL7/a/bubGIlT2PU7sbp1P9v2gqQt8qZFt9Yr7xwqroJ/II2hyZCCeR6qDKHjtY5z/NobbDLIGJNFfd1BmaEN5BS10iyVOpqL5zuDYKmOOXvxRvTgDb6sfOOreey8qib3u5FlluqwdoYcHrmx5l/JP88d2TfB/0syvbY3KCZ46H9czY0fmFcbew1rvWXJaNFx/M32XeGxy1Sj78UqRfa2xuhTUDhmnX72BLzg5y99LSOKZYzIW5Z7cvtBs0ncJu5F1fHBuw+XxflVcXVyF4kWITkmi0U9nT8AMemfGEsEAAA="
+   },
+   "Metadata": {
+    "aws:cdk:path": "EvhCicdStack/CDKMetadata/Default"
+   }
+  }
+ },
+ "Outputs": {
+  "EcrRepoUri": {
+   "Value": {
+    "Fn::Join": [
+     "",
+     [
+      {
+       "Fn::Select": [
+        4,
+        {
+         "Fn::Split": [
+          ":",
+          {
+           "Fn::GetAtt": [
+            "ApiRepoEFA7BA97",
+            "Arn"
+           ]
+          }
+         ]
+        }
+       ]
+      },
+      ".dkr.ecr.",
+      {
+       "Fn::Select": [
+        3,
+        {
+         "Fn::Split": [
+          ":",
+          {
+           "Fn::GetAtt": [
+            "ApiRepoEFA7BA97",
+            "Arn"
+           ]
+          }
+         ]
+        }
+       ]
+      },
+      ".",
+      {
+       "Ref": "AWS::URLSuffix"
+      },
+      "/",
+      {
+       "Ref": "ApiRepoEFA7BA97"
+      }
+     ]
+    ]
+   },
+   "Export": {
+    "Name": "EvhEcrRepoUri"
+   }
+  },
+  "GitHubRoleArn": {
+   "Value": {
+    "Fn::GetAtt": [
+     "GitHubActionsRole4F1BBA26",
+     "Arn"
+    ]
+   },
+   "Export": {
+    "Name": "EvhGitHubRoleArn"
+   }
+  }
+ },
+ "Parameters": {
+  "BootstrapVersion": {
+   "Type": "AWS::SSM::Parameter::Value<String>",
+   "Default": "/cdk-bootstrap/hnb659fds/version",
+   "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]"
+  }
+ },
+ "Rules": {
+  "CheckBootstrapVersion": {
+   "Assertions": [
+    {
+     "Assert": {
+      "Fn::Not": [
+       {
+        "Fn::Contains": [
+         [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5"
+         ],
+         {
+          "Ref": "BootstrapVersion"
+         }
+        ]
+       }
+      ]
+     },
+     "AssertDescription": "CDK bootstrap stack version 6 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI."
+    }
+   ]
+  }
+ }
+}

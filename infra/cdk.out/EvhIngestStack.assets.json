@@ -1,0 +1,36 @@
+{
+  "version": "54.0.0",
+  "files": {
+    "2819175352ad1ce0dae768e83fc328fb70fb5f10b4a8ff0ccbcb791f02b0716d": {
+      "displayName": "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8a/Code",
+      "source": {
+        "path": "asset.2819175352ad1ce0dae768e83fc328fb70fb5f10b4a8ff0ccbcb791f02b0716d",
+        "packaging": "zip"
+      },
+      "destinations": {
+        "487054650567-eu-west-1-8ca6dd12": {
+          "bucketName": "cdk-hnb659fds-assets-487054650567-eu-west-1",
+          "objectKey": "2819175352ad1ce0dae768e83fc328fb70fb5f10b4a8ff0ccbcb791f02b0716d.zip",
+          "region": "eu-west-1",
+          "assumeRoleArn": "arn:${AWS::Partition}:iam::487054650567:role/cdk-hnb659fds-file-publishing-role-487054650567-eu-west-1"
+        }
+      }
+    },
+    "4ca98d0b33fcbcaa7f7d9cb9a2b419a61c28e4ee0ef9e1beb4e4276323df07a0": {
+      "displayName": "EvhIngestStack Template",
+      "source": {
+        "path": "EvhIngestStack.template.json",
+        "packaging": "file"
+      },
+      "destinations": {
+        "487054650567-eu-west-1-d85d1077": {
+          "bucketName": "cdk-hnb659fds-assets-487054650567-eu-west-1",
+          "objectKey": "4ca98d0b33fcbcaa7f7d9cb9a2b419a61c28e4ee0ef9e1beb4e4276323df07a0.json",
+          "region": "eu-west-1",
+          "assumeRoleArn": "arn:${AWS::Partition}:iam::487054650567:role/cdk-hnb659fds-file-publishing-role-487054650567-eu-west-1"
+        }
+      }
+    }
+  },
+  "dockerImages": {}
+}

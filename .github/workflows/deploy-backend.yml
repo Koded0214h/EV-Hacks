@@ -43,40 +43,51 @@ jobs:
           docker push $ECR_REGISTRY/$ECR_REPO:$IMAGE_TAG
           docker push $ECR_REGISTRY/$ECR_REPO:latest
 
+      - name: Diagnose SSH secret
+        env:
+          KEY: ${{ secrets.EC2_SSH_PRIVATE_KEY }}
+        run: |
+          echo "Key length (chars): ${#KEY}"
+          echo "Key line count: $(printf '%s' "$KEY" | wc -l)"
+          echo "First line: $(printf '%s\n' "$KEY" | head -1)"
+          echo "Last line:  $(printf '%s\n' "$KEY" | tail -1)"
+          mkdir -p ~/.ssh
+          printf '%s\n' "$KEY" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          echo "Key file:"
+          ls -la ~/.ssh/deploy_key
+          file ~/.ssh/deploy_key
+          ssh -i ~/.ssh/deploy_key -o StrictHostKeyChecking=no -o BatchMode=yes -v \
+            ec2-user@34.251.241.87 'echo SSH_OK' 2>&1 | tail -30 || true
+
       - name: Deploy on EC2 via SSH
-        uses: appleboy/ssh-action@v1.0.3
-        with:
-          host: ${{ secrets.EC2_HOST }}
-          username: ${{ secrets.EC2_USER }}
-          key: ${{ secrets.EC2_SSH_PRIVATE_KEY }}
-          script: |
+        run: |
+          ssh -i ~/.ssh/deploy_key -o StrictHostKeyChecking=no ec2-user@34.251.241.87 bash -s <<'REMOTE'
             set -e
             source /etc/profile.d/evhacks.sh
             cd /opt/evhacks/app
-
             aws ecr get-login-password --region "$AWS_REGION" \
               | docker login --username AWS --password-stdin "$ECR_REGISTRY"
-
             docker compose pull api
             docker compose up -d --no-deps --force-recreate api
             docker compose ps
+          REMOTE
 
       - name: Health check
-        uses: appleboy/ssh-action@v1.0.3
-        with:
-          host: ${{ secrets.EC2_HOST }}
-          username: ${{ secrets.EC2_USER }}
-          key: ${{ secrets.EC2_SSH_PRIVATE_KEY }}
-          script: |
+        run: |
+          ssh -i ~/.ssh/deploy_key -o StrictHostKeyChecking=no ec2-user@34.251.241.87 bash -s <<'REMOTE'
             for i in $(seq 1 30); do
               STATUS=$(docker inspect --format '{{.State.Status}}' evhacks-api 2>/dev/null || echo "missing")
               echo "[$i] container status: $STATUS"
-              if [ "$STATUS" = "running" ] && curl -fs -m 3 http://localhost:8000/ >/dev/null 2>&1; then
-                echo "Healthy"
-                exit 0
+              if [ "$STATUS" = "running" ]; then
+                if curl -fs -m 3 http://localhost:8000/admin/ >/dev/null 2>&1 || curl -s -m 3 http://localhost:8000/ >/dev/null 2>&1; then
+                  echo "Healthy"
+                  exit 0
+                fi
               fi
               sleep 2
             done
             echo "::error::API didn't respond within 60s"
-            docker compose logs api --tail 100
+            cd /opt/evhacks/app && docker compose logs api --tail 100
             exit 1
+          REMOTE

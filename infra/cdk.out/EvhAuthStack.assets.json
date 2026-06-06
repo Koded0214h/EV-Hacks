@@ -1,0 +1,21 @@
+{
+  "version": "54.0.0",
+  "files": {
+    "a11e21c50060c5bbf79281a10e9bbbde64530bb80d59bb0d190214144bb3f2d4": {
+      "displayName": "EvhAuthStack Template",
+      "source": {
+        "path": "EvhAuthStack.template.json",
+        "packaging": "file"
+      },
+      "destinations": {
+        "487054650567-eu-west-1-bd410520": {
+          "bucketName": "cdk-hnb659fds-assets-487054650567-eu-west-1",
+          "objectKey": "a11e21c50060c5bbf79281a10e9bbbde64530bb80d59bb0d190214144bb3f2d4.json",
+          "region": "eu-west-1",
+          "assumeRoleArn": "arn:${AWS::Partition}:iam::487054650567:role/cdk-hnb659fds-file-publishing-role-487054650567-eu-west-1"
+        }
+      }
+    }
+  },
+  "dockerImages": {}
+}

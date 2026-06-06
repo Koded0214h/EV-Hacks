@@ -1,0 +1,36 @@
+{
+  "version": "54.0.0",
+  "files": {
+    "02b51ab524e7bcf8f477de3e71e5f9a72e448301b26ba62e9e75a14f9c55a093": {
+      "displayName": "EvhNetworkStack/Custom::VpcRestrictDefaultSGCustomResourceProvider Code",
+      "source": {
+        "path": "asset.02b51ab524e7bcf8f477de3e71e5f9a72e448301b26ba62e9e75a14f9c55a093",
+        "packaging": "zip"
+      },
+      "destinations": {
+        "487054650567-eu-west-1-fbe9c23f": {
+          "bucketName": "cdk-hnb659fds-assets-487054650567-eu-west-1",
+          "objectKey": "02b51ab524e7bcf8f477de3e71e5f9a72e448301b26ba62e9e75a14f9c55a093.zip",
+          "region": "eu-west-1",
+          "assumeRoleArn": "arn:${AWS::Partition}:iam::487054650567:role/cdk-hnb659fds-file-publishing-role-487054650567-eu-west-1"
+        }
+      }
+    },
+    "53e23ac57c704067e4b72fe999b63afede98ee1b022b03d82f3a873b4d2fe5ee": {
+      "displayName": "EvhNetworkStack Template",
+      "source": {
+        "path": "EvhNetworkStack.template.json",
+        "packaging": "file"
+      },
+      "destinations": {
+        "487054650567-eu-west-1-5778eed8": {
+          "bucketName": "cdk-hnb659fds-assets-487054650567-eu-west-1",
+          "objectKey": "53e23ac57c704067e4b72fe999b63afede98ee1b022b03d82f3a873b4d2fe5ee.json",
+          "region": "eu-west-1",
+          "assumeRoleArn": "arn:${AWS::Partition}:iam::487054650567:role/cdk-hnb659fds-file-publishing-role-487054650567-eu-west-1"
+        }
+      }
+    }
+  },
+  "dockerImages": {}
+}
