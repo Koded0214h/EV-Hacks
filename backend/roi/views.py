@@ -1,3 +1,4 @@
+from django.core.cache import cache
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from zones.stubs import STUB_ROI_RESULT
@@ -6,6 +7,7 @@ from .calculator import calculate_roi, input_hash
 USE_STUBS = False
 
 REQUIRED_FIELDS = ["lat", "lng", "station_type", "num_ports", "capex_ngn", "opex_monthly_ngn", "target_segment"]
+CACHE_TTL = 60 * 60 * 24  # 24 hours
 
 
 @api_view(["POST"])
@@ -20,8 +22,6 @@ def roi_calculate(request):
     if USE_STUBS:
         return Response(STUB_ROI_RESULT)
 
-    from .models import ROICache
-
     params = {k: request.data[k] for k in REQUIRED_FIELDS}
     params.update({
         "demand_score": request.data.get("demand_score", 50),
@@ -29,13 +29,13 @@ def roi_calculate(request):
         "zone_name": request.data.get("zone_id", ""),
     })
 
-    h = input_hash(params)
-    cached = ROICache.objects.filter(input_hash=h).first()
+    cache_key = f"roi:{input_hash(params)}"
+    cached = cache.get(cache_key)
     if cached:
-        return Response(cached.result_json)
+        return Response(cached)
 
     result = calculate_roi(params)
-    ROICache.objects.create(input_hash=h, result_json=result)
+    cache.set(cache_key, result, CACHE_TTL)
     return Response(result)
 
 
@@ -60,6 +60,13 @@ def roi_compare(request):
             "opex_monthly_ngn": opex, "target_segment": segment,
             "demand_score": 50, "competitor_count": 0, "zone_name": zone_id,
         }
-        comparisons.append(calculate_roi(params))
+        cache_key = f"roi:{input_hash(params)}"
+        cached = cache.get(cache_key)
+        if cached:
+            comparisons.append(cached)
+        else:
+            result = calculate_roi(params)
+            cache.set(cache_key, result, CACHE_TTL)
+            comparisons.append(result)
 
     return Response({"comparisons": comparisons})
