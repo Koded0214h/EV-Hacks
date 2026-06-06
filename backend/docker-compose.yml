@@ -1,0 +1,39 @@
+services:
+  db:
+    image: postgis/postgis:15-3.3
+    container_name: evhacks-db
+    environment:
+      POSTGRES_DB: evhacks
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  redis:
+    image: redis:7-alpine
+    container_name: evhacks-redis
+    ports:
+      - "6379:6379"
+
+  api:
+    build: .
+    container_name: evhacks-api
+    ports:
+      - "8000:8000"
+    environment:
+      SECRET_KEY: dev-secret-key-change-in-prod
+      DEBUG: "True"
+      DB_NAME: evhacks
+      DB_USER: postgres
+      DB_PASSWORD: postgres
+      DB_HOST: db
+      DB_PORT: "5432"
+      REDIS_URL: redis://redis:6379/0
+    depends_on:
+      - db
+      - redis
+
+volumes:
+  postgres_data:

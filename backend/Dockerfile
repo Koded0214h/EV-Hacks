@@ -1,0 +1,19 @@
+FROM python:3.12-slim
+
+RUN apt-get update && apt-get install -y --fix-missing \
+    gdal-bin \
+    libgdal-dev \
+    libpq-dev \
+    gcc \
+    && rm -rf /var/lib/apt/lists/*
+
+ENV GDAL_LIBRARY_PATH=/usr/lib/x86_64-linux-gnu/libgdal.so
+
+WORKDIR /app
+
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+COPY . .
+
+CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
