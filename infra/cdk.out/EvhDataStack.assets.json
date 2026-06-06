@@ -8,26 +8,26 @@
         "packaging": "zip"
       },
       "destinations": {
-        "current_account-eu-north-1-61a332f5": {
-          "bucketName": "cdk-hnb659fds-assets-${AWS::AccountId}-eu-north-1",
+        "487054650567-eu-west-1-0a2b5b91": {
+          "bucketName": "cdk-hnb659fds-assets-487054650567-eu-west-1",
           "objectKey": "faa95a81ae7d7373f3e1f242268f904eb748d8d0fdd306e8a6fe515a1905a7d6.zip",
-          "region": "eu-north-1",
-          "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-file-publishing-role-${AWS::AccountId}-eu-north-1"
+          "region": "eu-west-1",
+          "assumeRoleArn": "arn:${AWS::Partition}:iam::487054650567:role/cdk-hnb659fds-file-publishing-role-487054650567-eu-west-1"
         }
       }
     },
-    "971f0f8b8672160b7811c80e95909a42e9211435428a3a3111c3c82b50f4893b": {
+    "0c23a7b3f90f188705fcfbf3368ee74250221489f08adc96a220f2aa3bc0a879": {
       "displayName": "EvhDataStack Template",
       "source": {
         "path": "EvhDataStack.template.json",
         "packaging": "file"
       },
       "destinations": {
-        "current_account-eu-north-1-ee98bd1a": {
-          "bucketName": "cdk-hnb659fds-assets-${AWS::AccountId}-eu-north-1",
-          "objectKey": "971f0f8b8672160b7811c80e95909a42e9211435428a3a3111c3c82b50f4893b.json",
-          "region": "eu-north-1",
-          "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-file-publishing-role-${AWS::AccountId}-eu-north-1"
+        "487054650567-eu-west-1-f55bcb08": {
+          "bucketName": "cdk-hnb659fds-assets-487054650567-eu-west-1",
+          "objectKey": "0c23a7b3f90f188705fcfbf3368ee74250221489f08adc96a220f2aa3bc0a879.json",
+          "region": "eu-west-1",
+          "assumeRoleArn": "arn:${AWS::Partition}:iam::487054650567:role/cdk-hnb659fds-file-publishing-role-487054650567-eu-west-1"
         }
       }
     }
