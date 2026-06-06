@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, useMemo } from 'react'
 import mapboxgl from 'mapbox-gl'
 import 'mapbox-gl/dist/mapbox-gl.css'
 import {
@@ -8,6 +8,7 @@ import {
   ChevronUp, Map, History, ShoppingBag, Bolt,
 } from 'lucide-react'
 import './DriverView.css'
+import { api, mapDriverStation, getToken, setToken, setCachedUser, getCachedUser, clearAuth } from '../api.js'
 
 const MAPBOX_TOKEN = import.meta.env.VITE_MAPBOX_TOKEN
 
@@ -28,15 +29,25 @@ function fmtTime(s) {
   return m >= 60 ? `${Math.floor(m / 60)}h ${m % 60}m` : `${m} min`
 }
 
+const DEFAULT_LOC = { lng: 3.3792, lat: 6.5244 }
+
 function getUserLocation() {
   return new Promise((resolve) => {
-    if (!navigator.geolocation) { resolve({ lng:3.3792, lat:6.5244 }); return }
+    if (!navigator.geolocation) { resolve(DEFAULT_LOC); return }
     navigator.geolocation.getCurrentPosition(
       p => resolve({ lng:p.coords.longitude, lat:p.coords.latitude }),
-      () => resolve({ lng:3.3792, lat:6.5244 }),
+      () => resolve(DEFAULT_LOC),
       { timeout:5000, maximumAge:30000 }
     )
   })
+}
+
+function distKm(lat1, lng1, lat2, lng2) {
+  const R = 6371
+  const dLat = (lat2 - lat1) * Math.PI / 180
+  const dLng = (lng2 - lng1) * Math.PI / 180
+  const a = Math.sin(dLat/2)**2 + Math.cos(lat1*Math.PI/180)*Math.cos(lat2*Math.PI/180)*Math.sin(dLng/2)**2
+  return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a))
 }
 
 function makeStationIcon(color) {
@@ -142,16 +153,24 @@ function Splash({ onDone }) {
 
 // ── Login ─────────────────────────────────────────────────────
 function LoginScreen({ onLogin, onSignup }) {
-  const [phone,    setPhone]    = useState('')
+  const [email,    setEmail]    = useState('')
   const [password, setPassword] = useState('')
   const [showPass, setShowPass] = useState(false)
   const [loading,  setLoading]  = useState(false)
   const [error,    setError]    = useState('')
 
-  const submit = () => {
-    if (!phone.trim() || !password.trim()) { setError('Fill in all fields'); return }
+  const submit = async () => {
+    if (!email.trim() || !password.trim()) { setError('Fill in all fields'); return }
     setError(''); setLoading(true)
-    setTimeout(() => { setLoading(false); onLogin() }, 1100)
+    try {
+      const data = await api.auth.login(email.trim().toLowerCase(), password)
+      setToken(data.token)
+      setCachedUser(data.user)
+      onLogin(data.user)
+    } catch (e) {
+      setError(e.message || 'Sign in failed')
+      setLoading(false)
+    }
   }
 
   return (
@@ -166,12 +185,12 @@ function LoginScreen({ onLogin, onSignup }) {
         {error && <div className="dv-error">{error}</div>}
 
         <div className="dv-field">
-          <label className="dv-label">Phone Number</label>
-          <div className="dv-phone-row">
-            <span className="dv-prefix">🇳🇬 +234</span>
-            <input className="dv-phone-input" type="tel" placeholder="080 xxx xxxx"
-              value={phone} onChange={e => setPhone(e.target.value)}
-              onKeyDown={e => e.key === 'Enter' && submit()}/>
+          <label className="dv-label">Email</label>
+          <div className="dv-input-row">
+            <Mail size={15} className="dv-input-ico"/>
+            <input className="dv-input" type="email" placeholder="you@email.com"
+              value={email} onChange={e => setEmail(e.target.value)}
+              onKeyDown={e => e.key === 'Enter' && submit()} autoFocus/>
           </div>
         </div>
 
@@ -226,12 +245,23 @@ function SignupScreen({ onBack, onDone }) {
     setError(''); setStep(2)
   }
 
-  const submit = () => {
+  const submit = async () => {
     if (!form.vehicle) { setError('Select your vehicle'); return }
     if (form.password.length < 8) { setError('Password must be at least 8 characters'); return }
     if (form.password !== form.confirm) { setError("Passwords don't match"); return }
     setError(''); setLoading(true)
-    setTimeout(() => { setLoading(false); onDone() }, 1300)
+    try {
+      const data = await api.auth.register({
+        name: form.name, email: form.email.trim().toLowerCase(),
+        password: form.password, phone: form.phone, vehicle: form.vehicle,
+      })
+      setToken(data.token)
+      setCachedUser(data.user)
+      onDone(data.user)
+    } catch (e) {
+      setError(e.message || 'Registration failed')
+      setLoading(false)
+    }
   }
 
   return (
@@ -331,7 +361,7 @@ function SignupScreen({ onBack, onDone }) {
 }
 
 // ── Driver Map ─────────────────────────────────────────────────
-function DriverMap({ stations, flyToId, onStationClick, navRoute }) {
+function DriverMap({ stations, flyToId, onStationClick, navRoute, userLocation }) {
   const containerRef = useRef(null)
   const mapRef       = useRef(null)
   const stationsRef  = useRef(stations)
@@ -407,7 +437,7 @@ function DriverMap({ stations, flyToId, onStationClick, navRoute }) {
   // fly when selection changes
   useEffect(() => {
     if (!flyToId || !mapRef.current) return
-    const s = STATIONS.find(s => s.id === flyToId)
+    const s = stationsRef.current.find(s => s.id === flyToId)
     if (s) mapRef.current.flyTo({ center:[s.lng, s.lat], zoom:15, padding:{ bottom:340 }, duration:600 })
   }, [flyToId])
 
@@ -443,6 +473,20 @@ function DriverMap({ stations, flyToId, onStationClick, navRoute }) {
     if (map.isStyleLoaded()) draw(); else map.once('style.load', draw)
   }, [navRoute])
 
+  // move blue dot to real user position
+  useEffect(() => {
+    const map = mapRef.current
+    if (!map || !userLocation) return
+    const update = () => {
+      const src = map.getSource('user-loc')
+      if (src) src.setData({
+        type: 'Feature',
+        geometry: { type: 'Point', coordinates: [userLocation.lng, userLocation.lat] }
+      })
+    }
+    if (map.isStyleLoaded()) update(); else map.once('style.load', update)
+  }, [userLocation])
+
   return <div ref={containerRef} style={{ width:'100%', height:'100%' }}/>
 }
 
@@ -461,7 +505,7 @@ function StationCard({ station: s, onSelect }) {
         <div className="dv-card-meta">
           <span className="dv-card-type">{s.type}</span>
           <span className="dv-card-dot"/>
-          <span>{s.distanceKm} km away</span>
+          <span>{s.distanceKm != null ? `${s.distanceKm} km away` : 'Locating…'}</span>
         </div>
         <div className="dv-card-row">
           <span className="dv-card-status" style={{ color:cfg.color, background:cfg.bg }}>
@@ -568,7 +612,7 @@ function StationDetail({ station: s, onClose, onStartCharging, onNavigate }) {
           </div>
           <div className="dv-detail-row">
             <span className="dv-detail-row-icon" style={{ fontSize:13 }}>📏</span>
-            <span>{s.distanceKm} km from your location</span>
+            <span>{s.distanceKm != null ? `${s.distanceKm} km from your location` : 'Calculating distance…'}</span>
           </div>
         </div>
 
@@ -629,9 +673,9 @@ function Toggle({ on, onChange }) {
   )
 }
 
-function ProfilePage({ onLogout }) {
-  const [name,    setName]    = useState('Raufu Abdulraman')
-  const [vehicle, setVehicle] = useState('BYD Seal')
+function ProfilePage({ onLogout, user }) {
+  const [name,    setName]    = useState(user?.name    || 'Driver')
+  const [vehicle, setVehicle] = useState(user?.vehicle || 'BYD Seal')
   const [sheet,   setSheet]   = useState(null) // 'vehicle' | 'notifications' | 'settings' | 'editName'
   const [editNameVal, setEditNameVal] = useState(name)
   const [notif, setNotif] = useState({
@@ -657,7 +701,7 @@ function ProfilePage({ onLogout }) {
         <div className="dv-profile-avatar">{initials}</div>
         <div style={{ flex:1 }}>
           <div className="dv-profile-name">{name}</div>
-          <div className="dv-profile-vehicle">{vehicle} · +234 802 xxx xxxx</div>
+          <div className="dv-profile-vehicle">{vehicle}{user?.phone ? ` · +234 ${user.phone.replace(/^0/, '')}` : ''}</div>
         </div>
         <span style={{ color:'#94A3B8', fontSize:20 }}>›</span>
       </div>
@@ -834,7 +878,7 @@ function NavigationOverlay({ navTarget, navData, navLoading, onEnd }) {
 }
 
 // ── Driver Home ────────────────────────────────────────────────
-function DriverHome({ onLogout }) {
+function DriverHome({ onLogout, user }) {
   const [activeTab,       setActiveTab]       = useState('map')
   const [sheetExpanded,   setSheetExpanded]   = useState(false)
   const [filter,          setFilter]          = useState('all')
@@ -844,6 +888,31 @@ function DriverHome({ onLogout }) {
   const [navTarget,       setNavTarget]       = useState(null)
   const [navData,         setNavData]         = useState(null)
   const [navLoading,      setNavLoading]      = useState(false)
+  const [liveStations,    setLiveStations]    = useState(STATIONS)
+  const [userLoc,         setUserLoc]         = useState(DEFAULT_LOC)
+
+  useEffect(() => {
+    getUserLocation().then(setUserLoc)
+  }, [])
+
+  useEffect(() => {
+    api.getStations().then(d => {
+      if (d.stations?.length) setLiveStations(d.stations.map(mapDriverStation))
+    }).catch(() => {})
+  }, [])
+
+  // attach real distances and sort nearest-first
+  const stationsWithDist = useMemo(() =>
+    liveStations
+      .map(s => ({
+        ...s,
+        distanceKm: (s.lat && s.lng)
+          ? parseFloat(distKm(userLoc.lat, userLoc.lng, s.lat, s.lng).toFixed(1))
+          : null,
+      }))
+      .sort((a, b) => (a.distanceKm ?? 9999) - (b.distanceKm ?? 9999)),
+    [liveStations, userLoc]
+  )
 
   const endNav = () => { setNavTarget(null); setNavData(null); setNavLoading(false) }
 
@@ -853,8 +922,7 @@ function DriverHome({ onLogout }) {
     setNavData(null)
     setNavLoading(true)
     try {
-      const origin = await getUserLocation()
-      const route  = await fetchRoute(origin, station)
+      const route = await fetchRoute(userLoc, station)
       setNavData(route)
     } catch {
       setNavData(null)
@@ -863,7 +931,7 @@ function DriverHome({ onLogout }) {
     }
   }
 
-  const filtered = STATIONS.filter(s => {
+  const filtered = stationsWithDist.filter(s => {
     if (filter === 'available' && s.status !== 'available') return false
     if (filter === 'fast'      && s.type !== 'DC Fast Charge') return false
     if (searchQuery.trim()) {
@@ -882,10 +950,11 @@ function DriverHome({ onLogout }) {
       {activeTab === 'map' && (
         <div className="dv-map-wrap">
           <DriverMap
-            stations={STATIONS}
+            stations={stationsWithDist}
             flyToId={selected?.id}
             onStationClick={!navTarget ? handleSelect : undefined}
             navRoute={navData?.geometry?.coordinates ?? null}
+            userLocation={userLoc}
           />
         </div>
       )}
@@ -912,7 +981,7 @@ function DriverHome({ onLogout }) {
       )}
 
       {activeTab === 'profile' && (
-        <ProfilePage onLogout={onLogout}/>
+        <ProfilePage onLogout={onLogout} user={user}/>
       )}
 
       {/* Floating top bar (map tab only, hidden during navigation) */}
@@ -1017,12 +1086,32 @@ function DriverHome({ onLogout }) {
 // ── Root ───────────────────────────────────────────────────────
 export default function DriverView() {
   const [screen, setScreen] = useState('splash')
+  const [user,   setUser]   = useState(null)
+
+  const handleLogout = async () => {
+    api.auth.logout().catch(() => {})
+    clearAuth()
+    setUser(null)
+    setScreen('login')
+  }
+
+  // After splash: if token present skip login
+  const afterSplash = () => {
+    if (getToken() && getCachedUser()) {
+      api.auth.me()
+        .then(u => { setUser(u); setCachedUser(u); setScreen('home') })
+        .catch(() => { clearAuth(); setScreen('login') })
+    } else {
+      setScreen('login')
+    }
+  }
+
   return (
     <div className="dv-root">
-      {screen === 'splash'  && <Splash   onDone={()    => setScreen('login')}/>}
-      {screen === 'login'   && <LoginScreen onLogin={()   => setScreen('home')} onSignup={() => setScreen('signup')}/>}
-      {screen === 'signup'  && <SignupScreen onBack={()    => setScreen('login')} onDone={()    => setScreen('home')}/>}
-      {screen === 'home'    && <DriverHome  onLogout={()  => setScreen('login')}/>}
+      {screen === 'splash'  && <Splash   onDone={afterSplash}/>}
+      {screen === 'login'   && <LoginScreen onLogin={u => { setUser(u); setScreen('home') }} onSignup={() => setScreen('signup')}/>}
+      {screen === 'signup'  && <SignupScreen onBack={() => setScreen('login')} onDone={u => { setUser(u); setScreen('home') }}/>}
+      {screen === 'home'    && <DriverHome onLogout={handleLogout} user={user}/>}
     </div>
   )
 }

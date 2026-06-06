@@ -16,26 +16,23 @@ class ZoneSerializer(serializers.ModelSerializer):
         ]
 
     def get_centroid(self, obj):
-        if obj.centroid:
-            return {"lat": obj.centroid.y, "lng": obj.centroid.x}
+        if obj.centroid_lat is not None and obj.centroid_lng is not None:
+            return {"lat": obj.centroid_lat, "lng": obj.centroid_lng}
         return None
 
     def get_geometry(self, obj):
-        return json.loads(obj.geometry.geojson)
+        try:
+            return json.loads(obj.geometry)
+        except (ValueError, TypeError):
+            return {}
 
 
 class StationSerializer(serializers.ModelSerializer):
-    lat = serializers.SerializerMethodField()
-    lng = serializers.SerializerMethodField()
+    lat = serializers.FloatField(source="location_lat")
+    lng = serializers.FloatField(source="location_lng")
     type = serializers.CharField(source="station_type")
     ports = serializers.IntegerField(source="num_ports")
 
     class Meta:
         model = Station
         fields = ["station_id", "name", "operator", "lat", "lng", "type", "ports", "status", "utilisation", "last_seen"]
-
-    def get_lat(self, obj):
-        return obj.location.y
-
-    def get_lng(self, obj):
-        return obj.location.x

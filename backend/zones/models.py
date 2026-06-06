@@ -1,4 +1,4 @@
-from django.contrib.gis.db import models
+from django.db import models
 
 
 class Zone(models.Model):
@@ -6,8 +6,9 @@ class Zone(models.Model):
 
     zone_id = models.CharField(max_length=80, primary_key=True)
     name = models.CharField(max_length=200)
-    geometry = models.PolygonField(srid=4326)
-    centroid = models.PointField(srid=4326, null=True, blank=True)
+    geometry = models.TextField(default="{}")        # GeoJSON Polygon stored as JSON string
+    centroid_lat = models.FloatField(null=True, blank=True)
+    centroid_lng = models.FloatField(null=True, blank=True)
     demand_score = models.DecimalField(max_digits=5, decimal_places=2, default=0)
     tier = models.CharField(max_length=10, choices=TIERS, default="cold")
     pop_density = models.DecimalField(max_digits=12, decimal_places=2, null=True)
@@ -27,10 +28,11 @@ class Station(models.Model):
     STATION_TYPES = [("ac_level2", "AC Level 2"), ("dc_fast", "DC Fast"), ("swap", "Swap")]
     STATUS_CHOICES = [("available", "Available"), ("busy", "Busy"), ("offline", "Offline")]
 
-    station_id = models.UUIDField(primary_key=True)
+    station_id = models.CharField(max_length=80, primary_key=True)
     name = models.CharField(max_length=200, blank=True)
     operator = models.CharField(max_length=200, blank=True)
-    location = models.PointField(srid=4326)
+    location_lat = models.FloatField(default=0)
+    location_lng = models.FloatField(default=0)
     station_type = models.CharField(max_length=20, choices=STATION_TYPES)
     num_ports = models.IntegerField(default=1)
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default="available")

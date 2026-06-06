@@ -11,6 +11,7 @@ import {
   Eye, EyeOff, Mail, Lock, User, Building2, Shield, Check, Bell,
 } from 'lucide-react'
 import './Dashboard.css'
+import { api, mapZone, mapStation, mapROIResult, getToken, setToken, setCachedUser, getCachedUser, clearAuth } from '../api.js'
 
 const MAPBOX_TOKEN = import.meta.env.VITE_MAPBOX_TOKEN
 
@@ -67,6 +68,15 @@ function makeCircle(lng, lat, radiusKm, steps = 72) {
   coords.push(coords[0])
   return { type:'Polygon', coordinates:[coords] }
 }
+function distKm(lat1, lng1, lat2, lng2) {
+  const R = 6371
+  const dLat = (lat2 - lat1) * Math.PI / 180
+  const dLng = (lng2 - lng1) * Math.PI / 180
+  const a = Math.sin(dLat/2)**2 +
+    Math.cos(lat1 * Math.PI/180) * Math.cos(lat2 * Math.PI/180) * Math.sin(dLng/2)**2
+  return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a))
+}
+
 function closestZone(lng, lat) {
   return ZONES.reduce((best, z) =>
     Math.hypot(z.lng-lng, z.lat-lat) < Math.hypot(best.lng-lng, best.lat-lat) ? z : best
@@ -130,13 +140,36 @@ function DemandRing({ score }) {
 }
 
 // ─── ROI Modal ────────────────────────────────────────────────
-function ROIModal({ capex, type, zone, onClose }) {
+function ROIModal({ capex, type, zone, opex, onClose }) {
   const [phase, setPhase] = useState('loading')
-  const rows = calcROI(capex, type)
+  const [rows,  setRows]  = useState([])
+  const [rec,   setRec]   = useState('')
+  const typeToApi = { 'DC Fast': 'dc_fast', 'AC Level 2': 'ac_level2', 'Battery Swap': 'swap' }
 
   useEffect(() => {
-    const t = setTimeout(() => setPhase('results'), 1800)
-    return () => clearTimeout(t)
+    const run = async () => {
+      try {
+        const data = await api.calculateROI({
+          lat: zone?.lat ?? 6.5244,
+          lng: zone?.lng ?? 3.3792,
+          zone_id: zone?.zoneId ?? zone?.id ?? '',
+          station_type: typeToApi[type] ?? 'dc_fast',
+          num_ports: 4,
+          capex_ngn: capex,
+          opex_monthly_ngn: opex ?? 450000,
+          target_segment: 'mixed',
+          demand_score: zone?.score ?? 70,
+          competitor_count: zone?.existing ?? 0,
+        })
+        setRows(mapROIResult(data))
+        setRec(data.recommendation)
+      } catch {
+        setRows(calcROI(capex, type))
+        setRec('')
+      }
+      setPhase('results')
+    }
+    run()
   }, [])
 
   return (
@@ -210,7 +243,7 @@ function ROIModal({ capex, type, zone, onClose }) {
               </table>
 
               <div className="dp-modal-note">
-                Based on ₦180/kWh rate, 45 min avg session, zone demand score {zone?.score ?? 80}/100.
+                Mixed segment · zone demand score {zone?.score ?? 80}/100 · {zone?.existing ?? 0} competitor stations.
                 Results vary by zone and operator.
               </div>
 
@@ -218,9 +251,9 @@ function ROIModal({ capex, type, zone, onClose }) {
                 <div className="dp-modal-risk"><AlertTriangle size={13}/> Low demand zone — consider a smaller AC Level 2 deployment to reduce capex exposure.</div>
               )}
 
-              <div className="dp-modal-rec">
-                <TrendingUp size={13}/> {type} recommended for {zone?.name} based on commercial traffic density and avg driver dwell time &lt;30 min.
-              </div>
+              {rec && (
+                <div className="dp-modal-rec"><TrendingUp size={13}/> {rec}</div>
+              )}
 
               <div className="dp-modal-actions">
                 <button className="dp-modal-export"><Download size={14}/> Export PDF</button>
@@ -235,14 +268,32 @@ function ROIModal({ capex, type, zone, onClose }) {
 }
 
 // ─── AI Brief ────────────────────────────────────────────────
-function AIBrief({ zone }) {
-  const [state, setState] = useState('idle')
+function AIBrief({ zone, lastROI }) {
+  const [state,  setState]  = useState('idle')
+  const [brief,  setBrief]  = useState(null)
+
+  const generate = async () => {
+    setState('loading')
+    try {
+      const roiPayload = lastROI ?? {
+        location: { lat: zone.lat, lng: zone.lng, name: zone.name },
+        station_type: 'dc_fast', num_ports: 4,
+        capex_ngn: 8000000, opex_monthly_ngn: 450000,
+        scenarios: {}, demand_score: zone.score, competitor_count: zone.existing,
+      }
+      const data = await api.generateBrief(zone.zoneId ?? zone.id, roiPayload)
+      setBrief(data)
+    } catch {
+      setBrief(null)
+    }
+    setState('done')
+  }
+
   if (!zone) return null
   return (
     <div className="dp-brief">
       {state === 'idle' && (
-        <button className="dp-brief-btn"
-          onClick={() => { setState('loading'); setTimeout(() => setState('done'), 2200) }}>
+        <button className="dp-brief-btn" onClick={generate}>
           <Sparkles size={15}/> Generate Investor Brief
         </button>
       )}
@@ -254,29 +305,29 @@ function AIBrief({ zone }) {
       {state === 'done' && (
         <div className="dp-brief-result">
           <div className="dp-brief-ai-badge"><Sparkles size={11}/> AI Generated</div>
-          <p className="dp-brief-headline">{zone.name} — Strong ROI opportunity with manageable competition</p>
-          <p className="dp-brief-summary">
-            {zone.name} scores {zone.score}/100 on EV demand (Tier {zone.tier}). With {zone.evTraffic} EV trips
-            daily and only {zone.existing} existing station{zone.existing!==1?'s':''} in the area,
-            infrastructure supply is below demand. A 4-port station here targets breakeven in 12–15 months.
-          </p>
+          <p className="dp-brief-headline">{brief?.headline ?? `${zone.name} — Strong ROI opportunity`}</p>
+          <p className="dp-brief-summary">{brief?.summary ?? `${zone.name} scores ${zone.score}/100 on EV demand (Tier ${zone.tier}).`}</p>
           <div className="dp-brief-metrics">
-            {[
-              { val:`${zone.score}/100`, lbl:'Demand Score' },
-              { val:`${zone.existing}`, lbl:'Competition' },
-              { val:zone.evTraffic, lbl:'Daily Traffic' },
-            ].map(m => (
-              <div className="dp-brief-metric" key={m.lbl}>
-                <span className="dp-brief-metric-val">{m.val}</span>
-                <span className="dp-brief-metric-lbl">{m.lbl}</span>
+            {(brief?.key_metrics ?? [
+              { label: 'Demand Score', value: `${zone.score}/100` },
+              { label: 'Competition',  value: `${zone.existing}` },
+              { label: 'Daily Traffic', value: zone.evTraffic },
+            ]).map(m => (
+              <div className="dp-brief-metric" key={m.label ?? m.lbl}>
+                <span className="dp-brief-metric-val">{m.value ?? m.val}</span>
+                <span className="dp-brief-metric-lbl">{m.label ?? m.lbl}</span>
               </div>
             ))}
           </div>
-          {zone.score < 60 && <div className="dp-brief-risk"><AlertTriangle size={13}/> Low demand zone — smaller capex advised.</div>}
-          <div className="dp-brief-rec"><TrendingUp size={13}/> DC Fast recommended for {zone.name} based on traffic density.</div>
+          {(brief?.risk_factors ?? []).map((r, i) => (
+            <div className="dp-brief-risk" key={i}><AlertTriangle size={13}/> {r}</div>
+          ))}
+          {brief?.recommendation && (
+            <div className="dp-brief-rec"><TrendingUp size={13}/> {brief.recommendation}</div>
+          )}
           <div className="dp-brief-actions">
             <button className="dp-brief-export"><Download size={13}/> Export PDF</button>
-            <button className="dp-brief-reset" onClick={() => setState('idle')}>Regenerate</button>
+            <button className="dp-brief-reset" onClick={() => { setState('idle'); setBrief(null) }}>Regenerate</button>
           </div>
         </div>
       )}
@@ -285,7 +336,42 @@ function AIBrief({ zone }) {
 }
 
 // ─── Station Panel ─────────────────────────────────────────────
-function StationPanel({ station, zone, onClose, isNew, onCalculateROI }) {
+// ─── Competition block (real distances) ───────────────────────
+const COMP_RADIUS_KM = 5
+
+function CompetitionBlock({ station, stations }) {
+  const nearby = stations
+    .filter(s => String(s.id) !== String(station.id) && s.lat && s.lng)
+    .map(s => ({ ...s, dist: distKm(station.lat, station.lng, s.lat, s.lng) }))
+    .filter(s => s.dist <= COMP_RADIUS_KM)
+    .sort((a, b) => a.dist - b.dist)
+
+  return (
+    <>
+      <div className="dp-competitor">
+        <span className="dp-comp-count">{nearby.length}</span>
+        <span>station{nearby.length !== 1 ? 's' : ''} within {COMP_RADIUS_KM}km</span>
+      </div>
+      {nearby.length > 0 && (
+        <div className="dp-comp-list">
+          {nearby.map(s => (
+            <div className="dp-comp-item" key={s.id}>
+              <span className="dp-comp-dot" style={{ background: statusColor(s.status) }}/>
+              <span className="dp-comp-name">{s.name}</span>
+              <span className="dp-comp-dist">{s.dist.toFixed(1)}km</span>
+            </div>
+          ))}
+        </div>
+      )}
+      {nearby.length === 0 && (
+        <div className="dp-comp-empty">No competing stations nearby — low competition area.</div>
+      )}
+    </>
+  )
+}
+
+// ─── Station Panel ─────────────────────────────────────────────
+function StationPanel({ station, zone, onClose, isNew, onCalculateROI, stations = [] }) {
   const [name, setName]   = useState(station?.name ?? 'New Station')
   const [type, setType]   = useState(station?.type ?? 'AC Level 2')
   const [ports, setPorts] = useState(station?.ports ?? 4)
@@ -348,24 +434,21 @@ function StationPanel({ station, zone, onClose, isNew, onCalculateROI }) {
                 onChange={e => setOpex(Number(e.target.value))}/>
             </label>
           </div>
-          <button className="dp-calc-btn" onClick={() => onCalculateROI({ capex, type, zone:z })}>
+          <button className="dp-calc-btn" onClick={() => onCalculateROI({ capex, type, zone:z, opex })}>
             <Calculator size={14}/> Calculate ROI
           </button>
         </div>
 
-        {z && (
+        {station?.lat && (
           <div className="dp-panel-section">
             <div className="dp-section-label">Competition</div>
-            <div className="dp-competitor">
-              <span className="dp-comp-count">{z.existing}</span>
-              <span>existing station{z.existing!==1?'s':''} within 1km</span>
-            </div>
+            <CompetitionBlock station={station} stations={stations}/>
           </div>
         )}
 
         <div className="dp-panel-section">
           <div className="dp-section-label">AI Investor Brief</div>
-          <AIBrief zone={z}/>
+          <AIBrief zone={z} lastROI={null}/>
         </div>
       </div>
     </aside>
@@ -405,29 +488,42 @@ function LegendPanel() {
 }
 
 // ─── Mapbox map ───────────────────────────────────────────────
-function MapboxMap({ stations, heatmapOn, plantingMode, showLegend, onMapClick, onStationClick, mapInstanceRef }) {
+function MapboxMap({ stations, zones: zoneProp, heatmapOn, plantingMode, showLegend, onMapClick, onStationClick, mapInstanceRef }) {
+  const activeZones   = zoneProp ?? ZONES
   const containerRef  = useRef(null)
   const mapRef        = useRef(null)
   const plantRef      = useRef(plantingMode)
   const clickCbRef    = useRef(onMapClick)
   const stationCbRef  = useRef(onStationClick)
-  const stationsRef   = useRef(stations)        // always-current list for GL click handler
+  const stationsRef   = useRef(stations)
+  const zonesRef      = useRef(activeZones)     // always-current zones for GL setup
   const zonesAddedRef = useRef(false)
 
   useEffect(() => { plantRef.current     = plantingMode   }, [plantingMode])
   useEffect(() => { clickCbRef.current   = onMapClick     }, [onMapClick])
   useEffect(() => { stationCbRef.current = onStationClick }, [onStationClick])
   useEffect(() => { stationsRef.current  = stations       }, [stations])
+  useEffect(() => { zonesRef.current     = activeZones    }, [activeZones])
+
+  // ── helpers ────────────────────────────────────────────────
+  function makeZoneFeatures(zones) {
+    return zones.map(z => ({
+      type:'Feature',
+      properties:{ id:z.id, name:z.name, score:z.score, tier:z.tier, color:zoneColor(z.score) },
+      geometry:makeCircle(z.lng, z.lat, z.radiusKm ?? 1.1),
+    }))
+  }
+
+  function setZonesData(map, zones) {
+    const src = map.getSource('zones')
+    if (!src) return
+    src.setData({ type:'FeatureCollection', features:makeZoneFeatures(zones) })
+  }
 
   // ── zone circles ──────────────────────────────────────────
   function setupZoneLayers(map) {
     if (map.getSource('zones')) return
-    const features = ZONES.map(z => ({
-      type:'Feature',
-      properties:{ id:z.id, name:z.name, score:z.score, tier:z.tier, color:zoneColor(z.score) },
-      geometry:makeCircle(z.lng, z.lat, z.radiusKm),
-    }))
-    map.addSource('zones', { type:'geojson', data:{ type:'FeatureCollection', features } })
+    map.addSource('zones', { type:'geojson', data:{ type:'FeatureCollection', features:makeZoneFeatures(zonesRef.current) } })
     map.addLayer({ id:'zones-fill', type:'fill', source:'zones',
       paint:{ 'fill-color':['get','color'], 'fill-opacity':0.18 } })
     map.addLayer({ id:'zones-outline', type:'line', source:'zones',
@@ -506,11 +602,11 @@ function MapboxMap({ stations, heatmapOn, plantingMode, showLegend, onMapClick, 
         'icon-ignore-placement':true,
       }
     })
-    // click: find matching station by id stored in feature properties
+    // click: find matching station — IDs may be strings, so stringify both sides
     map.on('click', 'ev-stations', e => {
       if (!e.features?.length) return
-      const id = Number(e.features[0].properties.id)
-      const s  = stationsRef.current.find(s => s.id === id)
+      const id = String(e.features[0].properties.id)
+      const s  = stationsRef.current.find(s => String(s.id) === id)
       if (s) stationCbRef.current(s)
     })
     map.on('mouseenter', 'ev-stations', () => { map.getCanvas().style.cursor = 'pointer' })
@@ -547,10 +643,11 @@ function MapboxMap({ stations, heatmapOn, plantingMode, showLegend, onMapClick, 
     map._changeStyle = (styleUrl) => {
       zonesAddedRef.current = false
       map.once('style.load', () => {
-        setupZoneLayers(map)
+        setupZoneLayers(map)           // builds from zonesRef.current
         loadStationImages(map)
         setupStationsLayer(map)
         setStationsData(map, stationsRef.current)
+        setZonesData(map, zonesRef.current)   // push latest API zones in
       })
       map.setStyle(styleUrl)
     }
@@ -579,6 +676,13 @@ function MapboxMap({ stations, heatmapOn, plantingMode, showLegend, onMapClick, 
     if (!map?.isStyleLoaded()) return
     setStationsData(map, stations)
   }, [stations])
+
+  // ── update GL source when zones load from API ─────────────
+  useEffect(() => {
+    const map = mapRef.current
+    if (!map?.isStyleLoaded()) return
+    setZonesData(map, activeZones)
+  }, [activeZones])
 
   // ── heatmap toggle ────────────────────────────────────────
   useEffect(() => {
@@ -635,14 +739,18 @@ function InvestorLogin({ onLogin, onSignup }) {
   const [loading,  setLoading]  = useState(false)
   const [err,      setErr]      = useState('')
 
-  const submit = () => {
+  const submit = async () => {
     if (!email.trim() || !password.trim()) { setErr('Please fill in all fields'); return }
     setErr(''); setLoading(true)
-    setTimeout(() => {
+    try {
+      const data = await api.auth.login(email.trim().toLowerCase(), password)
+      setToken(data.token)
+      setCachedUser(data.user)
+      onLogin(data.user)
+    } catch (e) {
+      setErr(e.message || 'Sign in failed')
       setLoading(false)
-      const name = email.split('@')[0].replace(/[._]/g,' ').replace(/\b\w/g, c => c.toUpperCase())
-      onLogin({ name, email, company:'EV Hacks Ltd', role:'Investor' })
-    }, 900)
+    }
   }
 
   return (
@@ -743,15 +851,23 @@ function InvestorSignup({ onBack, onDone }) {
     setErr(''); setStep(2)
   }
 
-  const submit = () => {
+  const submit = async () => {
     if (!form.role)                      { setErr('Select your role'); return }
     if (form.password.length < 8)        { setErr('Password must be at least 8 characters'); return }
     if (form.password !== form.confirm)  { setErr("Passwords don't match"); return }
     setErr(''); setLoading(true)
-    setTimeout(() => {
+    try {
+      const data = await api.auth.register({
+        name: form.name, email: form.email.trim().toLowerCase(),
+        password: form.password, company: form.company, role: form.role,
+      })
+      setToken(data.token)
+      setCachedUser(data.user)
+      onDone(data.user)
+    } catch (e) {
+      setErr(e.message || 'Registration failed')
       setLoading(false)
-      onDone({ name:form.name, email:form.email, company:form.company, role:form.role })
-    }, 1100)
+    }
   }
 
   return (
@@ -1078,7 +1194,8 @@ function Sidebar({ activePage, setActivePage, stations, user, onLogout }) {
 }
 
 // ─── Sub-pages ─────────────────────────────────────────────────
-function ZoneRankings({ onSelectZone }) {
+function ZoneRankings({ zones, onSelectZone }) {
+  const list = zones ?? ZONES
   return (
     <div className="dp-subpage">
       <div className="dp-subpage-header">
@@ -1089,7 +1206,7 @@ function ZoneRankings({ onSelectZone }) {
         <table className="dp-rankings-table">
           <thead><tr><th>#</th><th>Zone</th><th>Tier</th><th>Demand Score</th><th>EV Traffic</th><th>POIs</th><th>Stations</th><th></th></tr></thead>
           <tbody>
-            {[...ZONES].sort((a,b)=>b.score-a.score).map((z,i) => (
+            {[...list].sort((a,b)=>b.score-a.score).map((z,i) => (
               <tr key={z.id}>
                 <td className="dp-rank-num">{i+1}</td>
                 <td className="dp-rank-name">{z.name}</td>
@@ -1166,7 +1283,8 @@ function ReportsPage() {
   )
 }
 
-function StationsPage({ stations, onStationClick }) {
+function StationsPage({ stations, zones, onStationClick }) {
+  const zoneList = zones ?? ZONES
   return (
     <div className="dp-subpage">
       <div className="dp-subpage-header">
@@ -1175,7 +1293,7 @@ function StationsPage({ stations, onStationClick }) {
       </div>
       <div className="dp-stations-grid">
         {stations.map(s => {
-          const z = ZONES.find(z => z.id === s.zone)
+          const z = zoneList.find(z => z.id === s.zone)
           return (
             <div className="dp-station-card" key={s.id} onClick={() => onStationClick(s)}>
               <div className="dp-station-card-header">
@@ -1196,6 +1314,7 @@ function StationsPage({ stations, onStationClick }) {
 let _nextId = 100
 function DashboardView({ user, onLogout, onUpdateUser }) {
   const [activePage,   setActivePage]   = useState('overview')
+  const [zones,        setZones]        = useState(ZONES)
   const [stations,     setStations]     = useState(INIT_STATIONS)
   const [plantingMode, setPlantingMode] = useState(false)
   const [selected,     setSelected]     = useState(null)
@@ -1207,8 +1326,21 @@ function DashboardView({ user, onLogout, onUpdateUser }) {
   const mapInstanceRef = useRef(null)
   const panelOpen = selected !== null || selectedZone !== null
 
+  useEffect(() => {
+    api.getZones().then(d => {
+      if (d.zones?.length) setZones(d.zones.map(mapZone))
+    }).catch(() => {})
+    api.getStations().then(d => {
+      if (d.stations?.length) {
+        setStations(d.stations.map(mapStation))
+      }
+    }).catch(() => {})
+  }, [])
+
   const handleMapClick = ({ lng, lat }) => {
-    const zone = closestZone(lng, lat)
+    const zone = zones.reduce((best, z) =>
+      Math.hypot(z.lng-lng, z.lat-lat) < Math.hypot(best.lng-lng, best.lat-lat) ? z : best
+    )
     const newId = ++_nextId
     const s = { id:newId, name:'New Station', status:'available', type:'AC Level 2', ports:4, capex:5000000, zone:zone.id, lng, lat, planted:true }
     setStations(prev => [...prev, s])
@@ -1257,7 +1389,7 @@ function DashboardView({ user, onLogout, onUpdateUser }) {
         {activePage === 'overview' && (
           <>
             <MapboxMap
-              stations={stations} heatmapOn={heatmapOn}
+              stations={stations} zones={zones} heatmapOn={heatmapOn}
               plantingMode={plantingMode} showLegend={showLegend}
               onMapClick={handleMapClick} onStationClick={handleStationClick}
               mapInstanceRef={mapInstanceRef}
@@ -1274,8 +1406,8 @@ function DashboardView({ user, onLogout, onUpdateUser }) {
             />
           </>
         )}
-        {activePage === 'stations'  && <StationsPage stations={stations} onStationClick={handleStationClick}/>}
-        {activePage === 'rankings'  && <ZoneRankings onSelectZone={handleZoneSelect}/>}
+        {activePage === 'stations'  && <StationsPage stations={stations} zones={zones} onStationClick={handleStationClick}/>}
+        {activePage === 'rankings'  && <ZoneRankings zones={zones} onSelectZone={handleZoneSelect}/>}
         {activePage === 'roi'       && <ROIHistoryPage/>}
         {activePage === 'reports'   && <ReportsPage/>}
         {activePage === 'settings'  && <SettingsPage user={user} onUpdateUser={onUpdateUser}/>}
@@ -1285,10 +1417,11 @@ function DashboardView({ user, onLogout, onUpdateUser }) {
         {panelOpen && (
           <StationPanel
             station={selected}
-            zone={selectedZone ?? (selected ? ZONES.find(z => z.id === selected.zone) : null)}
+            zone={selectedZone ?? (selected ? zones.find(z => z.id === selected.zone) : null)}
             onClose={closePanel}
             isNew={selected?.planted ?? false}
             onCalculateROI={setRoiModal}
+            stations={stations}
           />
         )}
       </div>
@@ -1296,6 +1429,7 @@ function DashboardView({ user, onLogout, onUpdateUser }) {
       {roiModal && (
         <ROIModal
           capex={roiModal.capex} type={roiModal.type} zone={roiModal.zone}
+          opex={roiModal.opex}
           onClose={() => setRoiModal(null)}
         />
       )}
@@ -1305,8 +1439,27 @@ function DashboardView({ user, onLogout, onUpdateUser }) {
 
 // ─── Investor App (auth wrapper) ───────────────────────────────
 export default function Dashboard() {
-  const [screen, setScreen] = useState('login') // 'login' | 'signup' | 'dashboard'
-  const [user,   setUser]   = useState(null)
+  const [screen, setScreen] = useState(() => {
+    // start on dashboard if we already have a valid token cached
+    return getToken() && getCachedUser() ? 'dashboard' : 'login'
+  })
+  const [user, setUser] = useState(() => getCachedUser())
+
+  useEffect(() => {
+    // Re-verify token in background — silently drop to login if it's expired
+    if (getToken()) {
+      api.auth.me()
+        .then(u => { setUser(u); setCachedUser(u); setScreen('dashboard') })
+        .catch(() => { clearAuth(); setUser(null); setScreen('login') })
+    }
+  }, [])
+
+  const handleLogout = async () => {
+    api.auth.logout().catch(() => {})
+    clearAuth()
+    setUser(null)
+    setScreen('login')
+  }
 
   if (screen === 'login') return (
     <InvestorLogin
@@ -1323,8 +1476,8 @@ export default function Dashboard() {
   return (
     <DashboardView
       user={user}
-      onLogout={() => { setUser(null); setScreen('login') }}
-      onUpdateUser={u => setUser(u)}
+      onLogout={handleLogout}
+      onUpdateUser={u => { setUser(u); setCachedUser(u) }}
     />
   )
 }
