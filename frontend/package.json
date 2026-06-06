@@ -14,6 +14,7 @@
     "@react-three/fiber": "^9.6.1",
     "autoprefixer": "^10.5.0",
     "axios": "^1.17.0",
+    "framer-motion": "^12.40.0",
     "lucide-react": "^1.17.0",
     "mapbox-gl": "^3.24.0",
     "postcss": "^8.5.15",
