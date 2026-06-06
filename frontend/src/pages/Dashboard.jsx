@@ -8,6 +8,7 @@ import {
   ZoomOut, Map, Download, Sparkles, AlertTriangle,
   TrendingUp, Clock, CheckCircle, Navigation, Settings,
   LogOut, ChevronsUpDown, Satellite, Globe,
+  Eye, EyeOff, Mail, Lock, User, Building2, Shield, Check, Bell,
 } from 'lucide-react'
 import './Dashboard.css'
 
@@ -104,6 +105,10 @@ const sidebarV = {
 }
 const labelV = {
   open:   { opacity:1, x:0,   display:'block',  transition:{ delay:.05, duration:.15 } },
+  closed: { opacity:0, x:-12, transitionEnd:{ display:'none' } },
+}
+const flexLabelV = {
+  open:   { opacity:1, x:0,   display:'flex',   transition:{ delay:.05, duration:.15 } },
   closed: { opacity:0, x:-12, transitionEnd:{ display:'none' } },
 }
 const transitionProps = { type:'tween', ease:'easeOut', duration:.2 }
@@ -437,27 +442,55 @@ function MapboxMap({ stations, heatmapOn, plantingMode, showLegend, onMapClick, 
     zonesAddedRef.current = true
   }
 
-  // ── station GL icons — registered as map sprite images ────
-  // Using GL symbol layers avoids all DOM-marker positioning issues
-  function loadStationImages(map, cb) {
-    const defs = [
+  // ── station GL icons — synchronous canvas (no async needed) ──
+  function makeStationIcon(color) {
+    const c = document.createElement('canvas')
+    c.width = 76; c.height = 76
+    const ctx = c.getContext('2d')
+    // circle background
+    ctx.beginPath(); ctx.arc(38,38,34,0,Math.PI*2)
+    ctx.fillStyle = color; ctx.fill()
+    ctx.strokeStyle = 'white'; ctx.lineWidth = 5; ctx.stroke()
+    // gas station pump (white)
+    ctx.fillStyle = 'white'
+    // pump body
+    ctx.beginPath()
+    ctx.roundRect(18, 12, 28, 50, 4)
+    ctx.fill()
+    // screen (darker cutout)
+    ctx.fillStyle = color
+    ctx.globalAlpha = 0.45
+    ctx.beginPath()
+    ctx.roundRect(23, 17, 18, 13, 2)
+    ctx.fill()
+    ctx.globalAlpha = 1
+    ctx.fillStyle = 'white'
+    // hose arm (horizontal)
+    ctx.beginPath()
+    ctx.roundRect(46, 26, 10, 5, 2)
+    ctx.fill()
+    // hose vertical
+    ctx.beginPath()
+    ctx.roundRect(51, 26, 5, 18, 2)
+    ctx.fill()
+    // nozzle bar
+    ctx.beginPath()
+    ctx.roundRect(44, 43, 13, 5, 2)
+    ctx.fill()
+    // nozzle tip
+    ctx.beginPath()
+    ctx.roundRect(44, 47, 5, 10, 2)
+    ctx.fill()
+    return ctx.getImageData(0,0,76,76)
+  }
+
+  function loadStationImages(map) {
+    ;[
       { name:'ev-available', color:'#16A34A' },
       { name:'ev-busy',      color:'#D97706' },
       { name:'ev-offline',   color:'#DC2626' },
-    ]
-    let pending = defs.length
-    const done = () => { if (--pending === 0 && cb) cb() }
-    defs.forEach(({ name, color }) => {
-      if (map.hasImage(name)) { done(); return }
-      // 76×76 SVG rendered at pixelRatio:2 → crisp 38×38 on screen
-      const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="76" height="76">
-        <circle cx="38" cy="38" r="34" fill="${color}" stroke="white" stroke-width="5"/>
-        <path d="M44 16L28 42h12L32 60 48 34h-12L44 16Z" fill="white"/>
-      </svg>`
-      const img = new Image(76, 76)
-      img.onload = () => { if (!map.hasImage(name)) map.addImage(name, img, { pixelRatio:2 }); done() }
-      img.onerror = done
-      img.src = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`
+    ].forEach(({ name, color }) => {
+      if (!map.hasImage(name)) map.addImage(name, makeStationIcon(color), { pixelRatio:2 })
     })
   }
 
@@ -515,20 +548,18 @@ function MapboxMap({ stations, heatmapOn, plantingMode, showLegend, onMapClick, 
       zonesAddedRef.current = false
       map.once('style.load', () => {
         setupZoneLayers(map)
-        loadStationImages(map, () => {
-          setupStationsLayer(map)
-          setStationsData(map, stationsRef.current)
-        })
+        loadStationImages(map)
+        setupStationsLayer(map)
+        setStationsData(map, stationsRef.current)
       })
       map.setStyle(styleUrl)
     }
 
     map.on('load', () => {
       setupZoneLayers(map)
-      loadStationImages(map, () => {
-        setupStationsLayer(map)
-        setStationsData(map, stationsRef.current)
-      })
+      loadStationImages(map)
+      setupStationsLayer(map)
+      setStationsData(map, stationsRef.current)
     })
 
     // plant click — skip if cursor is over an existing station icon
@@ -596,26 +627,388 @@ function Dock({ plantingMode, heatmapOn, showLegend, mapStyleIdx,
   )
 }
 
+// ─── Investor Login ────────────────────────────────────────────
+function InvestorLogin({ onLogin, onSignup }) {
+  const [email,    setEmail]    = useState('')
+  const [password, setPassword] = useState('')
+  const [showPass, setShowPass] = useState(false)
+  const [loading,  setLoading]  = useState(false)
+  const [err,      setErr]      = useState('')
+
+  const submit = () => {
+    if (!email.trim() || !password.trim()) { setErr('Please fill in all fields'); return }
+    setErr(''); setLoading(true)
+    setTimeout(() => {
+      setLoading(false)
+      const name = email.split('@')[0].replace(/[._]/g,' ').replace(/\b\w/g, c => c.toUpperCase())
+      onLogin({ name, email, company:'EV Hacks Ltd', role:'Investor' })
+    }, 900)
+  }
+
+  return (
+    <div className="ia-root">
+      <div className="ia-left">
+        <div className="ia-left-inner">
+          <div className="ia-left-brand">
+            <div className="ia-left-logo"><Zap size={18}/></div>
+            <span className="ia-left-brand-name">EV Hacks</span>
+          </div>
+          <h1 className="ia-left-title">Nigeria's EV Intelligence Layer</h1>
+          <p className="ia-left-sub">Infrastructure intelligence for investors building Nigeria's electric future.</p>
+          <div className="ia-stats">
+            {[
+              { val:'20,000+', lbl:'EVs on Nigerian roads' },
+              { val:'&lt; 50',    lbl:'Mapped charging stations' },
+              { val:'9 Zones', lbl:'Analyzed & ranked' },
+            ].map(s => (
+              <div className="ia-stat" key={s.lbl}>
+                <span className="ia-stat-val" dangerouslySetInnerHTML={{ __html:s.val }}/>
+                <span className="ia-stat-lbl">{s.lbl}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <div className="ia-right">
+        <div className="ia-form-wrap">
+          <div className="ia-form-badge">Investor Dashboard</div>
+          <h2 className="ia-form-title">Sign in to your account</h2>
+          <p className="ia-form-sub">Access demand maps, ROI tools, and AI-generated briefs.</p>
+
+          <div className="ia-form">
+            {err && <div className="ia-err">{err}</div>}
+
+            <div className="ia-field">
+              <label className="ia-label">Email</label>
+              <div className="ia-input-wrap">
+                <Mail size={15} className="ia-ico"/>
+                <input className="ia-input" type="email" placeholder="you@company.ng"
+                  value={email} onChange={e => setEmail(e.target.value)}
+                  onKeyDown={e => e.key==='Enter' && submit()} autoFocus/>
+              </div>
+            </div>
+
+            <div className="ia-field">
+              <label className="ia-label">Password</label>
+              <div className="ia-input-wrap">
+                <Lock size={15} className="ia-ico"/>
+                <input className="ia-input" type={showPass ? 'text' : 'password'}
+                  placeholder="Enter your password"
+                  value={password} onChange={e => setPassword(e.target.value)}
+                  onKeyDown={e => e.key==='Enter' && submit()}/>
+                <button className="ia-eye" type="button" onClick={() => setShowPass(p=>!p)}>
+                  {showPass ? <EyeOff size={15}/> : <Eye size={15}/>}
+                </button>
+              </div>
+              <button className="ia-forgot" type="button">Forgot password?</button>
+            </div>
+
+            <button className={`ia-btn-primary${loading?' --loading':''}`} onClick={submit} disabled={loading}>
+              {loading && <span className="ia-spinner"/>}
+              {loading ? 'Signing in…' : 'Sign In →'}
+            </button>
+          </div>
+
+          <p className="ia-switch">
+            Don't have an account?{' '}
+            <button className="ia-link" onClick={onSignup}>Create one</button>
+          </p>
+          <p className="ia-driver-hint">
+            Looking for the driver app?{' '}
+            <a href="#/driver" className="ia-link">Driver view →</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+// ─── Investor Signup ───────────────────────────────────────────
+function InvestorSignup({ onBack, onDone }) {
+  const [step,     setStep]     = useState(1)
+  const [form,     setForm]     = useState({ name:'', company:'', email:'', role:'', password:'', confirm:'' })
+  const [showPass, setShowPass] = useState(false)
+  const [loading,  setLoading]  = useState(false)
+  const [err,      setErr]      = useState('')
+
+  const set = (k, v) => setForm(f => ({ ...f, [k]:v }))
+
+  const ROLES = ['Angel Investor','Venture Capitalist','Grid Operator','Government Agency','Researcher','Other']
+
+  const nextStep = () => {
+    if (!form.name.trim())    { setErr('Enter your full name'); return }
+    if (!form.company.trim()) { setErr('Enter your company or organization'); return }
+    if (!form.email.includes('@')) { setErr('Enter a valid email address'); return }
+    setErr(''); setStep(2)
+  }
+
+  const submit = () => {
+    if (!form.role)                      { setErr('Select your role'); return }
+    if (form.password.length < 8)        { setErr('Password must be at least 8 characters'); return }
+    if (form.password !== form.confirm)  { setErr("Passwords don't match"); return }
+    setErr(''); setLoading(true)
+    setTimeout(() => {
+      setLoading(false)
+      onDone({ name:form.name, email:form.email, company:form.company, role:form.role })
+    }, 1100)
+  }
+
+  return (
+    <div className="ia-root">
+      <div className="ia-left">
+        <div className="ia-left-inner">
+          <div className="ia-left-brand">
+            <div className="ia-left-logo"><Zap size={18}/></div>
+            <span className="ia-left-brand-name">EV Hacks</span>
+          </div>
+          <h1 className="ia-left-title">Join Nigeria's EV Infrastructure Network</h1>
+          <p className="ia-left-sub">Get early access to demand data, zone rankings, and AI-generated investment briefs.</p>
+          <div className="ia-steps-wrap">
+            <div className="ia-steps-line"/>
+            {[1,2].map(n => (
+              <div key={n} className={`ia-step-dot${step>=n?' --active':''}${step>n?' --done':''}`}>
+                {step > n ? <Check size={10}/> : n}
+              </div>
+            ))}
+          </div>
+          <p className="ia-step-label">{step===1 ? 'Step 1 of 2 — Your details' : 'Step 2 of 2 — Role & security'}</p>
+        </div>
+      </div>
+
+      <div className="ia-right">
+        <div className="ia-form-wrap">
+          <button className="ia-back" type="button" onClick={step===1 ? onBack : () => setStep(1)}>
+            ← {step===1 ? 'Back to sign in' : 'Back'}
+          </button>
+          <div className="ia-form-badge">Create Account</div>
+          <h2 className="ia-form-title">{step===1 ? 'Your information' : 'Role & password'}</h2>
+
+          <div className="ia-form">
+            {err && <div className="ia-err">{err}</div>}
+
+            {step===1 ? (
+              <>
+                <div className="ia-field">
+                  <label className="ia-label">Full Name</label>
+                  <div className="ia-input-wrap">
+                    <User size={15} className="ia-ico"/>
+                    <input className="ia-input" type="text" placeholder="Amaka Okonkwo"
+                      value={form.name} onChange={e => set('name', e.target.value)} autoFocus/>
+                  </div>
+                </div>
+                <div className="ia-field">
+                  <label className="ia-label">Company / Organization</label>
+                  <div className="ia-input-wrap">
+                    <Building2 size={15} className="ia-ico"/>
+                    <input className="ia-input" type="text" placeholder="Zenith Capital Partners"
+                      value={form.company} onChange={e => set('company', e.target.value)}/>
+                  </div>
+                </div>
+                <div className="ia-field">
+                  <label className="ia-label">Work Email</label>
+                  <div className="ia-input-wrap">
+                    <Mail size={15} className="ia-ico"/>
+                    <input className="ia-input" type="email" placeholder="amaka@zenithcap.ng"
+                      value={form.email} onChange={e => set('email', e.target.value)}
+                      onKeyDown={e => e.key==='Enter' && nextStep()}/>
+                  </div>
+                </div>
+                <button className="ia-btn-primary" onClick={nextStep}>Continue →</button>
+              </>
+            ) : (
+              <>
+                <div className="ia-field">
+                  <label className="ia-label">Your Role</label>
+                  <div className="ia-role-grid">
+                    {ROLES.map(r => (
+                      <button key={r} type="button"
+                        className={`ia-role-chip${form.role===r?' --selected':''}`}
+                        onClick={() => set('role', r)}>{r}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+                <div className="ia-field">
+                  <label className="ia-label">Password</label>
+                  <div className="ia-input-wrap">
+                    <Lock size={15} className="ia-ico"/>
+                    <input className="ia-input" type={showPass ? 'text' : 'password'}
+                      placeholder="Min 8 characters"
+                      value={form.password} onChange={e => set('password', e.target.value)}/>
+                    <button className="ia-eye" type="button" onClick={() => setShowPass(p=>!p)}>
+                      {showPass ? <EyeOff size={15}/> : <Eye size={15}/>}
+                    </button>
+                  </div>
+                </div>
+                <div className="ia-field">
+                  <label className="ia-label">Confirm Password</label>
+                  <div className="ia-input-wrap">
+                    <Shield size={15} className="ia-ico"/>
+                    <input className="ia-input" type={showPass ? 'text' : 'password'}
+                      placeholder="Repeat password"
+                      value={form.confirm} onChange={e => set('confirm', e.target.value)}
+                      onKeyDown={e => e.key==='Enter' && submit()}/>
+                  </div>
+                </div>
+                <button className={`ia-btn-primary${loading?' --loading':''}`} onClick={submit} disabled={loading}>
+                  {loading && <span className="ia-spinner"/>}
+                  {loading ? 'Creating account…' : 'Create Account →'}
+                </button>
+              </>
+            )}
+          </div>
+
+          <p className="ia-switch">
+            Already have an account?{' '}
+            <button className="ia-link" onClick={onBack}>Sign in</button>
+          </p>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+// ─── Settings Page ─────────────────────────────────────────────
+function SettingsPage({ user, onUpdateUser }) {
+  const [name,     setName]     = useState(user.name)
+  const [company,  setCompany]  = useState(user.company ?? '')
+  const [notif,    setNotif]    = useState({ weekly:true, zones:true, price:false, stations:true })
+  const [mapStyle, setMapStyle] = useState('streets')
+  const [saved,    setSaved]    = useState(false)
+
+  const toggleNotif = k => setNotif(n => ({ ...n, [k]:!n[k] }))
+
+  const save = () => {
+    onUpdateUser({ ...user, name, company })
+    setSaved(true)
+    setTimeout(() => setSaved(false), 2200)
+  }
+
+  return (
+    <div className="dp-subpage">
+      <div className="dp-subpage-header">
+        <h2 className="dp-subpage-title">Settings</h2>
+        <p className="dp-subpage-sub">Manage your account and preferences</p>
+      </div>
+
+      <div className="dp-settings-body">
+        {/* Account */}
+        <div className="dp-settings-section">
+          <div className="dp-settings-section-hd">Account</div>
+          <div className="dp-settings-card">
+            <div className="dp-settings-avatar">
+              {user.name.split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase()}
+            </div>
+            <div className="dp-settings-fields">
+              <div className="dp-settings-field-row">
+                <div className="dp-settings-field">
+                  <label className="dp-settings-label">Full Name</label>
+                  <input className="dp-settings-input" value={name} onChange={e => setName(e.target.value)}/>
+                </div>
+                <div className="dp-settings-field">
+                  <label className="dp-settings-label">Company</label>
+                  <input className="dp-settings-input" value={company} onChange={e => setCompany(e.target.value)}/>
+                </div>
+              </div>
+              <div className="dp-settings-field-row">
+                <div className="dp-settings-field">
+                  <label className="dp-settings-label">Email</label>
+                  <input className="dp-settings-input --disabled" value={user.email} disabled/>
+                </div>
+                <div className="dp-settings-field">
+                  <label className="dp-settings-label">Role</label>
+                  <span className="dp-settings-role-badge">{user.role ?? 'Investor'}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Notifications */}
+        <div className="dp-settings-section">
+          <div className="dp-settings-section-hd"><Bell size={13}/> Notifications</div>
+          <div className="dp-settings-list">
+            {[
+              { k:'weekly',   lbl:'Weekly zone report',       sub:'Delivered every Monday morning' },
+              { k:'zones',    lbl:'Zone demand alerts',        sub:'When a zone score changes by ±5' },
+              { k:'price',    lbl:'Price change alerts',       sub:'Electricity tariff updates' },
+              { k:'stations', lbl:'New station notifications', sub:'New stations added in your tracked zones' },
+            ].map(({ k, lbl, sub }) => (
+              <div className="dp-settings-row" key={k}>
+                <div>
+                  <div className="dp-settings-row-lbl">{lbl}</div>
+                  <div className="dp-settings-row-sub">{sub}</div>
+                </div>
+                <button
+                  className={`dp-settings-toggle${notif[k]?' --on':''}`}
+                  onClick={() => toggleNotif(k)}
+                  aria-label={notif[k] ? 'Disable' : 'Enable'}>
+                  <span className="dp-settings-knob"/>
+                </button>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Map */}
+        <div className="dp-settings-section">
+          <div className="dp-settings-section-hd"><Map size={13}/> Map Preferences</div>
+          <div className="dp-settings-list">
+            <div className="dp-settings-row">
+              <div>
+                <div className="dp-settings-row-lbl">Default map style</div>
+                <div className="dp-settings-row-sub">Starting view when you open the dashboard</div>
+              </div>
+              <div className="dp-settings-seg">
+                {['Light','Streets','Satellite'].map(s => (
+                  <button key={s}
+                    className={`dp-settings-seg-btn${mapStyle===s.toLowerCase()?' --on':''}`}
+                    onClick={() => setMapStyle(s.toLowerCase())}>{s}</button>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="dp-settings-actions">
+          <button className={`dp-settings-save${saved?' --saved':''}`} onClick={save}>
+            {saved ? <><Check size={14}/> Saved</> : 'Save Changes'}
+          </button>
+        </div>
+      </div>
+    </div>
+  )
+}
+
 // ─── Sidebar ──────────────────────────────────────────────────
-function Sidebar({ activePage, setActivePage, stations }) {
-  const [collapsed, setCollapsed] = useState(true)
+function Sidebar({ activePage, setActivePage, stations, user, onLogout }) {
+  const [collapsed, setCollapsed] = useState(false)
+  const initials = (user?.name ?? 'EV').split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase()
 
   return (
     <motion.aside
       className="dp-sidebar"
-      initial="closed"
+      initial="open"
       animate={collapsed ? 'closed' : 'open'}
       variants={sidebarV}
       transition={transitionProps}
-      onMouseEnter={() => setCollapsed(false)}
-      onMouseLeave={() => setCollapsed(true)}
     >
-      {/* Top — wordmark */}
+      {/* Top — wordmark + toggle */}
       <div className="dp-sidebar-top">
-        <a href="#/" className="dp-wordmark">
-          <span className="dp-wordmark-bolt"><Zap size={12}/></span>
-          <motion.span variants={labelV} className="dp-wordmark-text">EV Hacks</motion.span>
-        </a>
+        <div className="dp-sidebar-wordmark-row">
+          <a href="#/" className="dp-wordmark">
+            <span className="dp-wordmark-bolt"><Zap size={12}/></span>
+            <motion.span variants={labelV} className="dp-wordmark-text">EV Hacks</motion.span>
+          </a>
+          <button
+            className="dp-sidebar-toggle"
+            onClick={() => setCollapsed(c => !c)}
+            title={collapsed ? 'Expand sidebar' : 'Collapse sidebar'}
+          >
+            <ChevronsUpDown size={14} style={{ transform:'rotate(90deg)' }}/>
+          </button>
+        </div>
         <motion.div variants={labelV} className="dp-sidebar-role">Investor Dashboard</motion.div>
       </div>
 
@@ -659,20 +1052,25 @@ function Sidebar({ activePage, setActivePage, stations }) {
           <span className="dp-nav-icon"><Navigation size={17}/></span>
           <motion.span variants={labelV} className="dp-nav-label">Driver View</motion.span>
         </a>
-        <button className="dp-nav-item">
+        <button
+          className={`dp-nav-item${activePage==='settings' ? ' dp-nav-item--active' : ''}`}
+          onClick={() => setActivePage('settings')}>
           <span className="dp-nav-icon"><Settings size={17}/></span>
           <motion.span variants={labelV} className="dp-nav-label">Settings</motion.span>
         </button>
         <div className="dp-sidebar-divider"/>
-        <div className="dp-account-row">
-          <div className="dp-account-avatar">RA</div>
-          <motion.div variants={labelV} className="dp-account-info">
-            <span className="dp-account-name">Raufu Abdulraman</span>
-            <span className="dp-account-email">raufu@evhacks.ng</span>
+        <div className="dp-account-row" onClick={() => setActivePage('settings')} title="Account settings">
+          <div className="dp-account-avatar">{initials}</div>
+          <motion.div variants={flexLabelV} className="dp-account-expand">
+            <div className="dp-account-info">
+              <span className="dp-account-name">{user?.name ?? 'Investor'}</span>
+              <span className="dp-account-email">{user?.email ?? ''}</span>
+            </div>
+            <button className="dp-account-logout" title="Sign out"
+              onClick={e => { e.stopPropagation(); onLogout() }}>
+              <LogOut size={13}/>
+            </button>
           </motion.div>
-          <motion.button variants={labelV} className="dp-account-logout" title="Sign out">
-            <LogOut size={13}/>
-          </motion.button>
         </div>
       </div>
     </motion.aside>
@@ -794,9 +1192,9 @@ function StationsPage({ stations, onStationClick }) {
   )
 }
 
-// ─── Main Dashboard ────────────────────────────────────────────
+// ─── Dashboard View (authenticated) ───────────────────────────
 let _nextId = 100
-export default function Dashboard() {
+function DashboardView({ user, onLogout, onUpdateUser }) {
   const [activePage,   setActivePage]   = useState('overview')
   const [stations,     setStations]     = useState(INIT_STATIONS)
   const [plantingMode, setPlantingMode] = useState(false)
@@ -805,27 +1203,22 @@ export default function Dashboard() {
   const [heatmapOn,    setHeatmapOn]    = useState(true)
   const [showLegend,   setShowLegend]   = useState(true)
   const [mapStyleIdx,  setMapStyleIdx]  = useState(1)
-  const [roiModal,     setRoiModal]     = useState(null) // { capex, type, zone }
+  const [roiModal,     setRoiModal]     = useState(null)
   const mapInstanceRef = useRef(null)
   const panelOpen = selected !== null || selectedZone !== null
 
   const handleMapClick = ({ lng, lat }) => {
-    console.log('[plant] click received at', lng, lat)
     const zone = closestZone(lng, lat)
     const newId = ++_nextId
     const s = { id:newId, name:'New Station', status:'available', type:'AC Level 2', ports:4, capex:5000000, zone:zone.id, lng, lat, planted:true }
-    console.log('[plant] creating station id', newId, 'zone', zone.name)
-    setStations(prev => { console.log('[plant] stations before:', prev.length); return [...prev, s] })
+    setStations(prev => [...prev, s])
     setSelected(s)
     setSelZone(null)
     setPlantingMode(false)
     setTimeout(() => {
       const map = mapInstanceRef.current
-      if (!map) { console.warn('[plant] no map ref'); return }
-      const currentZoom = map.getZoom()
-      const targetZoom = Math.max(currentZoom, 15)
-      console.log('[plant] flying to', lng, lat, 'zoom', currentZoom, '→', targetZoom)
-      map.flyTo({ center:[lng, lat], zoom:targetZoom, padding:{ right:380 }, duration:700 })
+      if (!map) return
+      map.flyTo({ center:[lng, lat], zoom:Math.max(map.getZoom(), 15), padding:{ right:380 }, duration:700 })
     }, 50)
   }
 
@@ -852,7 +1245,13 @@ export default function Dashboard() {
 
   return (
     <div className="dp-root">
-      <Sidebar activePage={activePage} setActivePage={p => { setActivePage(p); closePanel() }} stations={stations}/>
+      <Sidebar
+        activePage={activePage}
+        setActivePage={p => { setActivePage(p); closePanel() }}
+        stations={stations}
+        user={user}
+        onLogout={onLogout}
+      />
 
       <div className="dp-main">
         {activePage === 'overview' && (
@@ -875,10 +1274,11 @@ export default function Dashboard() {
             />
           </>
         )}
-        {activePage === 'stations' && <StationsPage stations={stations} onStationClick={handleStationClick}/>}
-        {activePage === 'rankings' && <ZoneRankings onSelectZone={handleZoneSelect}/>}
-        {activePage === 'roi'      && <ROIHistoryPage/>}
-        {activePage === 'reports'  && <ReportsPage/>}
+        {activePage === 'stations'  && <StationsPage stations={stations} onStationClick={handleStationClick}/>}
+        {activePage === 'rankings'  && <ZoneRankings onSelectZone={handleZoneSelect}/>}
+        {activePage === 'roi'       && <ROIHistoryPage/>}
+        {activePage === 'reports'   && <ReportsPage/>}
+        {activePage === 'settings'  && <SettingsPage user={user} onUpdateUser={onUpdateUser}/>}
       </div>
 
       <div className={`dp-panel-wrap${panelOpen ? ' dp-panel-wrap--open' : ''}`}>
@@ -900,5 +1300,31 @@ export default function Dashboard() {
         />
       )}
     </div>
+  )
+}
+
+// ─── Investor App (auth wrapper) ───────────────────────────────
+export default function Dashboard() {
+  const [screen, setScreen] = useState('login') // 'login' | 'signup' | 'dashboard'
+  const [user,   setUser]   = useState(null)
+
+  if (screen === 'login') return (
+    <InvestorLogin
+      onLogin={u => { setUser(u); setScreen('dashboard') }}
+      onSignup={() => setScreen('signup')}
+    />
+  )
+  if (screen === 'signup') return (
+    <InvestorSignup
+      onBack={() => setScreen('login')}
+      onDone={u => { setUser(u); setScreen('dashboard') }}
+    />
+  )
+  return (
+    <DashboardView
+      user={user}
+      onLogout={() => { setUser(null); setScreen('login') }}
+      onUpdateUser={u => setUser(u)}
+    />
   )
 }

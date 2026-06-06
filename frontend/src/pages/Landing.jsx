@@ -41,9 +41,20 @@ const IList = () => (
     <path d="M1.5 3.5h10M1.5 6.5h10M1.5 9.5h7" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round"/>
   </svg>
 )
-const IZap = ({ size = 10 }) => (
+const IGasStation = ({ size = 10 }) => (
   <svg width={size} height={size} viewBox="0 0 10 10" fill="currentColor" aria-hidden="true">
-    <path d="M6 1L2 6h3.5L4 9.5 8.5 4H5L6 1z"/>
+    {/* pump body */}
+    <rect x="1" y="0.8" width="5.2" height="8.8" rx="0.9"/>
+    {/* screen */}
+    <rect x="1.8" y="1.6" width="3.6" height="2.3" rx="0.5" fillOpacity="0.45"/>
+    {/* hose arm */}
+    <rect x="6.2" y="3.6" width="2.1" height="0.85" rx="0.4"/>
+    {/* hose vertical */}
+    <rect x="7.5" y="3.6" width="0.85" height="3.2" rx="0.4"/>
+    {/* nozzle bar */}
+    <rect x="6.8" y="6.5" width="1.8" height="0.85" rx="0.4"/>
+    {/* nozzle tip */}
+    <rect x="6.8" y="7.1" width="0.85" height="1.8" rx="0.4"/>
   </svg>
 )
 
@@ -66,22 +77,22 @@ function MapMock() {
         <div className="mroad mroad-d2" />
 
         <div className="mpin mpin--green" style={{ top:'16%', left:'20%' }}>
-          <span className="mpin-ring" /><span className="mpin-body"><IZap /></span>
+          <span className="mpin-ring" /><span className="mpin-body"><IGasStation /></span>
         </div>
         <div className="mpin mpin--green" style={{ top:'30%', left:'58%' }}>
-          <span className="mpin-ring" /><span className="mpin-body"><IZap /></span>
+          <span className="mpin-ring" /><span className="mpin-body"><IGasStation /></span>
         </div>
         <div className="mpin mpin--amber" style={{ top:'52%', left:'76%' }}>
-          <span className="mpin-body"><IZap /></span>
+          <span className="mpin-body"><IGasStation /></span>
         </div>
         <div className="mpin mpin--green" style={{ top:'65%', left:'36%' }}>
-          <span className="mpin-ring mpin-ring--delay" /><span className="mpin-body"><IZap /></span>
+          <span className="mpin-ring mpin-ring--delay" /><span className="mpin-body"><IGasStation /></span>
         </div>
         <div className="mpin mpin--red" style={{ top:'76%', left:'66%' }}>
-          <span className="mpin-body"><IZap /></span>
+          <span className="mpin-body"><IGasStation /></span>
         </div>
         <div className="mpin mpin--green" style={{ top:'20%', left:'82%' }}>
-          <span className="mpin-ring" /><span className="mpin-body"><IZap /></span>
+          <span className="mpin-ring" /><span className="mpin-body"><IGasStation /></span>
         </div>
 
         <div className="mloc">

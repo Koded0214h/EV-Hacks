@@ -15,12 +15,10 @@
   50%     { transform:scale(1.5); opacity:0; }
 }
 @keyframes locMove {
-  0%   { top:62%; left:48%; }
-  20%  { top:50%; left:38%; }
-  40%  { top:42%; left:54%; }
-  60%  { top:55%; left:65%; }
-  80%  { top:65%; left:52%; }
-  100% { top:62%; left:48%; }
+  0%,100% { top:65%; left:36%; }  /* Pin 4 — green station */
+  30%     { top:30%; left:58%; }  /* Pin 2 — green station */
+  55%     { top:16%; left:20%; }  /* Pin 1 — green station */
+  80%     { top:20%; left:82%; }  /* Pin 6 — green station */
 }
 @keyframes cardFloat {
   0%,100% { transform:translateY(0); }
@@ -228,7 +226,7 @@
 /* user location */
 .mloc {
   position:absolute;
-  animation:locMove 8s ease-in-out infinite;
+  animation:locMove 12s cubic-bezier(.45,0,.55,1) infinite;
   transform:translate(-50%,-50%);
   display:flex; align-items:center; justify-content:center;
 }
