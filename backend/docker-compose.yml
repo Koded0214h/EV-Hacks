@@ -1,11 +1,13 @@
 services:
+  # Local-dev Postgres. Disabled in production via profile — uses RDS instead.
   db:
+    profiles: ["local"]
     image: postgis/postgis:15-3.3
     container_name: evhacks-db
     environment:
-      POSTGRES_DB: evhacks
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
     ports:
       - "5432:5432"
     volumes:
@@ -18,21 +20,16 @@ services:
       - "6379:6379"
 
   api:
+    # Local dev:  builds from ./Dockerfile (ECR_REGISTRY empty → falls back to "evh/api")
+    # Production: pulls ${ECR_REGISTRY}/evh/api:${IMAGE_TAG}
+    image: ${ECR_REGISTRY:-evh}/api:${IMAGE_TAG:-latest}
     build: .
     container_name: evhacks-api
     ports:
       - "8000:8000"
-    environment:
-      SECRET_KEY: dev-secret-key-change-in-prod
-      DEBUG: "True"
-      DB_NAME: evhacks
-      DB_USER: postgres
-      DB_PASSWORD: postgres
-      DB_HOST: db
-      DB_PORT: "5432"
-      REDIS_URL: redis://redis:6379/0
+    env_file:
+      - .env
     depends_on:
-      - db
       - redis
 
 volumes:
