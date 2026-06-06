@@ -1,13 +1,38 @@
 import uuid
 import requests
 from django.conf import settings
+from drf_spectacular.utils import extend_schema, inline_serializer
+from drf_spectacular.types import OpenApiTypes
+from rest_framework import serializers
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from zones.stubs import STUB_BRIEF
 
-USE_STUBS = True  # flip to False in Phase 7 once Fluxx URL is confirmed
+USE_STUBS = True
 
 
+@extend_schema(
+    summary="Generate AI investor brief",
+    description="Proxies to Fluxx's internal LLM service. Returns AI-generated investor brief. Target: < 8 seconds.",
+    request=inline_serializer("BriefRequest", fields={
+        "zone_id": serializers.CharField(),
+        "roi_result": serializers.DictField(),
+    }),
+    responses={
+        200: inline_serializer("AIBriefResult", fields={
+            "brief_id": serializers.UUIDField(),
+            "zone_id": serializers.CharField(),
+            "generated_at": serializers.DateTimeField(),
+            "headline": serializers.CharField(),
+            "summary": serializers.CharField(),
+            "key_metrics": serializers.ListField(),
+            "risk_factors": serializers.ListField(child=serializers.CharField()),
+            "recommendation": serializers.CharField(),
+        }),
+        400: OpenApiTypes.OBJECT,
+        502: OpenApiTypes.OBJECT,
+    },
+)
 @api_view(["POST"])
 def brief_generate(request):
     zone_id = request.data.get("zone_id")

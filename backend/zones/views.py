@@ -1,10 +1,41 @@
+from drf_spectacular.utils import extend_schema, OpenApiParameter, inline_serializer
+from drf_spectacular.types import OpenApiTypes
+from rest_framework import serializers
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from .stubs import STUB_ZONES, STUB_STATIONS
 
 USE_STUBS = True  # flip to False in Phase 4 once DB is seeded
 
+_zone = inline_serializer("ZoneFeature", fields={
+    "zone_id": serializers.CharField(),
+    "name": serializers.CharField(),
+    "geometry": serializers.DictField(),
+    "centroid": serializers.DictField(),
+    "demand_score": serializers.FloatField(),
+    "tier": serializers.CharField(),
+    "pop_density": serializers.FloatField(),
+    "poi_count": serializers.IntegerField(),
+    "ev_traffic": serializers.FloatField(),
+    "station_count": serializers.IntegerField(),
+})
+_zone_list = inline_serializer("ZoneList", fields={"count": serializers.IntegerField(), "zones": serializers.ListField()})
+_station = inline_serializer("StationRecord", fields={
+    "station_id": serializers.CharField(),
+    "name": serializers.CharField(),
+    "operator": serializers.CharField(),
+    "lat": serializers.FloatField(),
+    "lng": serializers.FloatField(),
+    "type": serializers.CharField(),
+    "ports": serializers.IntegerField(),
+    "status": serializers.CharField(),
+    "utilisation": serializers.FloatField(),
+    "last_seen": serializers.DateTimeField(),
+})
+_station_list = inline_serializer("StationList", fields={"count": serializers.IntegerField(), "stations": serializers.ListField()})
 
+
+@extend_schema(summary="List all zones", responses={200: _zone_list})
 @api_view(["GET"])
 def zone_list(request):
     if USE_STUBS:
@@ -16,6 +47,7 @@ def zone_list(request):
     return Response({"count": zones.count(), "zones": ZoneSerializer(zones, many=True).data})
 
 
+@extend_schema(summary="Get zone by ID", responses={200: _zone, 404: OpenApiTypes.OBJECT})
 @api_view(["GET"])
 def zone_detail(request, zone_id):
     if USE_STUBS:
@@ -31,6 +63,16 @@ def zone_detail(request, zone_id):
     return Response(ZoneSerializer(zone).data)
 
 
+@extend_schema(
+    summary="List zones in bounding box",
+    parameters=[
+        OpenApiParameter("sw_lat", OpenApiTypes.FLOAT, description="South-west latitude"),
+        OpenApiParameter("sw_lng", OpenApiTypes.FLOAT, description="South-west longitude"),
+        OpenApiParameter("ne_lat", OpenApiTypes.FLOAT, description="North-east latitude"),
+        OpenApiParameter("ne_lng", OpenApiTypes.FLOAT, description="North-east longitude"),
+    ],
+    responses={200: inline_serializer("ZoneBbox", fields={"zones": serializers.ListField()})},
+)
 @api_view(["GET"])
 def zone_bbox(request):
     if USE_STUBS:
@@ -51,6 +93,17 @@ def zone_bbox(request):
     return Response({"zones": ZoneSerializer(zones, many=True).data})
 
 
+@extend_schema(
+    summary="List stations",
+    parameters=[
+        OpenApiParameter("lat", OpenApiTypes.FLOAT, description="Filter by proximity — latitude"),
+        OpenApiParameter("lng", OpenApiTypes.FLOAT, description="Filter by proximity — longitude"),
+        OpenApiParameter("radius_km", OpenApiTypes.FLOAT, description="Radius in km"),
+        OpenApiParameter("type", OpenApiTypes.STR, description="ac_level2 | dc_fast | swap"),
+        OpenApiParameter("status", OpenApiTypes.STR, description="available | busy | offline"),
+    ],
+    responses={200: _station_list},
+)
 @api_view(["GET"])
 def station_list(request):
     if USE_STUBS:
@@ -59,7 +112,6 @@ def station_list(request):
     from .models import Station
     from .serializers import StationSerializer
     from django.contrib.gis.geos import Point
-    from django.contrib.gis.db.models.functions import Distance
 
     qs = Station.objects.all()
 
@@ -81,6 +133,23 @@ def station_list(request):
     return Response({"count": qs.count(), "stations": StationSerializer(qs, many=True).data})
 
 
+@extend_schema(
+    summary="Report station status",
+    request=inline_serializer("StationReport", fields={
+        "station_id": serializers.CharField(),
+        "status": serializers.ChoiceField(choices=["available", "busy", "offline"]),
+        "reporter_type": serializers.ChoiceField(choices=["driver", "operator"]),
+        "note": serializers.CharField(required=False),
+    }),
+    responses={
+        200: inline_serializer("StationReportResponse", fields={
+            "success": serializers.BooleanField(),
+            "station_id": serializers.CharField(),
+            "new_status": serializers.CharField(),
+        }),
+        400: OpenApiTypes.OBJECT,
+    },
+)
 @api_view(["POST"])
 def station_report(request):
     station_id = request.data.get("station_id")

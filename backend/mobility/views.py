@@ -1,8 +1,10 @@
+from drf_spectacular.utils import extend_schema, OpenApiParameter, inline_serializer
+from drf_spectacular.types import OpenApiTypes
+from rest_framework import serializers
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from django.utils.dateparse import parse_datetime
 
-USE_STUBS = True  # flip to False in Phase 6 once DB is seeded
+USE_STUBS = True
 
 STUB_HEATMAP = {
     "type": "FeatureCollection",
@@ -14,6 +16,21 @@ STUB_HEATMAP = {
 }
 
 
+@extend_schema(
+    summary="Ingest GPS ping",
+    description="Ingest a GPS ping from the driver PWA. Returns the zone_id containing the ping.",
+    request=inline_serializer("PingRequest", fields={
+        "session_id": serializers.UUIDField(),
+        "lat": serializers.FloatField(),
+        "lng": serializers.FloatField(),
+        "speed_kmh": serializers.FloatField(required=False),
+        "recorded_at": serializers.DateTimeField(),
+    }),
+    responses={
+        200: inline_serializer("PingResponse", fields={"success": serializers.BooleanField(), "zone_id": serializers.CharField(allow_null=True)}),
+        400: OpenApiTypes.OBJECT,
+    },
+)
 @api_view(["POST"])
 def mobility_ping(request):
     required = ["session_id", "lat", "lng", "recorded_at"]
@@ -29,12 +46,12 @@ def mobility_ping(request):
 
     from .models import MobilityPing
     from django.contrib.gis.geos import Point
+    from django.db import connection
 
     lat = float(request.data["lat"])
     lng = float(request.data["lng"])
     point = Point(lng, lat, srid=4326)
 
-    from django.db import connection
     with connection.cursor() as cursor:
         cursor.execute(
             "SELECT zone_id FROM zones WHERE ST_Contains(geometry, ST_SetSRID(ST_MakePoint(%s, %s), 4326)) LIMIT 1",
@@ -54,6 +71,17 @@ def mobility_ping(request):
     return Response({"success": True, "zone_id": zone_id})
 
 
+@extend_schema(
+    summary="Get mobility heatmap",
+    description="Returns aggregated ping density as GeoJSON FeatureCollection. Koded renders this as the mobility overlay layer.",
+    parameters=[
+        OpenApiParameter("hours", OpenApiTypes.INT, description="24 (default) or 168 (7 days)"),
+    ],
+    responses={200: inline_serializer("Heatmap", fields={
+        "type": serializers.CharField(),
+        "features": serializers.ListField(),
+    })},
+)
 @api_view(["GET"])
 def mobility_heatmap(request):
     if USE_STUBS:
