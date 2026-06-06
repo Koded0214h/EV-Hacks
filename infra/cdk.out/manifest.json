@@ -218,28 +218,28 @@
       "additionalMetadataFile": "EvhCicdStack.metadata.json",
       "displayName": "EvhCicdStack"
     },
-    "EvhMlStack.assets": {
+    "EvhCdnStack.assets": {
       "type": "cdk:asset-manifest",
       "properties": {
-        "file": "EvhMlStack.assets.json",
+        "file": "EvhCdnStack.assets.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
       }
     },
-    "EvhMlStack": {
+    "EvhCdnStack": {
       "type": "aws:cloudformation:stack",
       "environment": "aws://487054650567/eu-west-1",
       "properties": {
-        "templateFile": "EvhMlStack.template.json",
+        "templateFile": "EvhCdnStack.template.json",
         "terminationProtection": false,
         "validateOnSynth": false,
         "assumeRoleArn": "arn:${AWS::Partition}:iam::487054650567:role/cdk-hnb659fds-deploy-role-487054650567-eu-west-1",
         "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::487054650567:role/cdk-hnb659fds-cfn-exec-role-487054650567-eu-west-1",
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-487054650567-eu-west-1/5794b7615a046305c2d183c7566c905e17300fc3b065c2759b5bae4ce013a367.json",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-487054650567-eu-west-1/bcfb5f1a6b441be205786cb80441c82768878101e452e9bff8c887a8e1bbbdf1.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
         "additionalDependencies": [
-          "EvhMlStack.assets"
+          "EvhCdnStack.assets"
         ],
         "lookupRole": {
           "arn": "arn:${AWS::Partition}:iam::487054650567:role/cdk-hnb659fds-lookup-role-487054650567-eu-west-1",
@@ -248,11 +248,10 @@
         }
       },
       "dependencies": [
-        "EvhDataStack",
-        "EvhMlStack.assets"
+        "EvhCdnStack.assets"
       ],
-      "additionalMetadataFile": "EvhMlStack.metadata.json",
-      "displayName": "EvhMlStack"
+      "additionalMetadataFile": "EvhCdnStack.metadata.json",
+      "displayName": "EvhCdnStack"
     },
     "Tree": {
       "type": "cdk:tree",
