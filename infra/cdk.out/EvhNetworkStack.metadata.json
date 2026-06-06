@@ -1,0 +1,1282 @@
+{
+  "/EvhNetworkStack": [
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "Kernel._Kernel_create (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:61224)",
+        "Kernel.create (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:51955)",
+        "KernelHost.processRequest (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:212065)",
+        "KernelHost.run (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:211120)",
+        "Immediate._onImmediate (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:211164)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/EvhNetworkStack/EvhVpc": [
+    {
+      "type": "aws:cdk:analytics:construct",
+      "data": {
+        "maxAzs": "*",
+        "natGateways": "*",
+        "subnetConfiguration": [
+          {
+            "name": "*",
+            "subnetType": "Public",
+            "cidrMask": "*"
+          },
+          {
+            "name": "*",
+            "subnetType": "Private",
+            "cidrMask": "*"
+          },
+          {
+            "name": "*",
+            "subnetType": "Isolated",
+            "cidrMask": "*"
+          }
+        ],
+        "vpcName": "*"
+      }
+    }
+  ],
+  "/EvhNetworkStack/Custom::VpcRestrictDefaultSGCustomResourceProvider": [
+    {
+      "type": "aws:cdk:is-custom-resource-handler-customResourceProvider",
+      "data": true
+    }
+  ],
+  "/EvhNetworkStack/AlbSg": [
+    {
+      "type": "aws:cdk:analytics:construct",
+      "data": {
+        "vpc": "*",
+        "allowAllOutbound": true,
+        "description": "*"
+      }
+    },
+    {
+      "type": "aws:cdk:analytics:method",
+      "data": {
+        "addIngressRule": [
+          {
+            "canInlineRule": true,
+            "connections": "*",
+            "uniqueId": "*"
+          },
+          {},
+          "*",
+          "*"
+        ]
+      }
+    },
+    {
+      "type": "aws:cdk:analytics:method",
+      "data": {
+        "addIngressRule": [
+          {
+            "canInlineRule": true,
+            "connections": "*",
+            "uniqueId": "*"
+          },
+          {},
+          "*",
+          "*"
+        ]
+      }
+    }
+  ],
+  "/EvhNetworkStack/EcsSg": [
+    {
+      "type": "aws:cdk:analytics:construct",
+      "data": {
+        "vpc": "*",
+        "allowAllOutbound": true,
+        "description": "*"
+      }
+    },
+    {
+      "type": "aws:cdk:analytics:method",
+      "data": {
+        "addIngressRule": [
+          "*",
+          {},
+          "*",
+          "*"
+        ]
+      }
+    }
+  ],
+  "/EvhNetworkStack/LambdaSg": [
+    {
+      "type": "aws:cdk:analytics:construct",
+      "data": {
+        "vpc": "*",
+        "allowAllOutbound": true,
+        "description": "*"
+      }
+    }
+  ],
+  "/EvhNetworkStack/RdsSg": [
+    {
+      "type": "aws:cdk:analytics:construct",
+      "data": {
+        "vpc": "*",
+        "allowAllOutbound": false,
+        "description": "*"
+      }
+    },
+    {
+      "type": "aws:cdk:analytics:method",
+      "data": {
+        "addIngressRule": [
+          "*",
+          {},
+          "*",
+          "*"
+        ]
+      }
+    },
+    {
+      "type": "aws:cdk:analytics:method",
+      "data": {
+        "addIngressRule": [
+          "*",
+          {},
+          "*",
+          "*"
+        ]
+      }
+    }
+  ],
+  "/EvhNetworkStack/RedisSg": [
+    {
+      "type": "aws:cdk:analytics:construct",
+      "data": {
+        "vpc": "*",
+        "allowAllOutbound": false,
+        "description": "*"
+      }
+    },
+    {
+      "type": "aws:cdk:analytics:method",
+      "data": {
+        "addIngressRule": [
+          "*",
+          {},
+          "*",
+          "*"
+        ]
+      }
+    },
+    {
+      "type": "aws:cdk:analytics:method",
+      "data": {
+        "addIngressRule": [
+          "*",
+          {},
+          "*",
+          "*"
+        ]
+      }
+    }
+  ],
+  "/EvhNetworkStack/DjangoSecretKey": [
+    {
+      "type": "aws:cdk:analytics:construct",
+      "data": {
+        "description": "*",
+        "generateSecretString": {
+          "excludeCharacters": "*",
+          "passwordLength": "*"
+        },
+        "secretName": "*"
+      }
+    }
+  ],
+  "/EvhNetworkStack/VpcId": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "VpcId"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "Kernel._Kernel_create (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:61224)",
+        "Kernel.create (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:51955)",
+        "KernelHost.processRequest (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:212065)",
+        "KernelHost.run (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:211120)",
+        "Immediate._onImmediate (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:211164)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/EvhNetworkStack/DjangoSecretArn": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "DjangoSecretArn"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "Kernel._Kernel_create (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:61224)",
+        "Kernel.create (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:51955)",
+        "KernelHost.processRequest (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:212065)",
+        "KernelHost.run (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:211120)",
+        "Immediate._onImmediate (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:211164)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/EvhNetworkStack/AlbSgId": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "AlbSgId"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "Kernel._Kernel_create (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:61224)",
+        "Kernel.create (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:51955)",
+        "KernelHost.processRequest (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:212065)",
+        "KernelHost.run (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:211120)",
+        "Immediate._onImmediate (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:211164)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/EvhNetworkStack/EcsSgId": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "EcsSgId"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "Kernel._Kernel_create (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:61224)",
+        "Kernel.create (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:51955)",
+        "KernelHost.processRequest (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:212065)",
+        "KernelHost.run (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:211120)",
+        "Immediate._onImmediate (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:211164)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/EvhNetworkStack/LambdaSgId": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "LambdaSgId"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "Kernel._Kernel_create (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:61224)",
+        "Kernel.create (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:51955)",
+        "KernelHost.processRequest (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:212065)",
+        "KernelHost.run (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:211120)",
+        "Immediate._onImmediate (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:211164)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/EvhNetworkStack/RdsSgId": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "RdsSgId"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "Kernel._Kernel_create (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:61224)",
+        "Kernel.create (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:51955)",
+        "KernelHost.processRequest (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:212065)",
+        "KernelHost.run (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:211120)",
+        "Immediate._onImmediate (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:211164)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/EvhNetworkStack/RedisSgId": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "RedisSgId"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "Kernel._Kernel_create (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:61224)",
+        "Kernel.create (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:51955)",
+        "KernelHost.processRequest (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:212065)",
+        "KernelHost.run (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:211120)",
+        "Immediate._onImmediate (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:211164)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/EvhNetworkStack/BootstrapVersion": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "BootstrapVersion"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/EvhNetworkStack/CheckBootstrapVersion": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CheckBootstrapVersion"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/EvhNetworkStack/EvhVpc/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "EvhVpcF6DF988C"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Vpc2 in aws-cdk-lib...",
+        "Kernel._Kernel_create (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:61224)",
+        "Kernel.create (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:51955)",
+        "KernelHost.processRequest (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:212065)",
+        "KernelHost.run (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:211120)",
+        "Immediate._onImmediate (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:211164)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/EvhNetworkStack/EvhVpc/publicSubnet1": [
+    {
+      "type": "aws:cdk:analytics:construct",
+      "data": {
+        "availabilityZone": "*",
+        "vpcId": "*",
+        "cidrBlock": "*",
+        "mapPublicIpOnLaunch": true,
+        "ipv6CidrBlock": "*",
+        "assignIpv6AddressOnCreation": "*"
+      }
+    },
+    {
+      "type": "aws:cdk:analytics:construct",
+      "data": {
+        "availabilityZone": "*",
+        "vpcId": "*",
+        "cidrBlock": "*",
+        "mapPublicIpOnLaunch": true,
+        "ipv6CidrBlock": "*",
+        "assignIpv6AddressOnCreation": "*"
+      }
+    },
+    {
+      "type": "aws:cdk:analytics:method",
+      "data": {}
+    },
+    {
+      "type": "aws:cdk:analytics:method",
+      "data": {
+        "addNatGateway": [
+          "*"
+        ]
+      }
+    }
+  ],
+  "/EvhNetworkStack/EvhVpc/publicSubnet2": [
+    {
+      "type": "aws:cdk:analytics:construct",
+      "data": {
+        "availabilityZone": "*",
+        "vpcId": "*",
+        "cidrBlock": "*",
+        "mapPublicIpOnLaunch": true,
+        "ipv6CidrBlock": "*",
+        "assignIpv6AddressOnCreation": "*"
+      }
+    },
+    {
+      "type": "aws:cdk:analytics:construct",
+      "data": {
+        "availabilityZone": "*",
+        "vpcId": "*",
+        "cidrBlock": "*",
+        "mapPublicIpOnLaunch": true,
+        "ipv6CidrBlock": "*",
+        "assignIpv6AddressOnCreation": "*"
+      }
+    },
+    {
+      "type": "aws:cdk:analytics:method",
+      "data": {}
+    }
+  ],
+  "/EvhNetworkStack/EvhVpc/private-egressSubnet1": [
+    {
+      "type": "aws:cdk:analytics:construct",
+      "data": {
+        "availabilityZone": "*",
+        "vpcId": "*",
+        "cidrBlock": "*",
+        "mapPublicIpOnLaunch": false,
+        "ipv6CidrBlock": "*",
+        "assignIpv6AddressOnCreation": "*"
+      }
+    },
+    {
+      "type": "aws:cdk:analytics:construct",
+      "data": {
+        "availabilityZone": "*",
+        "vpcId": "*",
+        "cidrBlock": "*",
+        "mapPublicIpOnLaunch": false,
+        "ipv6CidrBlock": "*",
+        "assignIpv6AddressOnCreation": "*"
+      }
+    },
+    {
+      "type": "aws:cdk:analytics:method",
+      "data": {}
+    }
+  ],
+  "/EvhNetworkStack/EvhVpc/private-egressSubnet2": [
+    {
+      "type": "aws:cdk:analytics:construct",
+      "data": {
+        "availabilityZone": "*",
+        "vpcId": "*",
+        "cidrBlock": "*",
+        "mapPublicIpOnLaunch": false,
+        "ipv6CidrBlock": "*",
+        "assignIpv6AddressOnCreation": "*"
+      }
+    },
+    {
+      "type": "aws:cdk:analytics:construct",
+      "data": {
+        "availabilityZone": "*",
+        "vpcId": "*",
+        "cidrBlock": "*",
+        "mapPublicIpOnLaunch": false,
+        "ipv6CidrBlock": "*",
+        "assignIpv6AddressOnCreation": "*"
+      }
+    },
+    {
+      "type": "aws:cdk:analytics:method",
+      "data": {}
+    }
+  ],
+  "/EvhNetworkStack/EvhVpc/private-isolatedSubnet1": [
+    {
+      "type": "aws:cdk:analytics:construct",
+      "data": {
+        "availabilityZone": "*",
+        "vpcId": "*",
+        "cidrBlock": "*",
+        "mapPublicIpOnLaunch": false,
+        "ipv6CidrBlock": "*",
+        "assignIpv6AddressOnCreation": "*"
+      }
+    },
+    {
+      "type": "aws:cdk:analytics:construct",
+      "data": {
+        "availabilityZone": "*",
+        "vpcId": "*",
+        "cidrBlock": "*",
+        "mapPublicIpOnLaunch": false,
+        "ipv6CidrBlock": "*",
+        "assignIpv6AddressOnCreation": "*"
+      }
+    }
+  ],
+  "/EvhNetworkStack/EvhVpc/private-isolatedSubnet2": [
+    {
+      "type": "aws:cdk:analytics:construct",
+      "data": {
+        "availabilityZone": "*",
+        "vpcId": "*",
+        "cidrBlock": "*",
+        "mapPublicIpOnLaunch": false,
+        "ipv6CidrBlock": "*",
+        "assignIpv6AddressOnCreation": "*"
+      }
+    },
+    {
+      "type": "aws:cdk:analytics:construct",
+      "data": {
+        "availabilityZone": "*",
+        "vpcId": "*",
+        "cidrBlock": "*",
+        "mapPublicIpOnLaunch": false,
+        "ipv6CidrBlock": "*",
+        "assignIpv6AddressOnCreation": "*"
+      }
+    }
+  ],
+  "/EvhNetworkStack/EvhVpc/IGW": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "EvhVpcIGWA02FF982"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Vpc2 in aws-cdk-lib...",
+        "Kernel._Kernel_create (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:61224)",
+        "Kernel.create (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:51955)",
+        "KernelHost.processRequest (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:212065)",
+        "KernelHost.run (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:211120)",
+        "Immediate._onImmediate (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:211164)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/EvhNetworkStack/EvhVpc/VPCGW": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "EvhVpcVPCGW01F8AF2F"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Vpc2 in aws-cdk-lib...",
+        "Kernel._Kernel_create (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:61224)",
+        "Kernel.create (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:51955)",
+        "KernelHost.processRequest (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:212065)",
+        "KernelHost.run (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:211120)",
+        "Immediate._onImmediate (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:211164)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/EvhNetworkStack/EvhVpc/RestrictDefaultSecurityGroupCustomResource": [
+    {
+      "type": "aws:cdk:analytics:construct",
+      "data": "*"
+    }
+  ],
+  "/EvhNetworkStack/Custom::VpcRestrictDefaultSGCustomResourceProvider/Role": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CustomVpcRestrictDefaultSGCustomResourceProviderRole26592FE0"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Vpc2 in aws-cdk-lib...",
+        "Kernel._Kernel_create (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:61224)",
+        "Kernel.create (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:51955)",
+        "KernelHost.processRequest (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:212065)",
+        "KernelHost.run (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:211120)"
+      ]
+    }
+  ],
+  "/EvhNetworkStack/Custom::VpcRestrictDefaultSGCustomResourceProvider/Handler": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CustomVpcRestrictDefaultSGCustomResourceProviderHandlerDC833E5E"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Vpc2 in aws-cdk-lib...",
+        "Kernel._Kernel_create (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:61224)",
+        "Kernel.create (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:51955)",
+        "KernelHost.processRequest (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:212065)",
+        "KernelHost.run (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:211120)"
+      ]
+    }
+  ],
+  "/EvhNetworkStack/AlbSg/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "AlbSg1155C1BE"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new SecurityGroup2 in aws-cdk-lib...",
+        "Kernel._Kernel_create (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:61224)",
+        "Kernel.create (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:51955)",
+        "KernelHost.processRequest (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:212065)",
+        "KernelHost.run (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:211120)",
+        "Immediate._onImmediate (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:211164)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/EvhNetworkStack/EcsSg/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "EcsSg17B4B0B3"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new SecurityGroup2 in aws-cdk-lib...",
+        "Kernel._Kernel_create (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:61224)",
+        "Kernel.create (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:51955)",
+        "KernelHost.processRequest (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:212065)",
+        "KernelHost.run (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:211120)",
+        "Immediate._onImmediate (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:211164)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/EvhNetworkStack/EcsSg/from EvhNetworkStackAlbSg4E51B491:8000": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "EcsSgfromEvhNetworkStackAlbSg4E51B49180007B9F6441"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.<anonymous> in aws-cdk-lib...",
+        "/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:542 (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:5429)",
+        "Kernel._Kernel_ensureSync (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:69840)",
+        "Kernel.invoke (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:54245)",
+        "KernelHost.processRequest (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:212065)",
+        "KernelHost.run (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:211120)",
+        "Immediate._onImmediate (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:211164)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/EvhNetworkStack/LambdaSg/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "LambdaSg30A6108C"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new SecurityGroup2 in aws-cdk-lib...",
+        "Kernel._Kernel_create (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:61224)",
+        "Kernel.create (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:51955)",
+        "KernelHost.processRequest (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:212065)",
+        "KernelHost.run (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:211120)",
+        "Immediate._onImmediate (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:211164)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/EvhNetworkStack/RdsSg/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "RdsSg7F9F43B6"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new SecurityGroup2 in aws-cdk-lib...",
+        "Kernel._Kernel_create (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:61224)",
+        "Kernel.create (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:51955)",
+        "KernelHost.processRequest (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:212065)",
+        "KernelHost.run (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:211120)",
+        "Immediate._onImmediate (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:211164)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/EvhNetworkStack/RdsSg/from EvhNetworkStackEcsSgF1139F43:5432": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "RdsSgfromEvhNetworkStackEcsSgF1139F435432F6553403"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.<anonymous> in aws-cdk-lib...",
+        "/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:542 (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:5429)",
+        "Kernel._Kernel_ensureSync (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:69840)",
+        "Kernel.invoke (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:54245)",
+        "KernelHost.processRequest (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:212065)",
+        "KernelHost.run (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:211120)",
+        "Immediate._onImmediate (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:211164)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/EvhNetworkStack/RdsSg/from EvhNetworkStackLambdaSgDFA6F6CB:5432": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "RdsSgfromEvhNetworkStackLambdaSgDFA6F6CB5432F0439A46"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.<anonymous> in aws-cdk-lib...",
+        "/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:542 (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:5429)",
+        "Kernel._Kernel_ensureSync (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:69840)",
+        "Kernel.invoke (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:54245)",
+        "KernelHost.processRequest (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:212065)",
+        "KernelHost.run (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:211120)",
+        "Immediate._onImmediate (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:211164)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/EvhNetworkStack/RedisSg/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "RedisSgFB48DCCD"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new SecurityGroup2 in aws-cdk-lib...",
+        "Kernel._Kernel_create (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:61224)",
+        "Kernel.create (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:51955)",
+        "KernelHost.processRequest (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:212065)",
+        "KernelHost.run (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:211120)",
+        "Immediate._onImmediate (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:211164)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/EvhNetworkStack/RedisSg/from EvhNetworkStackEcsSgF1139F43:6379": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "RedisSgfromEvhNetworkStackEcsSgF1139F436379921BA3B5"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.<anonymous> in aws-cdk-lib...",
+        "/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:542 (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:5429)",
+        "Kernel._Kernel_ensureSync (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:69840)",
+        "Kernel.invoke (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:54245)",
+        "KernelHost.processRequest (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:212065)",
+        "KernelHost.run (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:211120)",
+        "Immediate._onImmediate (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:211164)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/EvhNetworkStack/RedisSg/from EvhNetworkStackLambdaSgDFA6F6CB:6379": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "RedisSgfromEvhNetworkStackLambdaSgDFA6F6CB6379AC82875E"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.<anonymous> in aws-cdk-lib...",
+        "/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:542 (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:5429)",
+        "Kernel._Kernel_ensureSync (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:69840)",
+        "Kernel.invoke (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:54245)",
+        "KernelHost.processRequest (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:212065)",
+        "KernelHost.run (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:211120)",
+        "Immediate._onImmediate (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:211164)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/EvhNetworkStack/DjangoSecretKey/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "DjangoSecretKey0A000B3C"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Secret2 in aws-cdk-lib...",
+        "Kernel._Kernel_create (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:61224)",
+        "Kernel.create (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:51955)",
+        "KernelHost.processRequest (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:212065)",
+        "KernelHost.run (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:211120)",
+        "Immediate._onImmediate (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:211164)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/EvhNetworkStack/CDKMetadata/Default": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CDKMetadata"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...App.synth in aws-cdk-lib...",
+        "/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:542 (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:5429)",
+        "Kernel._Kernel_ensureSync (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:69840)"
+      ]
+    }
+  ],
+  "/EvhNetworkStack/Exports/Output{\"Ref\":\"EvhVpcprivateisolatedSubnet1SubnetF755653C\"}": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ExportsOutputRefEvhVpcprivateisolatedSubnet1SubnetF755653CC0CC12C4"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...App.synth in aws-cdk-lib...",
+        "/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:542 (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:5429)",
+        "Kernel._Kernel_ensureSync (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:69840)"
+      ]
+    }
+  ],
+  "/EvhNetworkStack/Exports/Output{\"Ref\":\"EvhVpcprivateisolatedSubnet2SubnetE16D2E2F\"}": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ExportsOutputRefEvhVpcprivateisolatedSubnet2SubnetE16D2E2F7D0B7FDA"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...App.synth in aws-cdk-lib...",
+        "/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:542 (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:5429)",
+        "Kernel._Kernel_ensureSync (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:69840)"
+      ]
+    }
+  ],
+  "/EvhNetworkStack/Exports/Output{\"Fn::GetAtt\":[\"RdsSg7F9F43B6\",\"GroupId\"]}": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ExportsOutputFnGetAttRdsSg7F9F43B6GroupId133E31A8"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...App.synth in aws-cdk-lib...",
+        "/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:542 (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:5429)",
+        "Kernel._Kernel_ensureSync (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:69840)"
+      ]
+    }
+  ],
+  "/EvhNetworkStack/Exports/Output{\"Ref\":\"EvhVpcF6DF988C\"}": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ExportsOutputRefEvhVpcF6DF988C73387650"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...App.synth in aws-cdk-lib...",
+        "/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:542 (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:5429)",
+        "Kernel._Kernel_ensureSync (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:69840)"
+      ]
+    }
+  ],
+  "/EvhNetworkStack/Exports/Output{\"Ref\":\"DjangoSecretKey0A000B3C\"}": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ExportsOutputRefDjangoSecretKey0A000B3C006EF65B"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...App.synth in aws-cdk-lib...",
+        "/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:542 (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:5429)",
+        "Kernel._Kernel_ensureSync (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:69840)"
+      ]
+    }
+  ],
+  "/EvhNetworkStack/Exports/Output{\"Fn::GetAtt\":[\"EcsSg17B4B0B3\",\"GroupId\"]}": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ExportsOutputFnGetAttEcsSg17B4B0B3GroupIdF7EB5B8E"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...App.synth in aws-cdk-lib...",
+        "/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:542 (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:5429)",
+        "Kernel._Kernel_ensureSync (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:69840)"
+      ]
+    }
+  ],
+  "/EvhNetworkStack/Exports/Output{\"Ref\":\"EvhVpcpublicSubnet1SubnetA49A46DB\"}": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ExportsOutputRefEvhVpcpublicSubnet1SubnetA49A46DB28632EA8"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...App.synth in aws-cdk-lib...",
+        "/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:542 (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:5429)",
+        "Kernel._Kernel_ensureSync (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:69840)"
+      ]
+    }
+  ],
+  "/EvhNetworkStack/EvhVpc/publicSubnet1/Subnet": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "EvhVpcpublicSubnet1SubnetA49A46DB"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        ".../tmp/claude-501/jsii-kernel-PC2szO/node_modules/aws-cdk-lib/aws-ec2/lib/vpc.js:1:268 in aws-cdk-lib...",
+        "Array.forEach (:)",
+        "...aws-cdk-lib..."
+      ]
+    }
+  ],
+  "/EvhNetworkStack/EvhVpc/publicSubnet1/RouteTable": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "EvhVpcpublicSubnet1RouteTable1A42DF48"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        ".../tmp/claude-501/jsii-kernel-PC2szO/node_modules/aws-cdk-lib/aws-ec2/lib/vpc.js:1:268 in aws-cdk-lib...",
+        "Array.forEach (:)",
+        "...aws-cdk-lib..."
+      ]
+    }
+  ],
+  "/EvhNetworkStack/EvhVpc/publicSubnet1/RouteTableAssociation": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "EvhVpcpublicSubnet1RouteTableAssociation22085EEE"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        ".../tmp/claude-501/jsii-kernel-PC2szO/node_modules/aws-cdk-lib/aws-ec2/lib/vpc.js:1:268 in aws-cdk-lib...",
+        "Array.forEach (:)",
+        "...aws-cdk-lib..."
+      ]
+    }
+  ],
+  "/EvhNetworkStack/EvhVpc/publicSubnet1/DefaultRoute": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "EvhVpcpublicSubnet1DefaultRouteE16E4642"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        ".../tmp/claude-501/jsii-kernel-PC2szO/node_modules/aws-cdk-lib/aws-ec2/lib/vpc.js:1:208 in aws-cdk-lib...",
+        "Array.forEach (:)",
+        "...new Vpc2 in aws-cdk-lib...",
+        "Kernel._Kernel_create (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:61224)",
+        "Kernel.create (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:51955)",
+        "KernelHost.processRequest (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:212065)",
+        "KernelHost.run (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:211120)"
+      ]
+    }
+  ],
+  "/EvhNetworkStack/EvhVpc/publicSubnet1/EIP": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "EvhVpcpublicSubnet1EIPF16F397C"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Vpc2 in aws-cdk-lib...",
+        "Kernel._Kernel_create (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:61224)",
+        "Kernel.create (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:51955)",
+        "KernelHost.processRequest (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:212065)",
+        "KernelHost.run (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:211120)"
+      ]
+    }
+  ],
+  "/EvhNetworkStack/EvhVpc/publicSubnet1/NATGateway": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "EvhVpcpublicSubnet1NATGatewayDE52C85C"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Vpc2 in aws-cdk-lib...",
+        "Kernel._Kernel_create (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:61224)",
+        "Kernel.create (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:51955)",
+        "KernelHost.processRequest (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:212065)",
+        "KernelHost.run (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:211120)"
+      ]
+    }
+  ],
+  "/EvhNetworkStack/EvhVpc/publicSubnet2/Subnet": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "EvhVpcpublicSubnet2SubnetCB4131A5"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        ".../tmp/claude-501/jsii-kernel-PC2szO/node_modules/aws-cdk-lib/aws-ec2/lib/vpc.js:1:268 in aws-cdk-lib...",
+        "Array.forEach (:)",
+        "...aws-cdk-lib..."
+      ]
+    }
+  ],
+  "/EvhNetworkStack/EvhVpc/publicSubnet2/RouteTable": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "EvhVpcpublicSubnet2RouteTable7F9D8308"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        ".../tmp/claude-501/jsii-kernel-PC2szO/node_modules/aws-cdk-lib/aws-ec2/lib/vpc.js:1:268 in aws-cdk-lib...",
+        "Array.forEach (:)",
+        "...aws-cdk-lib..."
+      ]
+    }
+  ],
+  "/EvhNetworkStack/EvhVpc/publicSubnet2/RouteTableAssociation": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "EvhVpcpublicSubnet2RouteTableAssociation8330F7F9"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        ".../tmp/claude-501/jsii-kernel-PC2szO/node_modules/aws-cdk-lib/aws-ec2/lib/vpc.js:1:268 in aws-cdk-lib...",
+        "Array.forEach (:)",
+        "...aws-cdk-lib..."
+      ]
+    }
+  ],
+  "/EvhNetworkStack/EvhVpc/publicSubnet2/DefaultRoute": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "EvhVpcpublicSubnet2DefaultRoute5E661E9A"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        ".../tmp/claude-501/jsii-kernel-PC2szO/node_modules/aws-cdk-lib/aws-ec2/lib/vpc.js:1:208 in aws-cdk-lib...",
+        "Array.forEach (:)",
+        "...new Vpc2 in aws-cdk-lib...",
+        "Kernel._Kernel_create (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:61224)",
+        "Kernel.create (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:51955)",
+        "KernelHost.processRequest (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:212065)",
+        "KernelHost.run (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:211120)"
+      ]
+    }
+  ],
+  "/EvhNetworkStack/EvhVpc/private-egressSubnet1/Subnet": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "EvhVpcprivateegressSubnet1Subnet97B30C17"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        ".../tmp/claude-501/jsii-kernel-PC2szO/node_modules/aws-cdk-lib/aws-ec2/lib/vpc.js:1:270 in aws-cdk-lib...",
+        "Array.forEach (:)",
+        "...aws-cdk-lib..."
+      ]
+    }
+  ],
+  "/EvhNetworkStack/EvhVpc/private-egressSubnet1/RouteTable": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "EvhVpcprivateegressSubnet1RouteTable6465978A"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        ".../tmp/claude-501/jsii-kernel-PC2szO/node_modules/aws-cdk-lib/aws-ec2/lib/vpc.js:1:270 in aws-cdk-lib...",
+        "Array.forEach (:)",
+        "...aws-cdk-lib..."
+      ]
+    }
+  ],
+  "/EvhNetworkStack/EvhVpc/private-egressSubnet1/RouteTableAssociation": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "EvhVpcprivateegressSubnet1RouteTableAssociation855C81C4"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        ".../tmp/claude-501/jsii-kernel-PC2szO/node_modules/aws-cdk-lib/aws-ec2/lib/vpc.js:1:270 in aws-cdk-lib...",
+        "Array.forEach (:)",
+        "...aws-cdk-lib..."
+      ]
+    }
+  ],
+  "/EvhNetworkStack/EvhVpc/private-egressSubnet1/DefaultRoute": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "EvhVpcprivateegressSubnet1DefaultRoute0EE93786"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Vpc2 in aws-cdk-lib...",
+        "Kernel._Kernel_create (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:61224)",
+        "Kernel.create (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:51955)",
+        "KernelHost.processRequest (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:212065)"
+      ]
+    }
+  ],
+  "/EvhNetworkStack/EvhVpc/private-egressSubnet2/Subnet": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "EvhVpcprivateegressSubnet2Subnet927B5CD5"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        ".../tmp/claude-501/jsii-kernel-PC2szO/node_modules/aws-cdk-lib/aws-ec2/lib/vpc.js:1:270 in aws-cdk-lib...",
+        "Array.forEach (:)",
+        "...aws-cdk-lib..."
+      ]
+    }
+  ],
+  "/EvhNetworkStack/EvhVpc/private-egressSubnet2/RouteTable": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "EvhVpcprivateegressSubnet2RouteTable333DD3C5"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        ".../tmp/claude-501/jsii-kernel-PC2szO/node_modules/aws-cdk-lib/aws-ec2/lib/vpc.js:1:270 in aws-cdk-lib...",
+        "Array.forEach (:)",
+        "...aws-cdk-lib..."
+      ]
+    }
+  ],
+  "/EvhNetworkStack/EvhVpc/private-egressSubnet2/RouteTableAssociation": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "EvhVpcprivateegressSubnet2RouteTableAssociation9EAFA37E"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        ".../tmp/claude-501/jsii-kernel-PC2szO/node_modules/aws-cdk-lib/aws-ec2/lib/vpc.js:1:270 in aws-cdk-lib...",
+        "Array.forEach (:)",
+        "...aws-cdk-lib..."
+      ]
+    }
+  ],
+  "/EvhNetworkStack/EvhVpc/private-egressSubnet2/DefaultRoute": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "EvhVpcprivateegressSubnet2DefaultRoute759D8FF9"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Vpc2 in aws-cdk-lib...",
+        "Kernel._Kernel_create (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:61224)",
+        "Kernel.create (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:51955)",
+        "KernelHost.processRequest (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:212065)"
+      ]
+    }
+  ],
+  "/EvhNetworkStack/EvhVpc/private-isolatedSubnet1/Subnet": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "EvhVpcprivateisolatedSubnet1SubnetF755653C"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        ".../tmp/claude-501/jsii-kernel-PC2szO/node_modules/aws-cdk-lib/aws-ec2/lib/vpc.js:1:272 in aws-cdk-lib...",
+        "Array.forEach (:)",
+        "...aws-cdk-lib..."
+      ]
+    }
+  ],
+  "/EvhNetworkStack/EvhVpc/private-isolatedSubnet1/RouteTable": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "EvhVpcprivateisolatedSubnet1RouteTable351820DB"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        ".../tmp/claude-501/jsii-kernel-PC2szO/node_modules/aws-cdk-lib/aws-ec2/lib/vpc.js:1:272 in aws-cdk-lib...",
+        "Array.forEach (:)",
+        "...aws-cdk-lib..."
+      ]
+    }
+  ],
+  "/EvhNetworkStack/EvhVpc/private-isolatedSubnet1/RouteTableAssociation": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "EvhVpcprivateisolatedSubnet1RouteTableAssociationEE12B86A"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        ".../tmp/claude-501/jsii-kernel-PC2szO/node_modules/aws-cdk-lib/aws-ec2/lib/vpc.js:1:272 in aws-cdk-lib...",
+        "Array.forEach (:)",
+        "...aws-cdk-lib..."
+      ]
+    }
+  ],
+  "/EvhNetworkStack/EvhVpc/private-isolatedSubnet2/Subnet": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "EvhVpcprivateisolatedSubnet2SubnetE16D2E2F"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        ".../tmp/claude-501/jsii-kernel-PC2szO/node_modules/aws-cdk-lib/aws-ec2/lib/vpc.js:1:272 in aws-cdk-lib...",
+        "Array.forEach (:)",
+        "...aws-cdk-lib..."
+      ]
+    }
+  ],
+  "/EvhNetworkStack/EvhVpc/private-isolatedSubnet2/RouteTable": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "EvhVpcprivateisolatedSubnet2RouteTableAD02DD73"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        ".../tmp/claude-501/jsii-kernel-PC2szO/node_modules/aws-cdk-lib/aws-ec2/lib/vpc.js:1:272 in aws-cdk-lib...",
+        "Array.forEach (:)",
+        "...aws-cdk-lib..."
+      ]
+    }
+  ],
+  "/EvhNetworkStack/EvhVpc/private-isolatedSubnet2/RouteTableAssociation": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "EvhVpcprivateisolatedSubnet2RouteTableAssociation279DC584"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        ".../tmp/claude-501/jsii-kernel-PC2szO/node_modules/aws-cdk-lib/aws-ec2/lib/vpc.js:1:272 in aws-cdk-lib...",
+        "Array.forEach (:)",
+        "...aws-cdk-lib..."
+      ]
+    }
+  ],
+  "/EvhNetworkStack/EvhVpc/RestrictDefaultSecurityGroupCustomResource/Default": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "EvhVpcRestrictDefaultSecurityGroupCustomResource1A07946D"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Vpc2 in aws-cdk-lib...",
+        "Kernel._Kernel_create (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:61224)",
+        "Kernel.create (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:51955)",
+        "KernelHost.processRequest (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:212065)",
+        "KernelHost.run (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:211120)"
+      ]
+    }
+  ]
+}

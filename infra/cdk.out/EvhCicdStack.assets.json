@@ -1,0 +1,36 @@
+{
+  "version": "54.0.0",
+  "files": {
+    "c0d9f24649426c60a1bc01108070535a40353ae6cd8ceccb812969319b936e5d": {
+      "displayName": "EvhCicdStack/Custom::AWSCDKOpenIdConnectProviderCustomResourceProvider Code",
+      "source": {
+        "path": "asset.c0d9f24649426c60a1bc01108070535a40353ae6cd8ceccb812969319b936e5d",
+        "packaging": "zip"
+      },
+      "destinations": {
+        "current_account-eu-north-1-9171c857": {
+          "bucketName": "cdk-hnb659fds-assets-${AWS::AccountId}-eu-north-1",
+          "objectKey": "c0d9f24649426c60a1bc01108070535a40353ae6cd8ceccb812969319b936e5d.zip",
+          "region": "eu-north-1",
+          "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-file-publishing-role-${AWS::AccountId}-eu-north-1"
+        }
+      }
+    },
+    "9b7e346df8cc6e0dc39616e1195e94a2733550b8d72022d550908fd90e4468cc": {
+      "displayName": "EvhCicdStack Template",
+      "source": {
+        "path": "EvhCicdStack.template.json",
+        "packaging": "file"
+      },
+      "destinations": {
+        "current_account-eu-north-1-59d09813": {
+          "bucketName": "cdk-hnb659fds-assets-${AWS::AccountId}-eu-north-1",
+          "objectKey": "9b7e346df8cc6e0dc39616e1195e94a2733550b8d72022d550908fd90e4468cc.json",
+          "region": "eu-north-1",
+          "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-file-publishing-role-${AWS::AccountId}-eu-north-1"
+        }
+      }
+    }
+  },
+  "dockerImages": {}
+}

@@ -1,0 +1,867 @@
+{
+  "/EvhIngestStack": [
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "Kernel._Kernel_create (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:61224)",
+        "Kernel.create (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:51955)",
+        "KernelHost.processRequest (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:212065)",
+        "KernelHost.run (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:211120)",
+        "Immediate._onImmediate (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:211164)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/EvhIngestStack/PingStream": [
+    {
+      "type": "aws:cdk:analytics:construct",
+      "data": {
+        "removalPolicy": "destroy",
+        "retentionPeriod": "*",
+        "streamMode": "ON_DEMAND",
+        "streamName": "*"
+      }
+    }
+  ],
+  "/EvhIngestStack/AwsCdkKinesisEncryptedStreamsUnsupportedRegions": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "AwsCdkKinesisEncryptedStreamsUnsupportedRegions"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Stream2 in aws-cdk-lib...",
+        "Kernel._Kernel_create (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:61224)",
+        "Kernel.create (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:51955)",
+        "KernelHost.processRequest (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:212065)",
+        "KernelHost.run (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:211120)",
+        "Immediate._onImmediate (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:211164)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/EvhIngestStack/IngestFn": [
+    {
+      "type": "aws:cdk:analytics:construct",
+      "data": {
+        "environment": "*",
+        "functionName": "*",
+        "logRetention": 7,
+        "memorySize": "*",
+        "timeout": "*",
+        "code": "*",
+        "handler": "*",
+        "runtime": "*"
+      }
+    },
+    {
+      "type": "aws:cdk:analytics:method",
+      "data": {
+        "addEnvironment": [
+          "*",
+          "*"
+        ]
+      }
+    }
+  ],
+  "/EvhIngestStack/FirehoseRole": [
+    {
+      "type": "aws:cdk:analytics:construct",
+      "data": {
+        "assumedBy": {
+          "principalAccount": "*",
+          "assumeRoleAction": "*"
+        }
+      }
+    },
+    {
+      "type": "aws:cdk:analytics:method",
+      "data": {
+        "attachInlinePolicy": [
+          "*"
+        ]
+      }
+    },
+    {
+      "type": "aws:cdk:analytics:method",
+      "data": {
+        "attachInlinePolicy": [
+          "*"
+        ]
+      }
+    }
+  ],
+  "/EvhIngestStack/FirehosePolicy": [
+    {
+      "type": "aws:cdk:analytics:construct",
+      "data": {
+        "statements": "*"
+      }
+    },
+    {
+      "type": "aws:cdk:analytics:method",
+      "data": {
+        "addStatements": [
+          {}
+        ]
+      }
+    },
+    {
+      "type": "aws:cdk:analytics:method",
+      "data": {
+        "addStatements": [
+          {}
+        ]
+      }
+    },
+    {
+      "type": "aws:cdk:analytics:method",
+      "data": {
+        "addStatements": [
+          {}
+        ]
+      }
+    },
+    {
+      "type": "aws:cdk:analytics:method",
+      "data": {
+        "attachToRole": [
+          "*"
+        ]
+      }
+    },
+    {
+      "type": "aws:cdk:analytics:method",
+      "data": {
+        "attachToRole": [
+          "*"
+        ]
+      }
+    }
+  ],
+  "/EvhIngestStack/PingFirehose": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "PingFirehose"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "Kernel._Kernel_create (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:61224)",
+        "Kernel.create (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:51955)",
+        "KernelHost.processRequest (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:212065)",
+        "KernelHost.run (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:211120)",
+        "Immediate._onImmediate (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:211164)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/EvhIngestStack/IngestApi": [
+    {
+      "type": "aws:cdk:analytics:construct",
+      "data": "*"
+    },
+    {
+      "type": "aws:cdk:analytics:method",
+      "data": "*"
+    },
+    {
+      "type": "aws:cdk:analytics:method",
+      "data": "*"
+    }
+  ],
+  "/EvhIngestStack/HealthFn": [
+    {
+      "type": "aws:cdk:analytics:construct",
+      "data": {
+        "logRetention": 7,
+        "timeout": "*",
+        "code": "*",
+        "handler": "*",
+        "runtime": "*"
+      }
+    }
+  ],
+  "/EvhIngestStack/IngestUrl": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "IngestUrl"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "Kernel._Kernel_create (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:61224)",
+        "Kernel.create (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:51955)",
+        "KernelHost.processRequest (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:212065)",
+        "KernelHost.run (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:211120)",
+        "Immediate._onImmediate (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:211164)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/EvhIngestStack/HealthUrl": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "HealthUrl"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "Kernel._Kernel_create (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:61224)",
+        "Kernel.create (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:51955)",
+        "KernelHost.processRequest (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:212065)",
+        "KernelHost.run (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:211120)",
+        "Immediate._onImmediate (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:211164)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/EvhIngestStack/StreamName": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "StreamName"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "Kernel._Kernel_create (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:61224)",
+        "Kernel.create (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:51955)",
+        "KernelHost.processRequest (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:212065)",
+        "KernelHost.run (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:211120)",
+        "Immediate._onImmediate (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:211164)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/EvhIngestStack/StreamArn": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "StreamArn"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "Kernel._Kernel_create (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:61224)",
+        "Kernel.create (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:51955)",
+        "KernelHost.processRequest (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:212065)",
+        "KernelHost.run (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:211120)",
+        "Immediate._onImmediate (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:211164)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/EvhIngestStack/FirehoseName": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "FirehoseName"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "Kernel._Kernel_create (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:61224)",
+        "Kernel.create (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:51955)",
+        "KernelHost.processRequest (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:212065)",
+        "KernelHost.run (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:211120)",
+        "Immediate._onImmediate (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:211164)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/EvhIngestStack/BootstrapVersion": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "BootstrapVersion"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/EvhIngestStack/CheckBootstrapVersion": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CheckBootstrapVersion"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/EvhIngestStack/PingStream/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "PingStreamD8F95A44"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Stream2 in aws-cdk-lib...",
+        "Kernel._Kernel_create (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:61224)",
+        "Kernel.create (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:51955)",
+        "KernelHost.processRequest (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:212065)",
+        "KernelHost.run (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:211120)",
+        "Immediate._onImmediate (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:211164)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/EvhIngestStack/IngestFn/ServiceRole": [
+    {
+      "type": "aws:cdk:analytics:construct",
+      "data": {
+        "assumedBy": {
+          "principalAccount": "*",
+          "assumeRoleAction": "*"
+        },
+        "managedPolicies": [
+          {
+            "managedPolicyArn": "*"
+          }
+        ]
+      }
+    },
+    {
+      "type": "aws:cdk:analytics:method",
+      "data": {
+        "addToPrincipalPolicy": [
+          {}
+        ]
+      }
+    },
+    {
+      "type": "aws:cdk:analytics:method",
+      "data": {
+        "attachInlinePolicy": [
+          "*"
+        ]
+      }
+    },
+    {
+      "type": "aws:cdk:analytics:method",
+      "data": {
+        "attachInlinePolicy": [
+          "*"
+        ]
+      }
+    }
+  ],
+  "/EvhIngestStack/IngestFn/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "IngestFnEE15D018"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Function2 in aws-cdk-lib...",
+        "Kernel._Kernel_create (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:61224)",
+        "Kernel.create (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:51955)",
+        "KernelHost.processRequest (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:212065)",
+        "KernelHost.run (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:211120)",
+        "Immediate._onImmediate (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:211164)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/EvhIngestStack/LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8a/ServiceRole": [
+    {
+      "type": "aws:cdk:analytics:construct",
+      "data": {
+        "assumedBy": {
+          "principalAccount": "*",
+          "assumeRoleAction": "*"
+        },
+        "managedPolicies": [
+          {
+            "managedPolicyArn": "*"
+          }
+        ]
+      }
+    },
+    {
+      "type": "aws:cdk:analytics:method",
+      "data": {
+        "addToPrincipalPolicy": [
+          {}
+        ]
+      }
+    },
+    {
+      "type": "aws:cdk:analytics:method",
+      "data": {
+        "attachInlinePolicy": [
+          "*"
+        ]
+      }
+    },
+    {
+      "type": "aws:cdk:analytics:method",
+      "data": {
+        "attachInlinePolicy": [
+          "*"
+        ]
+      }
+    }
+  ],
+  "/EvhIngestStack/LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8a/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aFD4BFC8A"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Function2 in aws-cdk-lib...",
+        "Kernel._Kernel_create (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:61224)",
+        "Kernel.create (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:51955)",
+        "KernelHost.processRequest (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:212065)",
+        "KernelHost.run (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:211120)"
+      ]
+    }
+  ],
+  "/EvhIngestStack/FirehoseRole/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "FirehoseRoleAA67C190"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Role2 in aws-cdk-lib...",
+        "Kernel._Kernel_create (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:61224)",
+        "Kernel.create (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:51955)",
+        "KernelHost.processRequest (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:212065)",
+        "KernelHost.run (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:211120)",
+        "Immediate._onImmediate (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:211164)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/EvhIngestStack/FirehosePolicy/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "FirehosePolicy3A3B2DF8"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Policy2 in aws-cdk-lib...",
+        "Kernel._Kernel_create (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:61224)",
+        "Kernel.create (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:51955)",
+        "KernelHost.processRequest (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:212065)",
+        "KernelHost.run (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:211120)",
+        "Immediate._onImmediate (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:211164)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/EvhIngestStack/IngestApi/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "IngestApi90DC3F9D"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new HttpApi2 in aws-cdk-lib...",
+        "Kernel._Kernel_create (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:61224)",
+        "Kernel.create (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:51955)",
+        "KernelHost.processRequest (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:212065)",
+        "KernelHost.run (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:211120)",
+        "Immediate._onImmediate (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:211164)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/EvhIngestStack/IngestApi/DefaultStage": [
+    {
+      "type": "aws:cdk:analytics:construct",
+      "data": "*"
+    }
+  ],
+  "/EvhIngestStack/IngestApi/POST--ingest": [
+    {
+      "type": "aws:cdk:analytics:construct",
+      "data": "*"
+    }
+  ],
+  "/EvhIngestStack/IngestApi/GET--health": [
+    {
+      "type": "aws:cdk:analytics:construct",
+      "data": "*"
+    }
+  ],
+  "/EvhIngestStack/HealthFn/ServiceRole": [
+    {
+      "type": "aws:cdk:analytics:construct",
+      "data": {
+        "assumedBy": {
+          "principalAccount": "*",
+          "assumeRoleAction": "*"
+        },
+        "managedPolicies": [
+          {
+            "managedPolicyArn": "*"
+          }
+        ]
+      }
+    }
+  ],
+  "/EvhIngestStack/HealthFn/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "HealthFn0EF18565"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Function2 in aws-cdk-lib...",
+        "Kernel._Kernel_create (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:61224)",
+        "Kernel.create (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:51955)",
+        "KernelHost.processRequest (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:212065)",
+        "KernelHost.run (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:211120)",
+        "Immediate._onImmediate (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:211164)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/EvhIngestStack/CDKMetadata/Default": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CDKMetadata"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...App.synth in aws-cdk-lib...",
+        "/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:542 (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:5429)",
+        "Kernel._Kernel_ensureSync (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:69840)"
+      ]
+    }
+  ],
+  "/EvhIngestStack/Exports/Output{\"Fn::GetAtt\":[\"IngestApi90DC3F9D\",\"ApiEndpoint\"]}": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ExportsOutputFnGetAttIngestApi90DC3F9DApiEndpoint9D968DCE"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...App.synth in aws-cdk-lib...",
+        "/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:542 (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:5429)",
+        "Kernel._Kernel_ensureSync (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:69840)"
+      ]
+    }
+  ],
+  "/EvhIngestStack/IngestFn/ServiceRole/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "IngestFnServiceRoleCDCC94EA"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Function2 in aws-cdk-lib...",
+        "Kernel._Kernel_create (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:61224)",
+        "Kernel.create (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:51955)",
+        "KernelHost.processRequest (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:212065)",
+        "KernelHost.run (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:211120)",
+        "Immediate._onImmediate (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:211164)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/EvhIngestStack/IngestFn/ServiceRole/DefaultPolicy": [
+    {
+      "type": "aws:cdk:analytics:construct",
+      "data": "*"
+    },
+    {
+      "type": "aws:cdk:analytics:method",
+      "data": {
+        "attachToRole": [
+          "*"
+        ]
+      }
+    },
+    {
+      "type": "aws:cdk:analytics:method",
+      "data": {
+        "attachToRole": [
+          "*"
+        ]
+      }
+    },
+    {
+      "type": "aws:cdk:analytics:method",
+      "data": {
+        "addStatements": [
+          {}
+        ]
+      }
+    }
+  ],
+  "/EvhIngestStack/IngestFn/LogRetention/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "IngestFnLogRetentionFCF03FF5"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Function2 in aws-cdk-lib...",
+        "Kernel._Kernel_create (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:61224)",
+        "Kernel.create (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:51955)",
+        "KernelHost.processRequest (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:212065)",
+        "KernelHost.run (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:211120)",
+        "Immediate._onImmediate (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:211164)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/EvhIngestStack/LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8a/Code/AssetBucket": [
+    {
+      "type": "aws:cdk:analytics:construct",
+      "data": "*"
+    }
+  ],
+  "/EvhIngestStack/LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8a/ServiceRole/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aServiceRole9741ECFB"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Function2 in aws-cdk-lib...",
+        "Kernel._Kernel_create (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:61224)",
+        "Kernel.create (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:51955)"
+      ]
+    }
+  ],
+  "/EvhIngestStack/LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8a/ServiceRole/DefaultPolicy": [
+    {
+      "type": "aws:cdk:analytics:construct",
+      "data": "*"
+    },
+    {
+      "type": "aws:cdk:analytics:method",
+      "data": {
+        "attachToRole": [
+          "*"
+        ]
+      }
+    },
+    {
+      "type": "aws:cdk:analytics:method",
+      "data": {
+        "attachToRole": [
+          "*"
+        ]
+      }
+    },
+    {
+      "type": "aws:cdk:analytics:method",
+      "data": {
+        "addStatements": [
+          {}
+        ]
+      }
+    }
+  ],
+  "/EvhIngestStack/IngestApi/DefaultStage/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "IngestApiDefaultStage4F9A3A6A"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new HttpApi2 in aws-cdk-lib...",
+        "Kernel._Kernel_create (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:61224)",
+        "Kernel.create (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:51955)",
+        "KernelHost.processRequest (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:212065)",
+        "KernelHost.run (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:211120)",
+        "Immediate._onImmediate (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:211164)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/EvhIngestStack/IngestApi/POST--ingest/LambdaInt": [
+    {
+      "type": "aws:cdk:analytics:construct",
+      "data": "*"
+    }
+  ],
+  "/EvhIngestStack/IngestApi/POST--ingest/LambdaInt-Permission": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "IngestApiPOSTingestLambdaIntPermission9A35F736"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        ".../tmp/claude-501/jsii-kernel-PC2szO/node_modules/aws-cdk-lib/aws-apigatewayv2/lib/http/api.js:1:96 in aws-cdk-lib...",
+        "Array.map (:)",
+        "...WrappedClass.<anonymous> in aws-cdk-lib...",
+        "/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:542 (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:5429)"
+      ]
+    }
+  ],
+  "/EvhIngestStack/IngestApi/POST--ingest/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "IngestApiPOSTingest3C524005"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        ".../tmp/claude-501/jsii-kernel-PC2szO/node_modules/aws-cdk-lib/aws-apigatewayv2/lib/http/api.js:1:96 in aws-cdk-lib...",
+        "Array.map (:)",
+        "...WrappedClass.<anonymous> in aws-cdk-lib...",
+        "/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:542 (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:5429)",
+        "Kernel._Kernel_ensureSync (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:69840)",
+        "Kernel.invoke (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:54245)",
+        "KernelHost.processRequest (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:212065)"
+      ]
+    }
+  ],
+  "/EvhIngestStack/IngestApi/GET--health/HealthInt": [
+    {
+      "type": "aws:cdk:analytics:construct",
+      "data": "*"
+    }
+  ],
+  "/EvhIngestStack/IngestApi/GET--health/HealthInt-Permission": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "IngestApiGEThealthHealthIntPermission4D48D7F2"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        ".../tmp/claude-501/jsii-kernel-PC2szO/node_modules/aws-cdk-lib/aws-apigatewayv2/lib/http/api.js:1:96 in aws-cdk-lib...",
+        "Array.map (:)",
+        "...WrappedClass.<anonymous> in aws-cdk-lib...",
+        "/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:542 (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:5429)"
+      ]
+    }
+  ],
+  "/EvhIngestStack/IngestApi/GET--health/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "IngestApiGEThealth80A30995"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        ".../tmp/claude-501/jsii-kernel-PC2szO/node_modules/aws-cdk-lib/aws-apigatewayv2/lib/http/api.js:1:96 in aws-cdk-lib...",
+        "Array.map (:)",
+        "...WrappedClass.<anonymous> in aws-cdk-lib...",
+        "/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:542 (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:5429)",
+        "Kernel._Kernel_ensureSync (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:69840)",
+        "Kernel.invoke (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:54245)",
+        "KernelHost.processRequest (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:212065)"
+      ]
+    }
+  ],
+  "/EvhIngestStack/HealthFn/ServiceRole/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "HealthFnServiceRoleA02F5DA7"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Function2 in aws-cdk-lib...",
+        "Kernel._Kernel_create (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:61224)",
+        "Kernel.create (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:51955)",
+        "KernelHost.processRequest (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:212065)",
+        "KernelHost.run (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:211120)",
+        "Immediate._onImmediate (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:211164)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/EvhIngestStack/HealthFn/LogRetention/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "HealthFnLogRetentionD59D9354"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Function2 in aws-cdk-lib...",
+        "Kernel._Kernel_create (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:61224)",
+        "Kernel.create (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:51955)",
+        "KernelHost.processRequest (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:212065)",
+        "KernelHost.run (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:211120)",
+        "Immediate._onImmediate (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:211164)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/EvhIngestStack/IngestFn/ServiceRole/DefaultPolicy/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "IngestFnServiceRoleDefaultPolicy2D066896"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.grantWrite in aws-cdk-lib...",
+        "/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:542 (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:5429)"
+      ]
+    }
+  ],
+  "/EvhIngestStack/LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8a/ServiceRole/DefaultPolicy/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aServiceRoleDefaultPolicyADDA7DEB"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/EvhIngestStack/IngestApi/POST--ingest/LambdaInt/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "IngestApiPOSTingestLambdaInt39CDAFAF"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        ".../tmp/claude-501/jsii-kernel-PC2szO/node_modules/aws-cdk-lib/aws-apigatewayv2/lib/http/api.js:1:96 in aws-cdk-lib...",
+        "Array.map (:)",
+        "...WrappedClass.<anonymous> in aws-cdk-lib...",
+        "/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:542 (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:5429)"
+      ]
+    }
+  ],
+  "/EvhIngestStack/IngestApi/GET--health/HealthInt/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "IngestApiGEThealthHealthInt4689BA9D"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        ".../tmp/claude-501/jsii-kernel-PC2szO/node_modules/aws-cdk-lib/aws-apigatewayv2/lib/http/api.js:1:96 in aws-cdk-lib...",
+        "Array.map (:)",
+        "...WrappedClass.<anonymous> in aws-cdk-lib...",
+        "/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:542 (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:5429)"
+      ]
+    }
+  ]
+}

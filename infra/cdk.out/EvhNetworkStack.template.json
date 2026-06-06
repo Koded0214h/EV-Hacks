@@ -1,0 +1,1466 @@
+{
+ "Resources": {
+  "EvhVpcF6DF988C": {
+   "Type": "AWS::EC2::VPC",
+   "Properties": {
+    "CidrBlock": "10.0.0.0/16",
+    "EnableDnsHostnames": true,
+    "EnableDnsSupport": true,
+    "InstanceTenancy": "default",
+    "Tags": [
+     {
+      "Key": "Hackathon",
+      "Value": "OneWithAI-2026"
+     },
+     {
+      "Key": "Name",
+      "Value": "EvhVpc"
+     },
+     {
+      "Key": "Owner",
+      "Value": "240404075@live.unilag.edu.ng"
+     },
+     {
+      "Key": "Project",
+      "Value": "EVHacks"
+     },
+     {
+      "Key": "Team",
+      "Value": "EVHacks"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "EvhNetworkStack/EvhVpc/Resource"
+   }
+  },
+  "EvhVpcpublicSubnet1SubnetA49A46DB": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "AvailabilityZone": {
+     "Fn::Select": [
+      0,
+      {
+       "Fn::GetAZs": ""
+      }
+     ]
+    },
+    "CidrBlock": "10.0.0.0/24",
+    "MapPublicIpOnLaunch": true,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "public"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Public"
+     },
+     {
+      "Key": "Hackathon",
+      "Value": "OneWithAI-2026"
+     },
+     {
+      "Key": "Name",
+      "Value": "EvhNetworkStack/EvhVpc/publicSubnet1"
+     },
+     {
+      "Key": "Owner",
+      "Value": "240404075@live.unilag.edu.ng"
+     },
+     {
+      "Key": "Project",
+      "Value": "EVHacks"
+     },
+     {
+      "Key": "Team",
+      "Value": "EVHacks"
+     }
+    ],
+    "VpcId": {
+     "Ref": "EvhVpcF6DF988C"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "EvhNetworkStack/EvhVpc/publicSubnet1/Subnet"
+   }
+  },
+  "EvhVpcpublicSubnet1RouteTable1A42DF48": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "Hackathon",
+      "Value": "OneWithAI-2026"
+     },
+     {
+      "Key": "Name",
+      "Value": "EvhNetworkStack/EvhVpc/publicSubnet1"
+     },
+     {
+      "Key": "Owner",
+      "Value": "240404075@live.unilag.edu.ng"
+     },
+     {
+      "Key": "Project",
+      "Value": "EVHacks"
+     },
+     {
+      "Key": "Team",
+      "Value": "EVHacks"
+     }
+    ],
+    "VpcId": {
+     "Ref": "EvhVpcF6DF988C"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "EvhNetworkStack/EvhVpc/publicSubnet1/RouteTable"
+   }
+  },
+  "EvhVpcpublicSubnet1RouteTableAssociation22085EEE": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "EvhVpcpublicSubnet1RouteTable1A42DF48"
+    },
+    "SubnetId": {
+     "Ref": "EvhVpcpublicSubnet1SubnetA49A46DB"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "EvhNetworkStack/EvhVpc/publicSubnet1/RouteTableAssociation"
+   }
+  },
+  "EvhVpcpublicSubnet1DefaultRouteE16E4642": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "DestinationCidrBlock": "0.0.0.0/0",
+    "GatewayId": {
+     "Ref": "EvhVpcIGWA02FF982"
+    },
+    "RouteTableId": {
+     "Ref": "EvhVpcpublicSubnet1RouteTable1A42DF48"
+    }
+   },
+   "DependsOn": [
+    "EvhVpcVPCGW01F8AF2F"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "EvhNetworkStack/EvhVpc/publicSubnet1/DefaultRoute"
+   }
+  },
+  "EvhVpcpublicSubnet1EIPF16F397C": {
+   "Type": "AWS::EC2::EIP",
+   "Properties": {
+    "Domain": "vpc",
+    "Tags": [
+     {
+      "Key": "Hackathon",
+      "Value": "OneWithAI-2026"
+     },
+     {
+      "Key": "Name",
+      "Value": "EvhNetworkStack/EvhVpc/publicSubnet1"
+     },
+     {
+      "Key": "Owner",
+      "Value": "240404075@live.unilag.edu.ng"
+     },
+     {
+      "Key": "Project",
+      "Value": "EVHacks"
+     },
+     {
+      "Key": "Team",
+      "Value": "EVHacks"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "EvhNetworkStack/EvhVpc/publicSubnet1/EIP"
+   }
+  },
+  "EvhVpcpublicSubnet1NATGatewayDE52C85C": {
+   "Type": "AWS::EC2::NatGateway",
+   "Properties": {
+    "AllocationId": {
+     "Fn::GetAtt": [
+      "EvhVpcpublicSubnet1EIPF16F397C",
+      "AllocationId"
+     ]
+    },
+    "SubnetId": {
+     "Ref": "EvhVpcpublicSubnet1SubnetA49A46DB"
+    },
+    "Tags": [
+     {
+      "Key": "Hackathon",
+      "Value": "OneWithAI-2026"
+     },
+     {
+      "Key": "Name",
+      "Value": "EvhNetworkStack/EvhVpc/publicSubnet1"
+     },
+     {
+      "Key": "Owner",
+      "Value": "240404075@live.unilag.edu.ng"
+     },
+     {
+      "Key": "Project",
+      "Value": "EVHacks"
+     },
+     {
+      "Key": "Team",
+      "Value": "EVHacks"
+     }
+    ]
+   },
+   "DependsOn": [
+    "EvhVpcpublicSubnet1DefaultRouteE16E4642",
+    "EvhVpcpublicSubnet1RouteTableAssociation22085EEE"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "EvhNetworkStack/EvhVpc/publicSubnet1/NATGateway"
+   }
+  },
+  "EvhVpcpublicSubnet2SubnetCB4131A5": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "AvailabilityZone": {
+     "Fn::Select": [
+      1,
+      {
+       "Fn::GetAZs": ""
+      }
+     ]
+    },
+    "CidrBlock": "10.0.1.0/24",
+    "MapPublicIpOnLaunch": true,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "public"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Public"
+     },
+     {
+      "Key": "Hackathon",
+      "Value": "OneWithAI-2026"
+     },
+     {
+      "Key": "Name",
+      "Value": "EvhNetworkStack/EvhVpc/publicSubnet2"
+     },
+     {
+      "Key": "Owner",
+      "Value": "240404075@live.unilag.edu.ng"
+     },
+     {
+      "Key": "Project",
+      "Value": "EVHacks"
+     },
+     {
+      "Key": "Team",
+      "Value": "EVHacks"
+     }
+    ],
+    "VpcId": {
+     "Ref": "EvhVpcF6DF988C"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "EvhNetworkStack/EvhVpc/publicSubnet2/Subnet"
+   }
+  },
+  "EvhVpcpublicSubnet2RouteTable7F9D8308": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "Hackathon",
+      "Value": "OneWithAI-2026"
+     },
+     {
+      "Key": "Name",
+      "Value": "EvhNetworkStack/EvhVpc/publicSubnet2"
+     },
+     {
+      "Key": "Owner",
+      "Value": "240404075@live.unilag.edu.ng"
+     },
+     {
+      "Key": "Project",
+      "Value": "EVHacks"
+     },
+     {
+      "Key": "Team",
+      "Value": "EVHacks"
+     }
+    ],
+    "VpcId": {
+     "Ref": "EvhVpcF6DF988C"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "EvhNetworkStack/EvhVpc/publicSubnet2/RouteTable"
+   }
+  },
+  "EvhVpcpublicSubnet2RouteTableAssociation8330F7F9": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "EvhVpcpublicSubnet2RouteTable7F9D8308"
+    },
+    "SubnetId": {
+     "Ref": "EvhVpcpublicSubnet2SubnetCB4131A5"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "EvhNetworkStack/EvhVpc/publicSubnet2/RouteTableAssociation"
+   }
+  },
+  "EvhVpcpublicSubnet2DefaultRoute5E661E9A": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "DestinationCidrBlock": "0.0.0.0/0",
+    "GatewayId": {
+     "Ref": "EvhVpcIGWA02FF982"
+    },
+    "RouteTableId": {
+     "Ref": "EvhVpcpublicSubnet2RouteTable7F9D8308"
+    }
+   },
+   "DependsOn": [
+    "EvhVpcVPCGW01F8AF2F"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "EvhNetworkStack/EvhVpc/publicSubnet2/DefaultRoute"
+   }
+  },
+  "EvhVpcprivateegressSubnet1Subnet97B30C17": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "AvailabilityZone": {
+     "Fn::Select": [
+      0,
+      {
+       "Fn::GetAZs": ""
+      }
+     ]
+    },
+    "CidrBlock": "10.0.2.0/24",
+    "MapPublicIpOnLaunch": false,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "private-egress"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Private"
+     },
+     {
+      "Key": "Hackathon",
+      "Value": "OneWithAI-2026"
+     },
+     {
+      "Key": "Name",
+      "Value": "EvhNetworkStack/EvhVpc/private-egressSubnet1"
+     },
+     {
+      "Key": "Owner",
+      "Value": "240404075@live.unilag.edu.ng"
+     },
+     {
+      "Key": "Project",
+      "Value": "EVHacks"
+     },
+     {
+      "Key": "Team",
+      "Value": "EVHacks"
+     }
+    ],
+    "VpcId": {
+     "Ref": "EvhVpcF6DF988C"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "EvhNetworkStack/EvhVpc/private-egressSubnet1/Subnet"
+   }
+  },
+  "EvhVpcprivateegressSubnet1RouteTable6465978A": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "Hackathon",
+      "Value": "OneWithAI-2026"
+     },
+     {
+      "Key": "Name",
+      "Value": "EvhNetworkStack/EvhVpc/private-egressSubnet1"
+     },
+     {
+      "Key": "Owner",
+      "Value": "240404075@live.unilag.edu.ng"
+     },
+     {
+      "Key": "Project",
+      "Value": "EVHacks"
+     },
+     {
+      "Key": "Team",
+      "Value": "EVHacks"
+     }
+    ],
+    "VpcId": {
+     "Ref": "EvhVpcF6DF988C"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "EvhNetworkStack/EvhVpc/private-egressSubnet1/RouteTable"
+   }
+  },
+  "EvhVpcprivateegressSubnet1RouteTableAssociation855C81C4": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "EvhVpcprivateegressSubnet1RouteTable6465978A"
+    },
+    "SubnetId": {
+     "Ref": "EvhVpcprivateegressSubnet1Subnet97B30C17"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "EvhNetworkStack/EvhVpc/private-egressSubnet1/RouteTableAssociation"
+   }
+  },
+  "EvhVpcprivateegressSubnet1DefaultRoute0EE93786": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "DestinationCidrBlock": "0.0.0.0/0",
+    "NatGatewayId": {
+     "Ref": "EvhVpcpublicSubnet1NATGatewayDE52C85C"
+    },
+    "RouteTableId": {
+     "Ref": "EvhVpcprivateegressSubnet1RouteTable6465978A"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "EvhNetworkStack/EvhVpc/private-egressSubnet1/DefaultRoute"
+   }
+  },
+  "EvhVpcprivateegressSubnet2Subnet927B5CD5": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "AvailabilityZone": {
+     "Fn::Select": [
+      1,
+      {
+       "Fn::GetAZs": ""
+      }
+     ]
+    },
+    "CidrBlock": "10.0.3.0/24",
+    "MapPublicIpOnLaunch": false,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "private-egress"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Private"
+     },
+     {
+      "Key": "Hackathon",
+      "Value": "OneWithAI-2026"
+     },
+     {
+      "Key": "Name",
+      "Value": "EvhNetworkStack/EvhVpc/private-egressSubnet2"
+     },
+     {
+      "Key": "Owner",
+      "Value": "240404075@live.unilag.edu.ng"
+     },
+     {
+      "Key": "Project",
+      "Value": "EVHacks"
+     },
+     {
+      "Key": "Team",
+      "Value": "EVHacks"
+     }
+    ],
+    "VpcId": {
+     "Ref": "EvhVpcF6DF988C"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "EvhNetworkStack/EvhVpc/private-egressSubnet2/Subnet"
+   }
+  },
+  "EvhVpcprivateegressSubnet2RouteTable333DD3C5": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "Hackathon",
+      "Value": "OneWithAI-2026"
+     },
+     {
+      "Key": "Name",
+      "Value": "EvhNetworkStack/EvhVpc/private-egressSubnet2"
+     },
+     {
+      "Key": "Owner",
+      "Value": "240404075@live.unilag.edu.ng"
+     },
+     {
+      "Key": "Project",
+      "Value": "EVHacks"
+     },
+     {
+      "Key": "Team",
+      "Value": "EVHacks"
+     }
+    ],
+    "VpcId": {
+     "Ref": "EvhVpcF6DF988C"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "EvhNetworkStack/EvhVpc/private-egressSubnet2/RouteTable"
+   }
+  },
+  "EvhVpcprivateegressSubnet2RouteTableAssociation9EAFA37E": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "EvhVpcprivateegressSubnet2RouteTable333DD3C5"
+    },
+    "SubnetId": {
+     "Ref": "EvhVpcprivateegressSubnet2Subnet927B5CD5"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "EvhNetworkStack/EvhVpc/private-egressSubnet2/RouteTableAssociation"
+   }
+  },
+  "EvhVpcprivateegressSubnet2DefaultRoute759D8FF9": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "DestinationCidrBlock": "0.0.0.0/0",
+    "NatGatewayId": {
+     "Ref": "EvhVpcpublicSubnet1NATGatewayDE52C85C"
+    },
+    "RouteTableId": {
+     "Ref": "EvhVpcprivateegressSubnet2RouteTable333DD3C5"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "EvhNetworkStack/EvhVpc/private-egressSubnet2/DefaultRoute"
+   }
+  },
+  "EvhVpcprivateisolatedSubnet1SubnetF755653C": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "AvailabilityZone": {
+     "Fn::Select": [
+      0,
+      {
+       "Fn::GetAZs": ""
+      }
+     ]
+    },
+    "CidrBlock": "10.0.4.0/24",
+    "MapPublicIpOnLaunch": false,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "private-isolated"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Isolated"
+     },
+     {
+      "Key": "Hackathon",
+      "Value": "OneWithAI-2026"
+     },
+     {
+      "Key": "Name",
+      "Value": "EvhNetworkStack/EvhVpc/private-isolatedSubnet1"
+     },
+     {
+      "Key": "Owner",
+      "Value": "240404075@live.unilag.edu.ng"
+     },
+     {
+      "Key": "Project",
+      "Value": "EVHacks"
+     },
+     {
+      "Key": "Team",
+      "Value": "EVHacks"
+     }
+    ],
+    "VpcId": {
+     "Ref": "EvhVpcF6DF988C"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "EvhNetworkStack/EvhVpc/private-isolatedSubnet1/Subnet"
+   }
+  },
+  "EvhVpcprivateisolatedSubnet1RouteTable351820DB": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "Hackathon",
+      "Value": "OneWithAI-2026"
+     },
+     {
+      "Key": "Name",
+      "Value": "EvhNetworkStack/EvhVpc/private-isolatedSubnet1"
+     },
+     {
+      "Key": "Owner",
+      "Value": "240404075@live.unilag.edu.ng"
+     },
+     {
+      "Key": "Project",
+      "Value": "EVHacks"
+     },
+     {
+      "Key": "Team",
+      "Value": "EVHacks"
+     }
+    ],
+    "VpcId": {
+     "Ref": "EvhVpcF6DF988C"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "EvhNetworkStack/EvhVpc/private-isolatedSubnet1/RouteTable"
+   }
+  },
+  "EvhVpcprivateisolatedSubnet1RouteTableAssociationEE12B86A": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "EvhVpcprivateisolatedSubnet1RouteTable351820DB"
+    },
+    "SubnetId": {
+     "Ref": "EvhVpcprivateisolatedSubnet1SubnetF755653C"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "EvhNetworkStack/EvhVpc/private-isolatedSubnet1/RouteTableAssociation"
+   }
+  },
+  "EvhVpcprivateisolatedSubnet2SubnetE16D2E2F": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "AvailabilityZone": {
+     "Fn::Select": [
+      1,
+      {
+       "Fn::GetAZs": ""
+      }
+     ]
+    },
+    "CidrBlock": "10.0.5.0/24",
+    "MapPublicIpOnLaunch": false,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "private-isolated"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Isolated"
+     },
+     {
+      "Key": "Hackathon",
+      "Value": "OneWithAI-2026"
+     },
+     {
+      "Key": "Name",
+      "Value": "EvhNetworkStack/EvhVpc/private-isolatedSubnet2"
+     },
+     {
+      "Key": "Owner",
+      "Value": "240404075@live.unilag.edu.ng"
+     },
+     {
+      "Key": "Project",
+      "Value": "EVHacks"
+     },
+     {
+      "Key": "Team",
+      "Value": "EVHacks"
+     }
+    ],
+    "VpcId": {
+     "Ref": "EvhVpcF6DF988C"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "EvhNetworkStack/EvhVpc/private-isolatedSubnet2/Subnet"
+   }
+  },
+  "EvhVpcprivateisolatedSubnet2RouteTableAD02DD73": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "Hackathon",
+      "Value": "OneWithAI-2026"
+     },
+     {
+      "Key": "Name",
+      "Value": "EvhNetworkStack/EvhVpc/private-isolatedSubnet2"
+     },
+     {
+      "Key": "Owner",
+      "Value": "240404075@live.unilag.edu.ng"
+     },
+     {
+      "Key": "Project",
+      "Value": "EVHacks"
+     },
+     {
+      "Key": "Team",
+      "Value": "EVHacks"
+     }
+    ],
+    "VpcId": {
+     "Ref": "EvhVpcF6DF988C"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "EvhNetworkStack/EvhVpc/private-isolatedSubnet2/RouteTable"
+   }
+  },
+  "EvhVpcprivateisolatedSubnet2RouteTableAssociation279DC584": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "EvhVpcprivateisolatedSubnet2RouteTableAD02DD73"
+    },
+    "SubnetId": {
+     "Ref": "EvhVpcprivateisolatedSubnet2SubnetE16D2E2F"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "EvhNetworkStack/EvhVpc/private-isolatedSubnet2/RouteTableAssociation"
+   }
+  },
+  "EvhVpcIGWA02FF982": {
+   "Type": "AWS::EC2::InternetGateway",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "Hackathon",
+      "Value": "OneWithAI-2026"
+     },
+     {
+      "Key": "Name",
+      "Value": "EvhVpc"
+     },
+     {
+      "Key": "Owner",
+      "Value": "240404075@live.unilag.edu.ng"
+     },
+     {
+      "Key": "Project",
+      "Value": "EVHacks"
+     },
+     {
+      "Key": "Team",
+      "Value": "EVHacks"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "EvhNetworkStack/EvhVpc/IGW"
+   }
+  },
+  "EvhVpcVPCGW01F8AF2F": {
+   "Type": "AWS::EC2::VPCGatewayAttachment",
+   "Properties": {
+    "InternetGatewayId": {
+     "Ref": "EvhVpcIGWA02FF982"
+    },
+    "VpcId": {
+     "Ref": "EvhVpcF6DF988C"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "EvhNetworkStack/EvhVpc/VPCGW"
+   }
+  },
+  "EvhVpcRestrictDefaultSecurityGroupCustomResource1A07946D": {
+   "Type": "Custom::VpcRestrictDefaultSG",
+   "Properties": {
+    "ServiceToken": {
+     "Fn::GetAtt": [
+      "CustomVpcRestrictDefaultSGCustomResourceProviderHandlerDC833E5E",
+      "Arn"
+     ]
+    },
+    "DefaultSecurityGroupId": {
+     "Fn::GetAtt": [
+      "EvhVpcF6DF988C",
+      "DefaultSecurityGroup"
+     ]
+    },
+    "Account": {
+     "Ref": "AWS::AccountId"
+    }
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "EvhNetworkStack/EvhVpc/RestrictDefaultSecurityGroupCustomResource/Default"
+   }
+  },
+  "CustomVpcRestrictDefaultSGCustomResourceProviderRole26592FE0": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Version": "2012-10-17",
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ]
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Sub": "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+     }
+    ],
+    "Policies": [
+     {
+      "PolicyName": "Inline",
+      "PolicyDocument": {
+       "Version": "2012-10-17",
+       "Statement": [
+        {
+         "Effect": "Allow",
+         "Action": [
+          "ec2:AuthorizeSecurityGroupIngress",
+          "ec2:AuthorizeSecurityGroupEgress",
+          "ec2:RevokeSecurityGroupIngress",
+          "ec2:RevokeSecurityGroupEgress"
+         ],
+         "Resource": [
+          {
+           "Fn::Join": [
+            "",
+            [
+             "arn:aws:ec2:eu-north-1:",
+             {
+              "Ref": "AWS::AccountId"
+             },
+             ":security-group/",
+             {
+              "Fn::GetAtt": [
+               "EvhVpcF6DF988C",
+               "DefaultSecurityGroup"
+              ]
+             }
+            ]
+           ]
+          }
+         ]
+        }
+       ]
+      }
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "EvhNetworkStack/Custom::VpcRestrictDefaultSGCustomResourceProvider/Role"
+   }
+  },
+  "CustomVpcRestrictDefaultSGCustomResourceProviderHandlerDC833E5E": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Code": {
+     "S3Bucket": {
+      "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-eu-north-1"
+     },
+     "S3Key": "02b51ab524e7bcf8f477de3e71e5f9a72e448301b26ba62e9e75a14f9c55a093.zip"
+    },
+    "Timeout": 900,
+    "MemorySize": 128,
+    "Handler": "__entrypoint__.handler",
+    "Role": {
+     "Fn::GetAtt": [
+      "CustomVpcRestrictDefaultSGCustomResourceProviderRole26592FE0",
+      "Arn"
+     ]
+    },
+    "Runtime": "nodejs22.x",
+    "Description": "Lambda function for removing all inbound/outbound rules from the VPC default security group"
+   },
+   "DependsOn": [
+    "CustomVpcRestrictDefaultSGCustomResourceProviderRole26592FE0"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "EvhNetworkStack/Custom::VpcRestrictDefaultSGCustomResourceProvider/Handler",
+    "aws:asset:path": "asset.02b51ab524e7bcf8f477de3e71e5f9a72e448301b26ba62e9e75a14f9c55a093",
+    "aws:asset:property": "Code"
+   }
+  },
+  "AlbSg1155C1BE": {
+   "Type": "AWS::EC2::SecurityGroup",
+   "Properties": {
+    "GroupDescription": "ALB ingress (443/80)",
+    "SecurityGroupEgress": [
+     {
+      "CidrIp": "0.0.0.0/0",
+      "Description": "Allow all outbound traffic by default",
+      "IpProtocol": "-1"
+     }
+    ],
+    "SecurityGroupIngress": [
+     {
+      "CidrIp": "0.0.0.0/0",
+      "Description": "HTTP from anywhere",
+      "FromPort": 80,
+      "IpProtocol": "tcp",
+      "ToPort": 80
+     },
+     {
+      "CidrIp": "0.0.0.0/0",
+      "Description": "HTTPS from anywhere",
+      "FromPort": 443,
+      "IpProtocol": "tcp",
+      "ToPort": 443
+     }
+    ],
+    "Tags": [
+     {
+      "Key": "Hackathon",
+      "Value": "OneWithAI-2026"
+     },
+     {
+      "Key": "Owner",
+      "Value": "240404075@live.unilag.edu.ng"
+     },
+     {
+      "Key": "Project",
+      "Value": "EVHacks"
+     },
+     {
+      "Key": "Team",
+      "Value": "EVHacks"
+     }
+    ],
+    "VpcId": {
+     "Ref": "EvhVpcF6DF988C"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "EvhNetworkStack/AlbSg/Resource"
+   }
+  },
+  "EcsSg17B4B0B3": {
+   "Type": "AWS::EC2::SecurityGroup",
+   "Properties": {
+    "GroupDescription": "ECS tasks",
+    "SecurityGroupEgress": [
+     {
+      "CidrIp": "0.0.0.0/0",
+      "Description": "Allow all outbound traffic by default",
+      "IpProtocol": "-1"
+     }
+    ],
+    "Tags": [
+     {
+      "Key": "Hackathon",
+      "Value": "OneWithAI-2026"
+     },
+     {
+      "Key": "Owner",
+      "Value": "240404075@live.unilag.edu.ng"
+     },
+     {
+      "Key": "Project",
+      "Value": "EVHacks"
+     },
+     {
+      "Key": "Team",
+      "Value": "EVHacks"
+     }
+    ],
+    "VpcId": {
+     "Ref": "EvhVpcF6DF988C"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "EvhNetworkStack/EcsSg/Resource"
+   }
+  },
+  "EcsSgfromEvhNetworkStackAlbSg4E51B49180007B9F6441": {
+   "Type": "AWS::EC2::SecurityGroupIngress",
+   "Properties": {
+    "Description": "ALB to Django",
+    "FromPort": 8000,
+    "GroupId": {
+     "Fn::GetAtt": [
+      "EcsSg17B4B0B3",
+      "GroupId"
+     ]
+    },
+    "IpProtocol": "tcp",
+    "SourceSecurityGroupId": {
+     "Fn::GetAtt": [
+      "AlbSg1155C1BE",
+      "GroupId"
+     ]
+    },
+    "ToPort": 8000
+   },
+   "Metadata": {
+    "aws:cdk:path": "EvhNetworkStack/EcsSg/from EvhNetworkStackAlbSg4E51B491:8000"
+   }
+  },
+  "LambdaSg30A6108C": {
+   "Type": "AWS::EC2::SecurityGroup",
+   "Properties": {
+    "GroupDescription": "Lambda functions",
+    "SecurityGroupEgress": [
+     {
+      "CidrIp": "0.0.0.0/0",
+      "Description": "Allow all outbound traffic by default",
+      "IpProtocol": "-1"
+     }
+    ],
+    "Tags": [
+     {
+      "Key": "Hackathon",
+      "Value": "OneWithAI-2026"
+     },
+     {
+      "Key": "Owner",
+      "Value": "240404075@live.unilag.edu.ng"
+     },
+     {
+      "Key": "Project",
+      "Value": "EVHacks"
+     },
+     {
+      "Key": "Team",
+      "Value": "EVHacks"
+     }
+    ],
+    "VpcId": {
+     "Ref": "EvhVpcF6DF988C"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "EvhNetworkStack/LambdaSg/Resource"
+   }
+  },
+  "RdsSg7F9F43B6": {
+   "Type": "AWS::EC2::SecurityGroup",
+   "Properties": {
+    "GroupDescription": "RDS Postgres",
+    "SecurityGroupEgress": [
+     {
+      "CidrIp": "255.255.255.255/32",
+      "Description": "Disallow all traffic",
+      "FromPort": 252,
+      "IpProtocol": "icmp",
+      "ToPort": 86
+     }
+    ],
+    "Tags": [
+     {
+      "Key": "Hackathon",
+      "Value": "OneWithAI-2026"
+     },
+     {
+      "Key": "Owner",
+      "Value": "240404075@live.unilag.edu.ng"
+     },
+     {
+      "Key": "Project",
+      "Value": "EVHacks"
+     },
+     {
+      "Key": "Team",
+      "Value": "EVHacks"
+     }
+    ],
+    "VpcId": {
+     "Ref": "EvhVpcF6DF988C"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "EvhNetworkStack/RdsSg/Resource"
+   }
+  },
+  "RdsSgfromEvhNetworkStackEcsSgF1139F435432F6553403": {
+   "Type": "AWS::EC2::SecurityGroupIngress",
+   "Properties": {
+    "Description": "ECS to Postgres",
+    "FromPort": 5432,
+    "GroupId": {
+     "Fn::GetAtt": [
+      "RdsSg7F9F43B6",
+      "GroupId"
+     ]
+    },
+    "IpProtocol": "tcp",
+    "SourceSecurityGroupId": {
+     "Fn::GetAtt": [
+      "EcsSg17B4B0B3",
+      "GroupId"
+     ]
+    },
+    "ToPort": 5432
+   },
+   "Metadata": {
+    "aws:cdk:path": "EvhNetworkStack/RdsSg/from EvhNetworkStackEcsSgF1139F43:5432"
+   }
+  },
+  "RdsSgfromEvhNetworkStackLambdaSgDFA6F6CB5432F0439A46": {
+   "Type": "AWS::EC2::SecurityGroupIngress",
+   "Properties": {
+    "Description": "Lambda to Postgres",
+    "FromPort": 5432,
+    "GroupId": {
+     "Fn::GetAtt": [
+      "RdsSg7F9F43B6",
+      "GroupId"
+     ]
+    },
+    "IpProtocol": "tcp",
+    "SourceSecurityGroupId": {
+     "Fn::GetAtt": [
+      "LambdaSg30A6108C",
+      "GroupId"
+     ]
+    },
+    "ToPort": 5432
+   },
+   "Metadata": {
+    "aws:cdk:path": "EvhNetworkStack/RdsSg/from EvhNetworkStackLambdaSgDFA6F6CB:5432"
+   }
+  },
+  "RedisSgFB48DCCD": {
+   "Type": "AWS::EC2::SecurityGroup",
+   "Properties": {
+    "GroupDescription": "ElastiCache Redis",
+    "SecurityGroupEgress": [
+     {
+      "CidrIp": "255.255.255.255/32",
+      "Description": "Disallow all traffic",
+      "FromPort": 252,
+      "IpProtocol": "icmp",
+      "ToPort": 86
+     }
+    ],
+    "Tags": [
+     {
+      "Key": "Hackathon",
+      "Value": "OneWithAI-2026"
+     },
+     {
+      "Key": "Owner",
+      "Value": "240404075@live.unilag.edu.ng"
+     },
+     {
+      "Key": "Project",
+      "Value": "EVHacks"
+     },
+     {
+      "Key": "Team",
+      "Value": "EVHacks"
+     }
+    ],
+    "VpcId": {
+     "Ref": "EvhVpcF6DF988C"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "EvhNetworkStack/RedisSg/Resource"
+   }
+  },
+  "RedisSgfromEvhNetworkStackEcsSgF1139F436379921BA3B5": {
+   "Type": "AWS::EC2::SecurityGroupIngress",
+   "Properties": {
+    "Description": "ECS to Redis",
+    "FromPort": 6379,
+    "GroupId": {
+     "Fn::GetAtt": [
+      "RedisSgFB48DCCD",
+      "GroupId"
+     ]
+    },
+    "IpProtocol": "tcp",
+    "SourceSecurityGroupId": {
+     "Fn::GetAtt": [
+      "EcsSg17B4B0B3",
+      "GroupId"
+     ]
+    },
+    "ToPort": 6379
+   },
+   "Metadata": {
+    "aws:cdk:path": "EvhNetworkStack/RedisSg/from EvhNetworkStackEcsSgF1139F43:6379"
+   }
+  },
+  "RedisSgfromEvhNetworkStackLambdaSgDFA6F6CB6379AC82875E": {
+   "Type": "AWS::EC2::SecurityGroupIngress",
+   "Properties": {
+    "Description": "Lambda to Redis",
+    "FromPort": 6379,
+    "GroupId": {
+     "Fn::GetAtt": [
+      "RedisSgFB48DCCD",
+      "GroupId"
+     ]
+    },
+    "IpProtocol": "tcp",
+    "SourceSecurityGroupId": {
+     "Fn::GetAtt": [
+      "LambdaSg30A6108C",
+      "GroupId"
+     ]
+    },
+    "ToPort": 6379
+   },
+   "Metadata": {
+    "aws:cdk:path": "EvhNetworkStack/RedisSg/from EvhNetworkStackLambdaSgDFA6F6CB:6379"
+   }
+  },
+  "DjangoSecretKey0A000B3C": {
+   "Type": "AWS::SecretsManager::Secret",
+   "Properties": {
+    "Description": "Django SECRET_KEY",
+    "GenerateSecretString": {
+     "ExcludeCharacters": "/@\" \\'",
+     "PasswordLength": 50
+    },
+    "Name": "evh/django/secret_key",
+    "Tags": [
+     {
+      "Key": "Hackathon",
+      "Value": "OneWithAI-2026"
+     },
+     {
+      "Key": "Owner",
+      "Value": "240404075@live.unilag.edu.ng"
+     },
+     {
+      "Key": "Project",
+      "Value": "EVHacks"
+     },
+     {
+      "Key": "Team",
+      "Value": "EVHacks"
+     }
+    ]
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "EvhNetworkStack/DjangoSecretKey/Resource"
+   }
+  },
+  "CDKMetadata": {
+   "Type": "AWS::CDK::Metadata",
+   "Properties": {
+    "Analytics": "v2:deflate64:H4sIAAAAAAAA/+2W30/bMBDH/xb8iNxsYwxNfSvRhCIxWrWIh1XVdLWvqVfnnPlHShf1f0f5VQZMSBsg5WFPti93X3/snHx3Ep18+hy9P4KtGwi5GWi1jMqZB7HhsHXfSxQnUXmTi3nJMrgd/XJsyI4ZZwT+AjxuYddZXFgS+tjQSqXBgleG2HBeMoIMH7hc7/LKMAlLrQTjTChpv4Lb1E57/kyEVQV4/JuQxBkNHuWTmAVnRS6uurD9gscrupnEvMGa1SLzkkEBSsNSaeV33wx1mxS5SGQ7r4TPtRGbdp1B3ogk+ZguIZBYs6G3ATlTeXEWP3IH51RKSV6cjaS06NyYYovt/bXH6wVFDSLl1eHPs+GcHbNFbwD7QdGkUpNA1WxqgsdrWGq8t9/bRs4ZoWqBg3M1+ZJMquH+snmb/a+emSvQrgd3/jKM/pD0BKM/JP8xeodRv1AJebSEh/elqX/tauQ9iHWG5PkMRbDK7y6sCfm8rEi7fbQ225HW4+CXJpDsHk6JTliVPzy2lAmlFcw0aKwbAwGUkFaEjaWJFYYIRRXa9RWB1M+A7eXUmV2bu8LzRrqvdMpK4VWUn4tqU+FfgV4K/dbbN/X09yx8YmgF9tyhsOhdBgQp2qic1et5+YSOsxQJbVVQa5eZt4pSNiwZ3godJMZrsCA82i5fcnBua6y8REr9uj0iazZ81Ec2kvs9n6IzwQrkcXDeZN2ybpvqcv/n7xNrCiXRnoNDPnKuwoNUUVrFjIPPg9/zyc6vDb37GH04jU6PfjilBjaQVxlG02a8A/Fb1ebcCwAA"
+   },
+   "Metadata": {
+    "aws:cdk:path": "EvhNetworkStack/CDKMetadata/Default"
+   }
+  }
+ },
+ "Outputs": {
+  "VpcId": {
+   "Value": {
+    "Ref": "EvhVpcF6DF988C"
+   },
+   "Export": {
+    "Name": "EvhVpcId"
+   }
+  },
+  "DjangoSecretArn": {
+   "Value": {
+    "Ref": "DjangoSecretKey0A000B3C"
+   },
+   "Export": {
+    "Name": "EvhDjangoSecretArn"
+   }
+  },
+  "AlbSgId": {
+   "Value": {
+    "Fn::GetAtt": [
+     "AlbSg1155C1BE",
+     "GroupId"
+    ]
+   },
+   "Export": {
+    "Name": "EvhAlbSgId"
+   }
+  },
+  "EcsSgId": {
+   "Value": {
+    "Fn::GetAtt": [
+     "EcsSg17B4B0B3",
+     "GroupId"
+    ]
+   },
+   "Export": {
+    "Name": "EvhEcsSgId"
+   }
+  },
+  "LambdaSgId": {
+   "Value": {
+    "Fn::GetAtt": [
+     "LambdaSg30A6108C",
+     "GroupId"
+    ]
+   },
+   "Export": {
+    "Name": "EvhLambdaSgId"
+   }
+  },
+  "RdsSgId": {
+   "Value": {
+    "Fn::GetAtt": [
+     "RdsSg7F9F43B6",
+     "GroupId"
+    ]
+   },
+   "Export": {
+    "Name": "EvhRdsSgId"
+   }
+  },
+  "RedisSgId": {
+   "Value": {
+    "Fn::GetAtt": [
+     "RedisSgFB48DCCD",
+     "GroupId"
+    ]
+   },
+   "Export": {
+    "Name": "EvhRedisSgId"
+   }
+  },
+  "ExportsOutputRefEvhVpcprivateisolatedSubnet1SubnetF755653CC0CC12C4": {
+   "Value": {
+    "Ref": "EvhVpcprivateisolatedSubnet1SubnetF755653C"
+   },
+   "Export": {
+    "Name": "EvhNetworkStack:ExportsOutputRefEvhVpcprivateisolatedSubnet1SubnetF755653CC0CC12C4"
+   }
+  },
+  "ExportsOutputRefEvhVpcprivateisolatedSubnet2SubnetE16D2E2F7D0B7FDA": {
+   "Value": {
+    "Ref": "EvhVpcprivateisolatedSubnet2SubnetE16D2E2F"
+   },
+   "Export": {
+    "Name": "EvhNetworkStack:ExportsOutputRefEvhVpcprivateisolatedSubnet2SubnetE16D2E2F7D0B7FDA"
+   }
+  },
+  "ExportsOutputFnGetAttRdsSg7F9F43B6GroupId133E31A8": {
+   "Value": {
+    "Fn::GetAtt": [
+     "RdsSg7F9F43B6",
+     "GroupId"
+    ]
+   },
+   "Export": {
+    "Name": "EvhNetworkStack:ExportsOutputFnGetAttRdsSg7F9F43B6GroupId133E31A8"
+   }
+  },
+  "ExportsOutputRefEvhVpcF6DF988C73387650": {
+   "Value": {
+    "Ref": "EvhVpcF6DF988C"
+   },
+   "Export": {
+    "Name": "EvhNetworkStack:ExportsOutputRefEvhVpcF6DF988C73387650"
+   }
+  },
+  "ExportsOutputRefDjangoSecretKey0A000B3C006EF65B": {
+   "Value": {
+    "Ref": "DjangoSecretKey0A000B3C"
+   },
+   "Export": {
+    "Name": "EvhNetworkStack:ExportsOutputRefDjangoSecretKey0A000B3C006EF65B"
+   }
+  },
+  "ExportsOutputFnGetAttEcsSg17B4B0B3GroupIdF7EB5B8E": {
+   "Value": {
+    "Fn::GetAtt": [
+     "EcsSg17B4B0B3",
+     "GroupId"
+    ]
+   },
+   "Export": {
+    "Name": "EvhNetworkStack:ExportsOutputFnGetAttEcsSg17B4B0B3GroupIdF7EB5B8E"
+   }
+  },
+  "ExportsOutputRefEvhVpcpublicSubnet1SubnetA49A46DB28632EA8": {
+   "Value": {
+    "Ref": "EvhVpcpublicSubnet1SubnetA49A46DB"
+   },
+   "Export": {
+    "Name": "EvhNetworkStack:ExportsOutputRefEvhVpcpublicSubnet1SubnetA49A46DB28632EA8"
+   }
+  }
+ },
+ "Parameters": {
+  "BootstrapVersion": {
+   "Type": "AWS::SSM::Parameter::Value<String>",
+   "Default": "/cdk-bootstrap/hnb659fds/version",
+   "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]"
+  }
+ },
+ "Rules": {
+  "CheckBootstrapVersion": {
+   "Assertions": [
+    {
+     "Assert": {
+      "Fn::Not": [
+       {
+        "Fn::Contains": [
+         [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5"
+         ],
+         {
+          "Ref": "BootstrapVersion"
+         }
+        ]
+       }
+      ]
+     },
+     "AssertDescription": "CDK bootstrap stack version 6 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI."
+    }
+   ]
+  }
+ }
+}

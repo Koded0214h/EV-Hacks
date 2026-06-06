@@ -1,0 +1,972 @@
+{
+ "Resources": {
+  "PingStreamD8F95A44": {
+   "Type": "AWS::Kinesis::Stream",
+   "Properties": {
+    "Name": "evh-pings",
+    "RetentionPeriodHours": 24,
+    "StreamEncryption": {
+     "Fn::If": [
+      "AwsCdkKinesisEncryptedStreamsUnsupportedRegions",
+      {
+       "Ref": "AWS::NoValue"
+      },
+      {
+       "EncryptionType": "KMS",
+       "KeyId": "alias/aws/kinesis"
+      }
+     ]
+    },
+    "StreamModeDetails": {
+     "StreamMode": "ON_DEMAND"
+    },
+    "Tags": [
+     {
+      "Key": "Hackathon",
+      "Value": "OneWithAI-2026"
+     },
+     {
+      "Key": "Owner",
+      "Value": "240404075@live.unilag.edu.ng"
+     },
+     {
+      "Key": "Project",
+      "Value": "EVHacks"
+     },
+     {
+      "Key": "Team",
+      "Value": "EVHacks"
+     }
+    ]
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "EvhIngestStack/PingStream/Resource"
+   }
+  },
+  "IngestFnServiceRoleCDCC94EA": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+       ]
+      ]
+     }
+    ],
+    "Tags": [
+     {
+      "Key": "Hackathon",
+      "Value": "OneWithAI-2026"
+     },
+     {
+      "Key": "Owner",
+      "Value": "240404075@live.unilag.edu.ng"
+     },
+     {
+      "Key": "Project",
+      "Value": "EVHacks"
+     },
+     {
+      "Key": "Team",
+      "Value": "EVHacks"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "EvhIngestStack/IngestFn/ServiceRole/Resource"
+   }
+  },
+  "IngestFnServiceRoleDefaultPolicy2D066896": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": [
+        "kinesis:ListShards",
+        "kinesis:PutRecord",
+        "kinesis:PutRecords"
+       ],
+       "Effect": "Allow",
+       "Resource": {
+        "Fn::GetAtt": [
+         "PingStreamD8F95A44",
+         "Arn"
+        ]
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "IngestFnServiceRoleDefaultPolicy2D066896",
+    "Roles": [
+     {
+      "Ref": "IngestFnServiceRoleCDCC94EA"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "EvhIngestStack/IngestFn/ServiceRole/DefaultPolicy/Resource"
+   }
+  },
+  "IngestFnEE15D018": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Code": {
+     "ZipFile": "\nimport json\nimport os\nimport uuid\nimport boto3\n\nkinesis = boto3.client(\"kinesis\")\nSTREAM = os.environ[\"STREAM_NAME\"]\n\nREQUIRED = (\"lat\", \"lon\", \"ts\")\n\n\ndef handler(event, _context):\n    try:\n        body = event.get(\"body\") or \"{}\"\n        if event.get(\"isBase64Encoded\"):\n            import base64\n            body = base64.b64decode(body).decode()\n        payload = json.loads(body)\n    except Exception as e:\n        return {\"statusCode\": 400, \"body\": json.dumps({\"error\": f\"bad json: {e}\"})}\n\n    missing = [f for f in REQUIRED if f not in payload]\n    if missing:\n        return {\"statusCode\": 400, \"body\": json.dumps({\"error\": f\"missing: {missing}\"})}\n\n    # Anonymise — never propagate raw driver identity past this point\n    raw_id = str(payload.pop(\"driver_id\", uuid.uuid4().hex))\n    partition_key = raw_id\n\n    record = {\n        \"lat\": float(payload[\"lat\"]),\n        \"lon\": float(payload[\"lon\"]),\n        \"ts\": payload[\"ts\"],\n        \"speed\": payload.get(\"speed\"),\n        \"battery\": payload.get(\"battery\"),\n        \"kind\": payload.get(\"kind\", \"ping\"),\n        \"ingested_at\": __import__(\"datetime\").datetime.utcnow().isoformat() + \"Z\",\n    }\n\n    kinesis.put_record(\n        StreamName=STREAM,\n        Data=(json.dumps(record) + \"\\n\").encode(),\n        PartitionKey=partition_key,\n    )\n    return {\"statusCode\": 200, \"body\": json.dumps({\"ok\": True})}\n"
+    },
+    "Environment": {
+     "Variables": {
+      "STREAM_NAME": {
+       "Ref": "PingStreamD8F95A44"
+      }
+     }
+    },
+    "FunctionName": "evh-ingest",
+    "Handler": "index.handler",
+    "MemorySize": 256,
+    "Role": {
+     "Fn::GetAtt": [
+      "IngestFnServiceRoleCDCC94EA",
+      "Arn"
+     ]
+    },
+    "Runtime": "python3.12",
+    "Tags": [
+     {
+      "Key": "Hackathon",
+      "Value": "OneWithAI-2026"
+     },
+     {
+      "Key": "Owner",
+      "Value": "240404075@live.unilag.edu.ng"
+     },
+     {
+      "Key": "Project",
+      "Value": "EVHacks"
+     },
+     {
+      "Key": "Team",
+      "Value": "EVHacks"
+     }
+    ],
+    "Timeout": 5
+   },
+   "DependsOn": [
+    "IngestFnServiceRoleDefaultPolicy2D066896",
+    "IngestFnServiceRoleCDCC94EA"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "EvhIngestStack/IngestFn/Resource"
+   }
+  },
+  "IngestFnLogRetentionFCF03FF5": {
+   "Type": "Custom::LogRetention",
+   "Properties": {
+    "ServiceToken": {
+     "Fn::GetAtt": [
+      "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aFD4BFC8A",
+      "Arn"
+     ]
+    },
+    "LogGroupName": {
+     "Fn::Join": [
+      "",
+      [
+       "/aws/lambda/",
+       {
+        "Ref": "IngestFnEE15D018"
+       }
+      ]
+     ]
+    },
+    "RetentionInDays": 7
+   },
+   "Metadata": {
+    "aws:cdk:path": "EvhIngestStack/IngestFn/LogRetention/Resource"
+   }
+  },
+  "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aServiceRole9741ECFB": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+       ]
+      ]
+     }
+    ],
+    "Tags": [
+     {
+      "Key": "Hackathon",
+      "Value": "OneWithAI-2026"
+     },
+     {
+      "Key": "Owner",
+      "Value": "240404075@live.unilag.edu.ng"
+     },
+     {
+      "Key": "Project",
+      "Value": "EVHacks"
+     },
+     {
+      "Key": "Team",
+      "Value": "EVHacks"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "EvhIngestStack/LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8a/ServiceRole/Resource"
+   }
+  },
+  "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aServiceRoleDefaultPolicyADDA7DEB": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": [
+        "logs:DeleteRetentionPolicy",
+        "logs:PutRetentionPolicy"
+       ],
+       "Effect": "Allow",
+       "Resource": "*"
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aServiceRoleDefaultPolicyADDA7DEB",
+    "Roles": [
+     {
+      "Ref": "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aServiceRole9741ECFB"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "EvhIngestStack/LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8a/ServiceRole/DefaultPolicy/Resource"
+   }
+  },
+  "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aFD4BFC8A": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Handler": "index.handler",
+    "Runtime": "nodejs22.x",
+    "Timeout": 900,
+    "Code": {
+     "S3Bucket": {
+      "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-eu-north-1"
+     },
+     "S3Key": "2819175352ad1ce0dae768e83fc328fb70fb5f10b4a8ff0ccbcb791f02b0716d.zip"
+    },
+    "Role": {
+     "Fn::GetAtt": [
+      "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aServiceRole9741ECFB",
+      "Arn"
+     ]
+    },
+    "Tags": [
+     {
+      "Key": "Hackathon",
+      "Value": "OneWithAI-2026"
+     },
+     {
+      "Key": "Owner",
+      "Value": "240404075@live.unilag.edu.ng"
+     },
+     {
+      "Key": "Project",
+      "Value": "EVHacks"
+     },
+     {
+      "Key": "Team",
+      "Value": "EVHacks"
+     }
+    ]
+   },
+   "DependsOn": [
+    "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aServiceRoleDefaultPolicyADDA7DEB",
+    "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aServiceRole9741ECFB"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "EvhIngestStack/LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8a/Resource",
+    "aws:asset:path": "asset.2819175352ad1ce0dae768e83fc328fb70fb5f10b4a8ff0ccbcb791f02b0716d",
+    "aws:asset:is-bundled": false,
+    "aws:asset:property": "Code"
+   }
+  },
+  "FirehoseRoleAA67C190": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "firehose.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "Tags": [
+     {
+      "Key": "Hackathon",
+      "Value": "OneWithAI-2026"
+     },
+     {
+      "Key": "Owner",
+      "Value": "240404075@live.unilag.edu.ng"
+     },
+     {
+      "Key": "Project",
+      "Value": "EVHacks"
+     },
+     {
+      "Key": "Team",
+      "Value": "EVHacks"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "EvhIngestStack/FirehoseRole/Resource"
+   }
+  },
+  "FirehosePolicy3A3B2DF8": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": [
+        "kinesis:DescribeStream",
+        "kinesis:DescribeStreamSummary",
+        "kinesis:GetRecords",
+        "kinesis:GetShardIterator",
+        "kinesis:ListShards"
+       ],
+       "Effect": "Allow",
+       "Resource": {
+        "Fn::GetAtt": [
+         "PingStreamD8F95A44",
+         "Arn"
+        ]
+       }
+      },
+      {
+       "Action": [
+        "s3:AbortMultipartUpload",
+        "s3:GetBucketLocation",
+        "s3:GetObject",
+        "s3:ListBucket",
+        "s3:ListBucketMultipartUploads",
+        "s3:PutObject"
+       ],
+       "Effect": "Allow",
+       "Resource": [
+        {
+         "Fn::ImportValue": "EvhDataStack:ExportsOutputFnGetAttDataBucketE3889A50Arn98F8399F"
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           {
+            "Fn::ImportValue": "EvhDataStack:ExportsOutputFnGetAttDataBucketE3889A50Arn98F8399F"
+           },
+           "/*"
+          ]
+         ]
+        }
+       ]
+      },
+      {
+       "Action": [
+        "logs:CreateLogStream",
+        "logs:PutLogEvents"
+       ],
+       "Effect": "Allow",
+       "Resource": "*"
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "FirehosePolicy3A3B2DF8",
+    "Roles": [
+     {
+      "Ref": "FirehoseRoleAA67C190"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "EvhIngestStack/FirehosePolicy/Resource"
+   }
+  },
+  "PingFirehose": {
+   "Type": "AWS::KinesisFirehose::DeliveryStream",
+   "Properties": {
+    "DeliveryStreamName": "evh-pings-firehose",
+    "DeliveryStreamType": "KinesisStreamAsSource",
+    "ExtendedS3DestinationConfiguration": {
+     "BucketARN": {
+      "Fn::ImportValue": "EvhDataStack:ExportsOutputFnGetAttDataBucketE3889A50Arn98F8399F"
+     },
+     "BufferingHints": {
+      "IntervalInSeconds": 60,
+      "SizeInMBs": 5
+     },
+     "CloudWatchLoggingOptions": {
+      "Enabled": true,
+      "LogGroupName": "/aws/kinesisfirehose/evh-pings",
+      "LogStreamName": "S3Delivery"
+     },
+     "CompressionFormat": "GZIP",
+     "ErrorOutputPrefix": "raw/pings_errors/!{firehose:error-output-type}/",
+     "Prefix": "raw/pings/year=!{timestamp:yyyy}/month=!{timestamp:MM}/day=!{timestamp:dd}/hour=!{timestamp:HH}/",
+     "RoleARN": {
+      "Fn::GetAtt": [
+       "FirehoseRoleAA67C190",
+       "Arn"
+      ]
+     }
+    },
+    "KinesisStreamSourceConfiguration": {
+     "KinesisStreamARN": {
+      "Fn::GetAtt": [
+       "PingStreamD8F95A44",
+       "Arn"
+      ]
+     },
+     "RoleARN": {
+      "Fn::GetAtt": [
+       "FirehoseRoleAA67C190",
+       "Arn"
+      ]
+     }
+    },
+    "Tags": [
+     {
+      "Key": "Hackathon",
+      "Value": "OneWithAI-2026"
+     },
+     {
+      "Key": "Owner",
+      "Value": "240404075@live.unilag.edu.ng"
+     },
+     {
+      "Key": "Project",
+      "Value": "EVHacks"
+     },
+     {
+      "Key": "Team",
+      "Value": "EVHacks"
+     }
+    ]
+   },
+   "DependsOn": [
+    "FirehosePolicy3A3B2DF8"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "EvhIngestStack/PingFirehose"
+   }
+  },
+  "IngestApi90DC3F9D": {
+   "Type": "AWS::ApiGatewayV2::Api",
+   "Properties": {
+    "CorsConfiguration": {
+     "AllowHeaders": [
+      "authorization",
+      "content-type"
+     ],
+     "AllowMethods": [
+      "POST",
+      "OPTIONS"
+     ],
+     "AllowOrigins": [
+      "*"
+     ]
+    },
+    "Name": "evh-ingest",
+    "ProtocolType": "HTTP",
+    "Tags": {
+     "Hackathon": "OneWithAI-2026",
+     "Owner": "240404075@live.unilag.edu.ng",
+     "Project": "EVHacks",
+     "Team": "EVHacks"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "EvhIngestStack/IngestApi/Resource"
+   }
+  },
+  "IngestApiDefaultStage4F9A3A6A": {
+   "Type": "AWS::ApiGatewayV2::Stage",
+   "Properties": {
+    "ApiId": {
+     "Ref": "IngestApi90DC3F9D"
+    },
+    "AutoDeploy": true,
+    "StageName": "$default",
+    "Tags": {
+     "Hackathon": "OneWithAI-2026",
+     "Owner": "240404075@live.unilag.edu.ng",
+     "Project": "EVHacks",
+     "Team": "EVHacks"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "EvhIngestStack/IngestApi/DefaultStage/Resource"
+   }
+  },
+  "IngestApiPOSTingestLambdaInt39CDAFAF": {
+   "Type": "AWS::ApiGatewayV2::Integration",
+   "Properties": {
+    "ApiId": {
+     "Ref": "IngestApi90DC3F9D"
+    },
+    "IntegrationType": "AWS_PROXY",
+    "IntegrationUri": {
+     "Fn::GetAtt": [
+      "IngestFnEE15D018",
+      "Arn"
+     ]
+    },
+    "PayloadFormatVersion": "2.0"
+   },
+   "Metadata": {
+    "aws:cdk:path": "EvhIngestStack/IngestApi/POST--ingest/LambdaInt/Resource"
+   }
+  },
+  "IngestApiPOSTingestLambdaIntPermission9A35F736": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "IngestFnEE15D018",
+      "Arn"
+     ]
+    },
+    "Principal": "apigateway.amazonaws.com",
+    "SourceArn": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:aws:execute-api:eu-north-1:",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       ":",
+       {
+        "Ref": "IngestApi90DC3F9D"
+       },
+       "/*/*/ingest"
+      ]
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "EvhIngestStack/IngestApi/POST--ingest/LambdaInt-Permission"
+   }
+  },
+  "IngestApiPOSTingest3C524005": {
+   "Type": "AWS::ApiGatewayV2::Route",
+   "Properties": {
+    "ApiId": {
+     "Ref": "IngestApi90DC3F9D"
+    },
+    "AuthorizationType": "NONE",
+    "RouteKey": "POST /ingest",
+    "Target": {
+     "Fn::Join": [
+      "",
+      [
+       "integrations/",
+       {
+        "Ref": "IngestApiPOSTingestLambdaInt39CDAFAF"
+       }
+      ]
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "EvhIngestStack/IngestApi/POST--ingest/Resource"
+   }
+  },
+  "IngestApiGEThealthHealthInt4689BA9D": {
+   "Type": "AWS::ApiGatewayV2::Integration",
+   "Properties": {
+    "ApiId": {
+     "Ref": "IngestApi90DC3F9D"
+    },
+    "IntegrationType": "AWS_PROXY",
+    "IntegrationUri": {
+     "Fn::GetAtt": [
+      "HealthFn0EF18565",
+      "Arn"
+     ]
+    },
+    "PayloadFormatVersion": "2.0"
+   },
+   "Metadata": {
+    "aws:cdk:path": "EvhIngestStack/IngestApi/GET--health/HealthInt/Resource"
+   }
+  },
+  "IngestApiGEThealthHealthIntPermission4D48D7F2": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "HealthFn0EF18565",
+      "Arn"
+     ]
+    },
+    "Principal": "apigateway.amazonaws.com",
+    "SourceArn": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:aws:execute-api:eu-north-1:",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       ":",
+       {
+        "Ref": "IngestApi90DC3F9D"
+       },
+       "/*/*/health"
+      ]
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "EvhIngestStack/IngestApi/GET--health/HealthInt-Permission"
+   }
+  },
+  "IngestApiGEThealth80A30995": {
+   "Type": "AWS::ApiGatewayV2::Route",
+   "Properties": {
+    "ApiId": {
+     "Ref": "IngestApi90DC3F9D"
+    },
+    "AuthorizationType": "NONE",
+    "RouteKey": "GET /health",
+    "Target": {
+     "Fn::Join": [
+      "",
+      [
+       "integrations/",
+       {
+        "Ref": "IngestApiGEThealthHealthInt4689BA9D"
+       }
+      ]
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "EvhIngestStack/IngestApi/GET--health/Resource"
+   }
+  },
+  "HealthFnServiceRoleA02F5DA7": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+       ]
+      ]
+     }
+    ],
+    "Tags": [
+     {
+      "Key": "Hackathon",
+      "Value": "OneWithAI-2026"
+     },
+     {
+      "Key": "Owner",
+      "Value": "240404075@live.unilag.edu.ng"
+     },
+     {
+      "Key": "Project",
+      "Value": "EVHacks"
+     },
+     {
+      "Key": "Team",
+      "Value": "EVHacks"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "EvhIngestStack/HealthFn/ServiceRole/Resource"
+   }
+  },
+  "HealthFn0EF18565": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Code": {
+     "ZipFile": "def handler(e,c): return {\"statusCode\":200,\"body\":\"ok\"}"
+    },
+    "Handler": "index.handler",
+    "Role": {
+     "Fn::GetAtt": [
+      "HealthFnServiceRoleA02F5DA7",
+      "Arn"
+     ]
+    },
+    "Runtime": "python3.12",
+    "Tags": [
+     {
+      "Key": "Hackathon",
+      "Value": "OneWithAI-2026"
+     },
+     {
+      "Key": "Owner",
+      "Value": "240404075@live.unilag.edu.ng"
+     },
+     {
+      "Key": "Project",
+      "Value": "EVHacks"
+     },
+     {
+      "Key": "Team",
+      "Value": "EVHacks"
+     }
+    ],
+    "Timeout": 3
+   },
+   "DependsOn": [
+    "HealthFnServiceRoleA02F5DA7"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "EvhIngestStack/HealthFn/Resource"
+   }
+  },
+  "HealthFnLogRetentionD59D9354": {
+   "Type": "Custom::LogRetention",
+   "Properties": {
+    "ServiceToken": {
+     "Fn::GetAtt": [
+      "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aFD4BFC8A",
+      "Arn"
+     ]
+    },
+    "LogGroupName": {
+     "Fn::Join": [
+      "",
+      [
+       "/aws/lambda/",
+       {
+        "Ref": "HealthFn0EF18565"
+       }
+      ]
+     ]
+    },
+    "RetentionInDays": 7
+   },
+   "Metadata": {
+    "aws:cdk:path": "EvhIngestStack/HealthFn/LogRetention/Resource"
+   }
+  },
+  "CDKMetadata": {
+   "Type": "AWS::CDK::Metadata",
+   "Properties": {
+    "Analytics": "v2:deflate64:H4sIAAAAAAAA/+VUXW/TMBT9LfPj5BnohkB9S9shJrGtavdWVdNdfJteGtuR7XQKVv47svNB0RACxAviKc451+d+2D4TMXn7Xrw+g2d3kcvDRUlPIqw95AcOz+4xHEijIxcxi6A2gVlU5gjl0pSUN2zKJDpvTcM4s+hRezJ6iZaMZFN2zjhzaeOtkcim7P7ucXF9m90tRuIOFKbIdsvnO92laXkJ6kmCCB9qnUfJTWCoj2SNVqh9L73ryVGDs9IUq6EMNn3HmUJlbLOmL0OEJ4WmHiTyrq643IOWJdr+z9Y6Rnal8cBAyuvTAjYp6pxtI/ki658kSf0P/cb1Eq0i58jolhMoEVamxE1g4FytUM4aNg2ssqRzqqDM8tzU42i6mLghy7uqUh9MgYYCZTo9Qsemm/Ad1mS2j932XT+Y5ZBiOPNN6FnvId/f6JI0jtwwk5+T/3ML/8bo0nWMEryj0oUfanswkXlR8ktYyrUHj/HNuGHqf00oMHeCfXuoP4r8TfjXi0tz6kbU8tIUTnw6cQPuLh/BOfROZPHD3aWY1fkB/QwcJgXee+yOLO6NQzHf6QWWdETbdHbIoaICPD5Dc5yI8NH7KqtocKDkQrGIrCIeubWHopdOjgoFJnxlao+jbyXoRnssLCSHPZU6wbtrUHts27icGy1pxNGZ2ubIx0VqMqYkXcSI+9pXtW/5svF7o19dijdX4urssyO66M1PrLrvVwkv8rWKBgAA"
+   },
+   "Metadata": {
+    "aws:cdk:path": "EvhIngestStack/CDKMetadata/Default"
+   }
+  }
+ },
+ "Conditions": {
+  "AwsCdkKinesisEncryptedStreamsUnsupportedRegions": {
+   "Fn::Or": [
+    {
+     "Fn::Equals": [
+      {
+       "Ref": "AWS::Region"
+      },
+      "cn-north-1"
+     ]
+    },
+    {
+     "Fn::Equals": [
+      {
+       "Ref": "AWS::Region"
+      },
+      "cn-northwest-1"
+     ]
+    }
+   ]
+  }
+ },
+ "Outputs": {
+  "IngestUrl": {
+   "Value": {
+    "Fn::Join": [
+     "",
+     [
+      {
+       "Fn::GetAtt": [
+        "IngestApi90DC3F9D",
+        "ApiEndpoint"
+       ]
+      },
+      "/ingest"
+     ]
+    ]
+   },
+   "Export": {
+    "Name": "EvhIngestUrl"
+   }
+  },
+  "HealthUrl": {
+   "Value": {
+    "Fn::Join": [
+     "",
+     [
+      {
+       "Fn::GetAtt": [
+        "IngestApi90DC3F9D",
+        "ApiEndpoint"
+       ]
+      },
+      "/health"
+     ]
+    ]
+   },
+   "Export": {
+    "Name": "EvhHealthUrl"
+   }
+  },
+  "StreamName": {
+   "Value": {
+    "Ref": "PingStreamD8F95A44"
+   },
+   "Export": {
+    "Name": "EvhStreamName"
+   }
+  },
+  "StreamArn": {
+   "Value": {
+    "Fn::GetAtt": [
+     "PingStreamD8F95A44",
+     "Arn"
+    ]
+   },
+   "Export": {
+    "Name": "EvhStreamArn"
+   }
+  },
+  "FirehoseName": {
+   "Value": "evh-pings-firehose",
+   "Export": {
+    "Name": "EvhFirehoseName"
+   }
+  },
+  "ExportsOutputFnGetAttIngestApi90DC3F9DApiEndpoint9D968DCE": {
+   "Value": {
+    "Fn::GetAtt": [
+     "IngestApi90DC3F9D",
+     "ApiEndpoint"
+    ]
+   },
+   "Export": {
+    "Name": "EvhIngestStack:ExportsOutputFnGetAttIngestApi90DC3F9DApiEndpoint9D968DCE"
+   }
+  }
+ },
+ "Parameters": {
+  "BootstrapVersion": {
+   "Type": "AWS::SSM::Parameter::Value<String>",
+   "Default": "/cdk-bootstrap/hnb659fds/version",
+   "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]"
+  }
+ },
+ "Rules": {
+  "CheckBootstrapVersion": {
+   "Assertions": [
+    {
+     "Assert": {
+      "Fn::Not": [
+       {
+        "Fn::Contains": [
+         [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5"
+         ],
+         {
+          "Ref": "BootstrapVersion"
+         }
+        ]
+       }
+      ]
+     },
+     "AssertDescription": "CDK bootstrap stack version 6 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI."
+    }
+   ]
+  }
+ }
+}

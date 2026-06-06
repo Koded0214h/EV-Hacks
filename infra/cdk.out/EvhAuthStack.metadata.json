@@ -1,0 +1,418 @@
+{
+  "/EvhAuthStack": [
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "Kernel._Kernel_create (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:61224)",
+        "Kernel.create (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:51955)",
+        "KernelHost.processRequest (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:212065)",
+        "KernelHost.run (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:211120)",
+        "Immediate._onImmediate (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:211164)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/EvhAuthStack/EvhUserPool": [
+    {
+      "type": "aws:cdk:analytics:construct",
+      "data": {
+        "accountRecovery": 2,
+        "autoVerify": {
+          "email": true
+        },
+        "passwordPolicy": {
+          "minLength": "*",
+          "requireDigits": true,
+          "requireLowercase": true,
+          "requireSymbols": false,
+          "requireUppercase": false
+        },
+        "removalPolicy": "destroy",
+        "selfSignUpEnabled": true,
+        "signInAliases": {
+          "email": true,
+          "username": true
+        },
+        "standardAttributes": {},
+        "userPoolName": "*"
+      }
+    }
+  ],
+  "/EvhAuthStack/GroupDrivers": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "GroupDrivers"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "Kernel._Kernel_create (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:61224)",
+        "Kernel.create (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:51955)",
+        "KernelHost.processRequest (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:212065)",
+        "KernelHost.run (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:211120)",
+        "Immediate._onImmediate (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:211164)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/EvhAuthStack/GroupOperators": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "GroupOperators"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "Kernel._Kernel_create (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:61224)",
+        "Kernel.create (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:51955)",
+        "KernelHost.processRequest (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:212065)",
+        "KernelHost.run (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:211120)",
+        "Immediate._onImmediate (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:211164)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/EvhAuthStack/GroupInvestors": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "GroupInvestors"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "Kernel._Kernel_create (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:61224)",
+        "Kernel.create (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:51955)",
+        "KernelHost.processRequest (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:212065)",
+        "KernelHost.run (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:211120)",
+        "Immediate._onImmediate (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:211164)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/EvhAuthStack/UserPoolId": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "UserPoolId"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "Kernel._Kernel_create (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:61224)",
+        "Kernel.create (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:51955)",
+        "KernelHost.processRequest (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:212065)",
+        "KernelHost.run (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:211120)",
+        "Immediate._onImmediate (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:211164)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/EvhAuthStack/UserPoolArn": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "UserPoolArn"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "Kernel._Kernel_create (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:61224)",
+        "Kernel.create (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:51955)",
+        "KernelHost.processRequest (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:212065)",
+        "KernelHost.run (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:211120)",
+        "Immediate._onImmediate (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:211164)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/EvhAuthStack/PwaClientId": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "PwaClientId"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "Kernel._Kernel_create (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:61224)",
+        "Kernel.create (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:51955)",
+        "KernelHost.processRequest (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:212065)",
+        "KernelHost.run (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:211120)",
+        "Immediate._onImmediate (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:211164)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/EvhAuthStack/ApiClientId": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ApiClientId"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "Kernel._Kernel_create (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:61224)",
+        "Kernel.create (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:51955)",
+        "KernelHost.processRequest (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:212065)",
+        "KernelHost.run (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:211120)",
+        "Immediate._onImmediate (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:211164)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/EvhAuthStack/HostedUiDomain": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "HostedUiDomain"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "Kernel._Kernel_create (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:61224)",
+        "Kernel.create (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:51955)",
+        "KernelHost.processRequest (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:212065)",
+        "KernelHost.run (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:211120)",
+        "Immediate._onImmediate (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:211164)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/EvhAuthStack/HostedUiUrl": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "HostedUiUrl"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "Kernel._Kernel_create (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:61224)",
+        "Kernel.create (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:51955)",
+        "KernelHost.processRequest (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:212065)",
+        "KernelHost.run (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:211120)",
+        "Immediate._onImmediate (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:211164)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/EvhAuthStack/TokenIssuer": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "TokenIssuer"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "Kernel._Kernel_create (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:61224)",
+        "Kernel.create (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:51955)",
+        "KernelHost.processRequest (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:212065)",
+        "KernelHost.run (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:211120)",
+        "Immediate._onImmediate (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:211164)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/EvhAuthStack/BootstrapVersion": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "BootstrapVersion"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/EvhAuthStack/CheckBootstrapVersion": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CheckBootstrapVersion"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/EvhAuthStack/EvhUserPool/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "EvhUserPool3528D286"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new UserPool2 in aws-cdk-lib...",
+        "Kernel._Kernel_create (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:61224)",
+        "Kernel.create (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:51955)",
+        "KernelHost.processRequest (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:212065)",
+        "KernelHost.run (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:211120)",
+        "Immediate._onImmediate (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:211164)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/EvhAuthStack/EvhUserPool/HostedUiDomain": [
+    {
+      "type": "aws:cdk:analytics:construct",
+      "data": {
+        "userPool": "*",
+        "cognitoDomain": {
+          "domainPrefix": "*"
+        }
+      }
+    }
+  ],
+  "/EvhAuthStack/EvhUserPool/PwaClient": [
+    {
+      "type": "aws:cdk:analytics:construct",
+      "data": {
+        "userPool": "*",
+        "accessTokenValidity": "*",
+        "authFlows": {
+          "adminUserPassword": true,
+          "userSrp": true
+        },
+        "generateSecret": false,
+        "idTokenValidity": "*",
+        "oAuth": {
+          "callbackUrls": "*",
+          "flows": {
+            "authorizationCodeGrant": true
+          },
+          "logoutUrls": "*",
+          "scopes": "*"
+        },
+        "refreshTokenValidity": "*",
+        "userPoolClientName": "*"
+      }
+    }
+  ],
+  "/EvhAuthStack/EvhUserPool/ApiClient": [
+    {
+      "type": "aws:cdk:analytics:construct",
+      "data": {
+        "userPool": "*",
+        "authFlows": {
+          "adminUserPassword": true,
+          "userPassword": true
+        },
+        "generateSecret": true,
+        "userPoolClientName": "*"
+      }
+    }
+  ],
+  "/EvhAuthStack/CDKMetadata/Default": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CDKMetadata"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...App.synth in aws-cdk-lib...",
+        "/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:542 (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:5429)",
+        "Kernel._Kernel_ensureSync (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:69840)"
+      ]
+    }
+  ],
+  "/EvhAuthStack/Exports/Output{\"Ref\":\"EvhUserPool3528D286\"}": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ExportsOutputRefEvhUserPool3528D28677FB2358"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...App.synth in aws-cdk-lib...",
+        "/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:542 (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:5429)",
+        "Kernel._Kernel_ensureSync (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:69840)"
+      ]
+    }
+  ],
+  "/EvhAuthStack/Exports/Output{\"Ref\":\"EvhUserPoolPwaClient8EC6E1D9\"}": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ExportsOutputRefEvhUserPoolPwaClient8EC6E1D97DC66171"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...App.synth in aws-cdk-lib...",
+        "/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:542 (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:5429)",
+        "Kernel._Kernel_ensureSync (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:69840)"
+      ]
+    }
+  ],
+  "/EvhAuthStack/Exports/Output{\"Ref\":\"EvhUserPoolApiClient1C31AF05\"}": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ExportsOutputRefEvhUserPoolApiClient1C31AF0520359C48"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...App.synth in aws-cdk-lib...",
+        "/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:542 (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:5429)",
+        "Kernel._Kernel_ensureSync (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:69840)"
+      ]
+    }
+  ],
+  "/EvhAuthStack/EvhUserPool/HostedUiDomain/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "EvhUserPoolHostedUiDomain0FF4E28E"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addDomain in aws-cdk-lib...",
+        "/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:542 (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:5429)",
+        "Kernel._Kernel_ensureSync (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:69840)",
+        "Kernel.invoke (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:54245)",
+        "KernelHost.processRequest (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:212065)",
+        "KernelHost.run (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:211120)",
+        "Immediate._onImmediate (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:211164)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/EvhAuthStack/EvhUserPool/PwaClient/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "EvhUserPoolPwaClient8EC6E1D9"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addClient in aws-cdk-lib...",
+        "/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:542 (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:5429)",
+        "Kernel._Kernel_ensureSync (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:69840)",
+        "Kernel.invoke (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:54245)",
+        "KernelHost.processRequest (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:212065)",
+        "KernelHost.run (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:211120)",
+        "Immediate._onImmediate (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:211164)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/EvhAuthStack/EvhUserPool/ApiClient/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "EvhUserPoolApiClient1C31AF05"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addClient in aws-cdk-lib...",
+        "/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:542 (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:5429)",
+        "Kernel._Kernel_ensureSync (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:69840)",
+        "Kernel.invoke (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:54245)",
+        "KernelHost.processRequest (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:212065)",
+        "KernelHost.run (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:211120)",
+        "Immediate._onImmediate (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:211164)",
+        "...node internals..."
+      ]
+    }
+  ]
+}

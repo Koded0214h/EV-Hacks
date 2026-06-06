@@ -1,0 +1,36 @@
+{
+  "version": "54.0.0",
+  "files": {
+    "02b51ab524e7bcf8f477de3e71e5f9a72e448301b26ba62e9e75a14f9c55a093": {
+      "displayName": "EvhNetworkStack/Custom::VpcRestrictDefaultSGCustomResourceProvider Code",
+      "source": {
+        "path": "asset.02b51ab524e7bcf8f477de3e71e5f9a72e448301b26ba62e9e75a14f9c55a093",
+        "packaging": "zip"
+      },
+      "destinations": {
+        "current_account-eu-north-1-8fc417e5": {
+          "bucketName": "cdk-hnb659fds-assets-${AWS::AccountId}-eu-north-1",
+          "objectKey": "02b51ab524e7bcf8f477de3e71e5f9a72e448301b26ba62e9e75a14f9c55a093.zip",
+          "region": "eu-north-1",
+          "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-file-publishing-role-${AWS::AccountId}-eu-north-1"
+        }
+      }
+    },
+    "7563ac80b4f6ed6bc73e12e773d03c40660d84c91f7f05425f7fff0b31b99756": {
+      "displayName": "EvhNetworkStack Template",
+      "source": {
+        "path": "EvhNetworkStack.template.json",
+        "packaging": "file"
+      },
+      "destinations": {
+        "current_account-eu-north-1-98451311": {
+          "bucketName": "cdk-hnb659fds-assets-${AWS::AccountId}-eu-north-1",
+          "objectKey": "7563ac80b4f6ed6bc73e12e773d03c40660d84c91f7f05425f7fff0b31b99756.json",
+          "region": "eu-north-1",
+          "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-file-publishing-role-${AWS::AccountId}-eu-north-1"
+        }
+      }
+    }
+  },
+  "dockerImages": {}
+}

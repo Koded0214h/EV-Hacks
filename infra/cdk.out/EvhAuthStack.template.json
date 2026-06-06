@@ -1,0 +1,341 @@
+{
+ "Resources": {
+  "EvhUserPool3528D286": {
+   "Type": "AWS::Cognito::UserPool",
+   "Properties": {
+    "AccountRecoverySetting": {
+     "RecoveryMechanisms": [
+      {
+       "Name": "verified_email",
+       "Priority": 1
+      }
+     ]
+    },
+    "AdminCreateUserConfig": {
+     "AllowAdminCreateUserOnly": false
+    },
+    "AliasAttributes": [
+     "email"
+    ],
+    "AutoVerifiedAttributes": [
+     "email"
+    ],
+    "EmailVerificationMessage": "The verification code to your new account is {####}",
+    "EmailVerificationSubject": "Verify your new account",
+    "Policies": {
+     "PasswordPolicy": {
+      "MinimumLength": 8,
+      "RequireLowercase": true,
+      "RequireNumbers": true,
+      "RequireSymbols": false,
+      "RequireUppercase": false
+     }
+    },
+    "Schema": [
+     {
+      "Mutable": true,
+      "Name": "email",
+      "Required": true
+     }
+    ],
+    "SmsVerificationMessage": "The verification code to your new account is {####}",
+    "UserPoolName": "evh-users",
+    "UserPoolTags": {
+     "Hackathon": "OneWithAI-2026",
+     "Owner": "240404075@live.unilag.edu.ng",
+     "Project": "EVHacks",
+     "Team": "EVHacks"
+    },
+    "VerificationMessageTemplate": {
+     "DefaultEmailOption": "CONFIRM_WITH_CODE",
+     "EmailMessage": "The verification code to your new account is {####}",
+     "EmailSubject": "Verify your new account",
+     "SmsMessage": "The verification code to your new account is {####}"
+    }
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "EvhAuthStack/EvhUserPool/Resource"
+   }
+  },
+  "EvhUserPoolHostedUiDomain0FF4E28E": {
+   "Type": "AWS::Cognito::UserPoolDomain",
+   "Properties": {
+    "Domain": "evhacks-onewithai",
+    "UserPoolId": {
+     "Ref": "EvhUserPool3528D286"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "EvhAuthStack/EvhUserPool/HostedUiDomain/Resource"
+   }
+  },
+  "EvhUserPoolPwaClient8EC6E1D9": {
+   "Type": "AWS::Cognito::UserPoolClient",
+   "Properties": {
+    "AccessTokenValidity": 480,
+    "AllowedOAuthFlows": [
+     "code"
+    ],
+    "AllowedOAuthFlowsUserPoolClient": true,
+    "AllowedOAuthScopes": [
+     "openid",
+     "email",
+     "profile"
+    ],
+    "CallbackURLs": [
+     "http://localhost:5173/auth/callback",
+     "https://main.evhacks.amplifyapp.com/auth/callback"
+    ],
+    "ClientName": "evh-pwa",
+    "ExplicitAuthFlows": [
+     "ALLOW_ADMIN_USER_PASSWORD_AUTH",
+     "ALLOW_USER_SRP_AUTH",
+     "ALLOW_REFRESH_TOKEN_AUTH"
+    ],
+    "GenerateSecret": false,
+    "IdTokenValidity": 480,
+    "LogoutURLs": [
+     "http://localhost:5173/",
+     "https://main.evhacks.amplifyapp.com/"
+    ],
+    "RefreshTokenValidity": 43200,
+    "SupportedIdentityProviders": [
+     "COGNITO"
+    ],
+    "TokenValidityUnits": {
+     "AccessToken": "minutes",
+     "IdToken": "minutes",
+     "RefreshToken": "minutes"
+    },
+    "UserPoolId": {
+     "Ref": "EvhUserPool3528D286"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "EvhAuthStack/EvhUserPool/PwaClient/Resource"
+   }
+  },
+  "EvhUserPoolApiClient1C31AF05": {
+   "Type": "AWS::Cognito::UserPoolClient",
+   "Properties": {
+    "AllowedOAuthFlows": [
+     "implicit",
+     "code"
+    ],
+    "AllowedOAuthFlowsUserPoolClient": true,
+    "AllowedOAuthScopes": [
+     "profile",
+     "phone",
+     "email",
+     "openid",
+     "aws.cognito.signin.user.admin"
+    ],
+    "CallbackURLs": [
+     "https://example.com"
+    ],
+    "ClientName": "evh-api",
+    "ExplicitAuthFlows": [
+     "ALLOW_USER_PASSWORD_AUTH",
+     "ALLOW_ADMIN_USER_PASSWORD_AUTH",
+     "ALLOW_REFRESH_TOKEN_AUTH"
+    ],
+    "GenerateSecret": true,
+    "SupportedIdentityProviders": [
+     "COGNITO"
+    ],
+    "UserPoolId": {
+     "Ref": "EvhUserPool3528D286"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "EvhAuthStack/EvhUserPool/ApiClient/Resource"
+   }
+  },
+  "GroupDrivers": {
+   "Type": "AWS::Cognito::UserPoolGroup",
+   "Properties": {
+    "Description": "EV Hacks drivers",
+    "GroupName": "drivers",
+    "UserPoolId": {
+     "Ref": "EvhUserPool3528D286"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "EvhAuthStack/GroupDrivers"
+   }
+  },
+  "GroupOperators": {
+   "Type": "AWS::Cognito::UserPoolGroup",
+   "Properties": {
+    "Description": "EV Hacks operators",
+    "GroupName": "operators",
+    "UserPoolId": {
+     "Ref": "EvhUserPool3528D286"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "EvhAuthStack/GroupOperators"
+   }
+  },
+  "GroupInvestors": {
+   "Type": "AWS::Cognito::UserPoolGroup",
+   "Properties": {
+    "Description": "EV Hacks investors",
+    "GroupName": "investors",
+    "UserPoolId": {
+     "Ref": "EvhUserPool3528D286"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "EvhAuthStack/GroupInvestors"
+   }
+  },
+  "CDKMetadata": {
+   "Type": "AWS::CDK::Metadata",
+   "Properties": {
+    "Analytics": "v2:deflate64:H4sIAAAAAAAA/41RwW7bMAz9lupYON6adcCQW5B2xYBiC5qll2IYGIl2uMiiJ1HNPMP/PtiO3aTNYSdJ75F84nvTdPrxU/r+AvZhos1uYmmT1isBvUtgH35qzh0Jp/U6oF8y26dagdYcnTyg5mf0lZpNEwVR+BE9ZZWa1QoLIKtm4iM2iSohhD17s2RLuuMLcvfoctmqmbpUifL4O5LHG8pJQt83gve8R68h4Ct8VRUbtkHNMrDhBV6X5VDeEU3LFPwMdpBXBoN4rlSiAtpsRblbl7cONhbNoBEod1/c3BIEDK82SlQM6B0UOG4YBJwBb+YinjZRup6mL2xN+9oVq0vV/EgWmRu8TIbLDRdA7qkeGw6+HNzv6fYbprstPWb0px94OrGvHOcuLKGTt3NBawzhO+/QPYIlQ1INTJTtZ8v7bmkwBfWjDwkeG7Dy5bh/jg49CK5Qe5QxEjLnJHge2+BrpcHaDejd2rcxdlw2SkfZsqe/IMRuwQbvPDgZBS3nHOWoMWgusX90iWcew/acejyx5iWY5K1J/23FKXbGj6PSM9InCfbkMXLnOZZNi3yLUkZpkmUlW3bvPqRX1+n1xa9ANPHRCRWYPvTnPymty+XWAwAA"
+   },
+   "Metadata": {
+    "aws:cdk:path": "EvhAuthStack/CDKMetadata/Default"
+   }
+  }
+ },
+ "Outputs": {
+  "UserPoolId": {
+   "Value": {
+    "Ref": "EvhUserPool3528D286"
+   },
+   "Export": {
+    "Name": "EvhUserPoolId"
+   }
+  },
+  "UserPoolArn": {
+   "Value": {
+    "Fn::GetAtt": [
+     "EvhUserPool3528D286",
+     "Arn"
+    ]
+   },
+   "Export": {
+    "Name": "EvhUserPoolArn"
+   }
+  },
+  "PwaClientId": {
+   "Value": {
+    "Ref": "EvhUserPoolPwaClient8EC6E1D9"
+   },
+   "Export": {
+    "Name": "EvhPwaClientId"
+   }
+  },
+  "ApiClientId": {
+   "Value": {
+    "Ref": "EvhUserPoolApiClient1C31AF05"
+   },
+   "Export": {
+    "Name": "EvhApiClientId"
+   }
+  },
+  "HostedUiDomain": {
+   "Value": {
+    "Ref": "EvhUserPoolHostedUiDomain0FF4E28E"
+   },
+   "Export": {
+    "Name": "EvhHostedUiDomain"
+   }
+  },
+  "HostedUiUrl": {
+   "Value": {
+    "Fn::Join": [
+     "",
+     [
+      "https://",
+      {
+       "Ref": "EvhUserPoolHostedUiDomain0FF4E28E"
+      },
+      ".auth.eu-north-1.amazoncognito.com"
+     ]
+    ]
+   },
+   "Export": {
+    "Name": "EvhHostedUiUrl"
+   }
+  },
+  "TokenIssuer": {
+   "Value": {
+    "Fn::Join": [
+     "",
+     [
+      "https://cognito-idp.eu-north-1.amazonaws.com/",
+      {
+       "Ref": "EvhUserPool3528D286"
+      }
+     ]
+    ]
+   },
+   "Export": {
+    "Name": "EvhTokenIssuer"
+   }
+  },
+  "ExportsOutputRefEvhUserPool3528D28677FB2358": {
+   "Value": {
+    "Ref": "EvhUserPool3528D286"
+   },
+   "Export": {
+    "Name": "EvhAuthStack:ExportsOutputRefEvhUserPool3528D28677FB2358"
+   }
+  },
+  "ExportsOutputRefEvhUserPoolPwaClient8EC6E1D97DC66171": {
+   "Value": {
+    "Ref": "EvhUserPoolPwaClient8EC6E1D9"
+   },
+   "Export": {
+    "Name": "EvhAuthStack:ExportsOutputRefEvhUserPoolPwaClient8EC6E1D97DC66171"
+   }
+  },
+  "ExportsOutputRefEvhUserPoolApiClient1C31AF0520359C48": {
+   "Value": {
+    "Ref": "EvhUserPoolApiClient1C31AF05"
+   },
+   "Export": {
+    "Name": "EvhAuthStack:ExportsOutputRefEvhUserPoolApiClient1C31AF0520359C48"
+   }
+  }
+ },
+ "Parameters": {
+  "BootstrapVersion": {
+   "Type": "AWS::SSM::Parameter::Value<String>",
+   "Default": "/cdk-bootstrap/hnb659fds/version",
+   "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]"
+  }
+ },
+ "Rules": {
+  "CheckBootstrapVersion": {
+   "Assertions": [
+    {
+     "Assert": {
+      "Fn::Not": [
+       {
+        "Fn::Contains": [
+         [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5"
+         ],
+         {
+          "Ref": "BootstrapVersion"
+         }
+        ]
+       }
+      ]
+     },
+     "AssertDescription": "CDK bootstrap stack version 6 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI."
+    }
+   ]
+  }
+ }
+}
