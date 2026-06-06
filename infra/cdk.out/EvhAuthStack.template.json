@@ -255,7 +255,7 @@
       {
        "Ref": "EvhUserPoolHostedUiDomain0FF4E28E"
       },
-      ".auth.eu-west-1.amazoncognito.com"
+      ".auth.eu-north-1.amazoncognito.com"
      ]
     ]
    },
@@ -268,7 +268,7 @@
     "Fn::Join": [
      "",
      [
-      "https://cognito-idp.eu-west-1.amazonaws.com/",
+      "https://cognito-idp.eu-north-1.amazonaws.com/",
       {
        "Ref": "EvhUserPool3528D286"
       }

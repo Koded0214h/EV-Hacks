@@ -37,7 +37,14 @@
   "EvhVpcpublicSubnet1SubnetA49A46DB": {
    "Type": "AWS::EC2::Subnet",
    "Properties": {
-    "AvailabilityZone": "eu-west-1a",
+    "AvailabilityZone": {
+     "Fn::Select": [
+      0,
+      {
+       "Fn::GetAZs": ""
+      }
+     ]
+    },
     "CidrBlock": "10.0.0.0/24",
     "MapPublicIpOnLaunch": true,
     "Tags": [
@@ -220,7 +227,14 @@
   "EvhVpcpublicSubnet2SubnetCB4131A5": {
    "Type": "AWS::EC2::Subnet",
    "Properties": {
-    "AvailabilityZone": "eu-west-1b",
+    "AvailabilityZone": {
+     "Fn::Select": [
+      1,
+      {
+       "Fn::GetAZs": ""
+      }
+     ]
+    },
     "CidrBlock": "10.0.1.0/24",
     "MapPublicIpOnLaunch": true,
     "Tags": [
@@ -329,7 +343,14 @@
   "EvhVpcprivateegressSubnet1Subnet97B30C17": {
    "Type": "AWS::EC2::Subnet",
    "Properties": {
-    "AvailabilityZone": "eu-west-1a",
+    "AvailabilityZone": {
+     "Fn::Select": [
+      0,
+      {
+       "Fn::GetAZs": ""
+      }
+     ]
+    },
     "CidrBlock": "10.0.2.0/24",
     "MapPublicIpOnLaunch": false,
     "Tags": [
@@ -435,7 +456,14 @@
   "EvhVpcprivateegressSubnet2Subnet927B5CD5": {
    "Type": "AWS::EC2::Subnet",
    "Properties": {
-    "AvailabilityZone": "eu-west-1b",
+    "AvailabilityZone": {
+     "Fn::Select": [
+      1,
+      {
+       "Fn::GetAZs": ""
+      }
+     ]
+    },
     "CidrBlock": "10.0.3.0/24",
     "MapPublicIpOnLaunch": false,
     "Tags": [
@@ -541,7 +569,14 @@
   "EvhVpcprivateisolatedSubnet1SubnetF755653C": {
    "Type": "AWS::EC2::Subnet",
    "Properties": {
-    "AvailabilityZone": "eu-west-1a",
+    "AvailabilityZone": {
+     "Fn::Select": [
+      0,
+      {
+       "Fn::GetAZs": ""
+      }
+     ]
+    },
     "CidrBlock": "10.0.4.0/24",
     "MapPublicIpOnLaunch": false,
     "Tags": [
@@ -632,7 +667,14 @@
   "EvhVpcprivateisolatedSubnet2SubnetE16D2E2F": {
    "Type": "AWS::EC2::Subnet",
    "Properties": {
-    "AvailabilityZone": "eu-west-1b",
+    "AvailabilityZone": {
+     "Fn::Select": [
+      1,
+      {
+       "Fn::GetAZs": ""
+      }
+     ]
+    },
     "CidrBlock": "10.0.5.0/24",
     "MapPublicIpOnLaunch": false,
     "Tags": [
@@ -779,7 +821,9 @@
       "DefaultSecurityGroup"
      ]
     },
-    "Account": "487054650567"
+    "Account": {
+     "Ref": "AWS::AccountId"
+    }
    },
    "UpdateReplacePolicy": "Delete",
    "DeletionPolicy": "Delete",
@@ -826,7 +870,11 @@
            "Fn::Join": [
             "",
             [
-             "arn:aws:ec2:eu-west-1:487054650567:security-group/",
+             "arn:aws:ec2:eu-north-1:",
+             {
+              "Ref": "AWS::AccountId"
+             },
+             ":security-group/",
              {
               "Fn::GetAtt": [
                "EvhVpcF6DF988C",
@@ -851,7 +899,9 @@
    "Type": "AWS::Lambda::Function",
    "Properties": {
     "Code": {
-     "S3Bucket": "cdk-hnb659fds-assets-487054650567-eu-west-1",
+     "S3Bucket": {
+      "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-eu-north-1"
+     },
      "S3Key": "02b51ab524e7bcf8f477de3e71e5f9a72e448301b26ba62e9e75a14f9c55a093.zip"
     },
     "Timeout": 900,

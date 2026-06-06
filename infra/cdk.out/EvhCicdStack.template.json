@@ -108,7 +108,9 @@
    "Type": "AWS::Lambda::Function",
    "Properties": {
     "Code": {
-     "S3Bucket": "cdk-hnb659fds-assets-487054650567-eu-west-1",
+     "S3Bucket": {
+      "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-eu-north-1"
+     },
      "S3Key": "c0d9f24649426c60a1bc01108070535a40353ae6cd8ceccb812969319b936e5d.zip"
     },
     "Timeout": 900,
@@ -217,12 +219,16 @@
        "Action": "ssm:SendCommand",
        "Effect": "Allow",
        "Resource": [
-        "arn:aws:ssm:eu-west-1::document/AWS-RunShellScript",
+        "arn:aws:ssm:eu-north-1::document/AWS-RunShellScript",
         {
          "Fn::Join": [
           "",
           [
-           "arn:aws:ec2:eu-west-1:487054650567:instance/",
+           "arn:aws:ec2:eu-north-1:",
+           {
+            "Ref": "AWS::AccountId"
+           },
+           ":instance/",
            {
             "Fn::ImportValue": "EvhComputeStack:ExportsOutputRefAppHostFF64211A980FDAB5"
            }

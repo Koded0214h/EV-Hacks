@@ -2,7 +2,7 @@
   "rewrites": [
     {
       "source": "/api/:path*",
-      "destination": "http://34.251.241.87:8000/api/:path*"
+      "destination": "https://CHANGE_ME_TO_CDN_DOMAIN/api/:path*"
     },
     {
       "source": "/ingest",

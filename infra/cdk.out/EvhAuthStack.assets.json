@@ -1,18 +1,18 @@
 {
   "version": "54.0.0",
   "files": {
-    "a11e21c50060c5bbf79281a10e9bbbde64530bb80d59bb0d190214144bb3f2d4": {
+    "29c63e0e68ed3cea99ebc35c42d0f8c27c2c62c0177ea8c4cd3daa2f5bdc85b5": {
       "displayName": "EvhAuthStack Template",
       "source": {
         "path": "EvhAuthStack.template.json",
         "packaging": "file"
       },
       "destinations": {
-        "487054650567-eu-west-1-bd410520": {
-          "bucketName": "cdk-hnb659fds-assets-487054650567-eu-west-1",
-          "objectKey": "a11e21c50060c5bbf79281a10e9bbbde64530bb80d59bb0d190214144bb3f2d4.json",
-          "region": "eu-west-1",
-          "assumeRoleArn": "arn:${AWS::Partition}:iam::487054650567:role/cdk-hnb659fds-file-publishing-role-487054650567-eu-west-1"
+        "current_account-eu-north-1-fd53c694": {
+          "bucketName": "cdk-hnb659fds-assets-${AWS::AccountId}-eu-north-1",
+          "objectKey": "29c63e0e68ed3cea99ebc35c42d0f8c27c2c62c0177ea8c4cd3daa2f5bdc85b5.json",
+          "region": "eu-north-1",
+          "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-file-publishing-role-${AWS::AccountId}-eu-north-1"
         }
       }
     }
