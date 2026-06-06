@@ -70,6 +70,15 @@ export const api = {
   generateBrief:  (zoneId, roiResult)  => post('/brief/generate/', { zone_id: zoneId, roi_result: roiResult }),
   reportStation:  (stationId, status)  => post('/stations/report/', { station_id: stationId, status, reporter_type: 'driver' }),
   getMobilityHeatmap: (hours = 24)     => get(`/mobility/heatmap/?hours=${hours}`),
+  plantStation:   (payload)            => post('/stations/plant/', payload),
+  getPlanted:     ()                   => get('/stations/planted/'),
+  charging: {
+    start:   (stationId, stationName, pricePerKwh) =>
+      post('/charging/start/', { station_id: stationId, station_name: stationName, price_per_kwh: pricePerKwh }),
+    stop:    (sessionId, kwhDelivered, durationSeconds) =>
+      post('/charging/stop/', { session_id: sessionId, kwh_delivered: kwhDelivered, duration_seconds: durationSeconds }),
+    history: () => get('/charging/history/'),
+  },
 }
 
 // ── Data mappers ───────────────────────────────────────────────
@@ -130,9 +139,9 @@ export function mapDriverStation(s, idx) {
     type:           TYPE_LABEL_DV[s.type] ?? s.type,
     distanceKm:     null,
     pricePerKwh:    priceMap[s.type] ?? 175,
-    rating:         null,
-    reviews:        null,
-    address:        s.operator ? `Operated by ${s.operator}` : s.name,
+    rating:         s.rating ?? null,
+    reviews:        s.reviews ?? null,
+    address:        s.address || (s.operator ? `Operated by ${s.operator}` : s.name),
     amenities:      ['Parking'],
     lng:            s.lng,
     lat:            s.lat,

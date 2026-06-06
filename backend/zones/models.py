@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.db import models
 
 
@@ -45,3 +46,23 @@ class Station(models.Model):
 
     def __str__(self):
         return f"{self.name} ({self.station_type})"
+
+
+class PlantedStation(models.Model):
+    STATION_TYPES = [("ac_level2", "AC Level 2"), ("dc_fast", "DC Fast"), ("swap", "Swap")]
+
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="planted_stations")
+    name = models.CharField(max_length=200, default="New Station")
+    lat = models.FloatField()
+    lng = models.FloatField()
+    station_type = models.CharField(max_length=20, choices=STATION_TYPES, default="dc_fast")
+    num_ports = models.IntegerField(default=4)
+    status = models.CharField(max_length=20, default="planned")
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        db_table = "planted_stations"
+        ordering = ["-created_at"]
+
+    def __str__(self):
+        return f"{self.name} @ ({self.lat:.4f}, {self.lng:.4f})"

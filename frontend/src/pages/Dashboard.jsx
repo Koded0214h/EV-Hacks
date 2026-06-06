@@ -1098,7 +1098,7 @@ function SettingsPage({ user, onUpdateUser }) {
 }
 
 // ─── Sidebar ──────────────────────────────────────────────────
-function Sidebar({ activePage, setActivePage, stations, user, onLogout }) {
+function Sidebar({ activePage, setActivePage, stations, zones, user, onLogout, sidebarROI }) {
   const [collapsed, setCollapsed] = useState(false)
   const initials = (user?.name ?? 'EV').split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase()
 
@@ -1147,10 +1147,10 @@ function Sidebar({ activePage, setActivePage, stations, user, onLogout }) {
       <div className="dp-sidebar-stats">
         <motion.div variants={labelV} className="dp-sidebar-stats-title">Live Stats</motion.div>
         {[
-          { label:'Stations',  val:String(stations.length), icon:<MapPin size={14}/> },
-          { label:'Top Zone',  val:'Lekki',                 icon:<BarChart3 size={14}/> },
-          { label:'Best ROI',  val:'132%',                  icon:<TrendingUp size={14}/> },
-          { label:'Payback',   val:'14 mo',                 icon:<Clock size={14}/> },
+          { label:'Stations',  val:String(stations.filter(s => !s.planted).length), icon:<MapPin size={14}/> },
+          { label:'Top Zone',  val:sidebarROI?.topZone ?? (zones[0]?.name.split(' ')[0] || '—'), icon:<BarChart3 size={14}/> },
+          { label:'Best ROI',  val:sidebarROI?.roi     ?? '—',                                   icon:<TrendingUp size={14}/> },
+          { label:'Payback',   val:sidebarROI?.payback ?? '—',                                   icon:<Clock size={14}/> },
         ].map(({ label, val, icon }) => (
           <div className="dp-stat-card" key={label}>
             <div className="dp-stat-icon" title={label}>{icon}</div>
@@ -1323,6 +1323,7 @@ function DashboardView({ user, onLogout, onUpdateUser }) {
   const [showLegend,   setShowLegend]   = useState(true)
   const [mapStyleIdx,  setMapStyleIdx]  = useState(1)
   const [roiModal,     setRoiModal]     = useState(null)
+  const [sidebarROI,   setSidebarROI]   = useState(null)
   const mapInstanceRef = useRef(null)
   const panelOpen = selected !== null || selectedZone !== null
 
@@ -1330,12 +1331,38 @@ function DashboardView({ user, onLogout, onUpdateUser }) {
     api.getZones().then(d => {
       if (d.zones?.length) setZones(d.zones.map(mapZone))
     }).catch(() => {})
-    api.getStations().then(d => {
-      if (d.stations?.length) {
-        setStations(d.stations.map(mapStation))
-      }
+    Promise.all([api.getStations(), api.getPlanted().catch(() => ({ stations: [] }))]).then(([real, planted]) => {
+      const realStations = real.stations?.length ? real.stations.map(mapStation) : []
+      const plantedStations = planted.stations?.length
+        ? planted.stations.map(s => ({
+            id: `planted-${s.station_id}`, name: s.name, status: s.status ?? 'planned',
+            type: s.type === 'dc_fast' ? 'DC Fast' : s.type === 'swap' ? 'Swap' : 'AC Level 2',
+            ports: s.ports ?? 4, capex: 8000000, zone: null,
+            lng: s.lng, lat: s.lat, planted: true, operator: s.operator,
+          }))
+        : []
+      setStations([...realStations, ...plantedStations])
     }).catch(() => {})
   }, [])
+
+  // compute sidebar ROI for top zone once zones load
+  useEffect(() => {
+    if (!zones.length) return
+    const top = [...zones].sort((a, b) => b.score - a.score)[0]
+    api.calculateROI({
+      lat: top.lat, lng: top.lng, zone_id: top.id,
+      station_type: 'dc_fast', num_ports: 4,
+      capex_ngn: 8_000_000, opex_monthly_ngn: 450_000,
+      target_segment: 'mixed', demand_score: top.score, competitor_count: top.existing ?? 0,
+    }).then(d => {
+      const base = d.scenarios.base
+      setSidebarROI({
+        roi: `${Math.round(base.roi_12m_pct)}%`,
+        payback: `${Math.round(base.payback_months)} mo`,
+        topZone: top.name.split(' ').slice(0, 2).join(' '),
+      })
+    }).catch(() => {})
+  }, [zones])
 
   const handleMapClick = ({ lng, lat }) => {
     const zone = zones.reduce((best, z) =>
@@ -1347,6 +1374,7 @@ function DashboardView({ user, onLogout, onUpdateUser }) {
     setSelected(s)
     setSelZone(null)
     setPlantingMode(false)
+    api.plantStation({ lat, lng, name: 'New Station', station_type: 'ac_level2', num_ports: 4 }).catch(() => {})
     setTimeout(() => {
       const map = mapInstanceRef.current
       if (!map) return
@@ -1381,8 +1409,10 @@ function DashboardView({ user, onLogout, onUpdateUser }) {
         activePage={activePage}
         setActivePage={p => { setActivePage(p); closePanel() }}
         stations={stations}
+        zones={zones}
         user={user}
         onLogout={onLogout}
+        sidebarROI={sidebarROI}
       />
 
       <div className="dp-main">

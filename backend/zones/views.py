@@ -1,7 +1,8 @@
 from drf_spectacular.utils import extend_schema, OpenApiParameter, inline_serializer
 from drf_spectacular.types import OpenApiTypes
 from rest_framework import serializers
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from .stubs import STUB_ZONES, STUB_STATIONS
 
@@ -168,3 +169,54 @@ def station_report(request):
     if not updated:
         return Response({"error": True, "message": "Station not found", "code": "ERR_NOT_FOUND"}, status=404)
     return Response({"success": True, "station_id": station_id, "new_status": new_status})
+
+
+@extend_schema(summary="Plant a new investor station", responses={201: OpenApiTypes.OBJECT, 400: OpenApiTypes.OBJECT})
+@api_view(["POST"])
+@permission_classes([IsAuthenticated])
+def plant_station(request):
+    lat = request.data.get("lat")
+    lng = request.data.get("lng")
+    if lat is None or lng is None:
+        return Response({"error": True, "message": "lat and lng required"}, status=400)
+
+    from .models import PlantedStation
+    ps = PlantedStation.objects.create(
+        user=request.user,
+        name=request.data.get("name", "New Station"),
+        lat=float(lat),
+        lng=float(lng),
+        station_type=request.data.get("station_type", "dc_fast"),
+        num_ports=int(request.data.get("num_ports", 4)),
+    )
+    return Response({
+        "station_id": f"planted-{ps.id}",
+        "name": ps.name,
+        "lat": ps.lat,
+        "lng": ps.lng,
+        "type": ps.station_type,
+        "ports": ps.num_ports,
+        "status": ps.status,
+        "operator": request.user.username,
+        "planted": True,
+    }, status=201)
+
+
+@extend_schema(summary="List investor's planted stations", responses={200: OpenApiTypes.OBJECT})
+@api_view(["GET"])
+@permission_classes([IsAuthenticated])
+def planted_list(request):
+    from .models import PlantedStation
+    qs = PlantedStation.objects.filter(user=request.user)
+    stations = [{
+        "station_id": f"planted-{p.id}",
+        "name": p.name,
+        "lat": p.lat,
+        "lng": p.lng,
+        "type": p.station_type,
+        "ports": p.num_ports,
+        "status": p.status,
+        "operator": request.user.username,
+        "planted": True,
+    } for p in qs]
+    return Response({"count": len(stations), "stations": stations})

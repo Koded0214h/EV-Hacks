@@ -23,6 +23,7 @@ INSTALLED_APPS = [
     "roi",
     "mobility",
     "brief",
+    "charging",
 ]
 
 MIDDLEWARE = [
