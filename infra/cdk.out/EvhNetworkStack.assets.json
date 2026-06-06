@@ -8,26 +8,26 @@
         "packaging": "zip"
       },
       "destinations": {
-        "current_account-eu-north-1-8fc417e5": {
-          "bucketName": "cdk-hnb659fds-assets-${AWS::AccountId}-eu-north-1",
+        "487054650567-eu-west-1-fbe9c23f": {
+          "bucketName": "cdk-hnb659fds-assets-487054650567-eu-west-1",
           "objectKey": "02b51ab524e7bcf8f477de3e71e5f9a72e448301b26ba62e9e75a14f9c55a093.zip",
-          "region": "eu-north-1",
-          "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-file-publishing-role-${AWS::AccountId}-eu-north-1"
+          "region": "eu-west-1",
+          "assumeRoleArn": "arn:${AWS::Partition}:iam::487054650567:role/cdk-hnb659fds-file-publishing-role-487054650567-eu-west-1"
         }
       }
     },
-    "7563ac80b4f6ed6bc73e12e773d03c40660d84c91f7f05425f7fff0b31b99756": {
+    "53e23ac57c704067e4b72fe999b63afede98ee1b022b03d82f3a873b4d2fe5ee": {
       "displayName": "EvhNetworkStack Template",
       "source": {
         "path": "EvhNetworkStack.template.json",
         "packaging": "file"
       },
       "destinations": {
-        "current_account-eu-north-1-98451311": {
-          "bucketName": "cdk-hnb659fds-assets-${AWS::AccountId}-eu-north-1",
-          "objectKey": "7563ac80b4f6ed6bc73e12e773d03c40660d84c91f7f05425f7fff0b31b99756.json",
-          "region": "eu-north-1",
-          "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-file-publishing-role-${AWS::AccountId}-eu-north-1"
+        "487054650567-eu-west-1-5778eed8": {
+          "bucketName": "cdk-hnb659fds-assets-487054650567-eu-west-1",
+          "objectKey": "53e23ac57c704067e4b72fe999b63afede98ee1b022b03d82f3a873b4d2fe5ee.json",
+          "region": "eu-west-1",
+          "assumeRoleArn": "arn:${AWS::Partition}:iam::487054650567:role/cdk-hnb659fds-file-publishing-role-487054650567-eu-west-1"
         }
       }
     }

@@ -3,11 +3,11 @@
     {
       "type": "aws:cdk:creationStack",
       "data": [
-        "Kernel._Kernel_create (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:61224)",
-        "Kernel.create (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:51955)",
-        "KernelHost.processRequest (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:212065)",
-        "KernelHost.run (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:211120)",
-        "Immediate._onImmediate (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:211164)",
+        "Kernel._Kernel_create (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:61224)",
+        "Kernel.create (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:51955)",
+        "KernelHost.processRequest (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:212065)",
+        "KernelHost.run (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:211120)",
+        "Immediate._onImmediate (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:211164)",
         "...node internals..."
       ]
     }
@@ -201,11 +201,11 @@
     {
       "type": "aws:cdk:creationStack",
       "data": [
-        "Kernel._Kernel_create (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:61224)",
-        "Kernel.create (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:51955)",
-        "KernelHost.processRequest (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:212065)",
-        "KernelHost.run (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:211120)",
-        "Immediate._onImmediate (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:211164)",
+        "Kernel._Kernel_create (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:61224)",
+        "Kernel.create (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:51955)",
+        "KernelHost.processRequest (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:212065)",
+        "KernelHost.run (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:211120)",
+        "Immediate._onImmediate (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:211164)",
         "...node internals..."
       ]
     }
@@ -218,11 +218,11 @@
     {
       "type": "aws:cdk:creationStack",
       "data": [
-        "Kernel._Kernel_create (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:61224)",
-        "Kernel.create (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:51955)",
-        "KernelHost.processRequest (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:212065)",
-        "KernelHost.run (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:211120)",
-        "Immediate._onImmediate (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:211164)",
+        "Kernel._Kernel_create (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:61224)",
+        "Kernel.create (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:51955)",
+        "KernelHost.processRequest (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:212065)",
+        "KernelHost.run (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:211120)",
+        "Immediate._onImmediate (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:211164)",
         "...node internals..."
       ]
     }
@@ -235,11 +235,11 @@
     {
       "type": "aws:cdk:creationStack",
       "data": [
-        "Kernel._Kernel_create (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:61224)",
-        "Kernel.create (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:51955)",
-        "KernelHost.processRequest (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:212065)",
-        "KernelHost.run (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:211120)",
-        "Immediate._onImmediate (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:211164)",
+        "Kernel._Kernel_create (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:61224)",
+        "Kernel.create (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:51955)",
+        "KernelHost.processRequest (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:212065)",
+        "KernelHost.run (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:211120)",
+        "Immediate._onImmediate (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:211164)",
         "...node internals..."
       ]
     }
@@ -252,11 +252,11 @@
     {
       "type": "aws:cdk:creationStack",
       "data": [
-        "Kernel._Kernel_create (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:61224)",
-        "Kernel.create (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:51955)",
-        "KernelHost.processRequest (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:212065)",
-        "KernelHost.run (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:211120)",
-        "Immediate._onImmediate (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:211164)",
+        "Kernel._Kernel_create (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:61224)",
+        "Kernel.create (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:51955)",
+        "KernelHost.processRequest (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:212065)",
+        "KernelHost.run (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:211120)",
+        "Immediate._onImmediate (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:211164)",
         "...node internals..."
       ]
     }
@@ -269,11 +269,11 @@
     {
       "type": "aws:cdk:creationStack",
       "data": [
-        "Kernel._Kernel_create (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:61224)",
-        "Kernel.create (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:51955)",
-        "KernelHost.processRequest (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:212065)",
-        "KernelHost.run (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:211120)",
-        "Immediate._onImmediate (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:211164)",
+        "Kernel._Kernel_create (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:61224)",
+        "Kernel.create (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:51955)",
+        "KernelHost.processRequest (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:212065)",
+        "KernelHost.run (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:211120)",
+        "Immediate._onImmediate (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:211164)",
         "...node internals..."
       ]
     }
@@ -286,11 +286,11 @@
     {
       "type": "aws:cdk:creationStack",
       "data": [
-        "Kernel._Kernel_create (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:61224)",
-        "Kernel.create (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:51955)",
-        "KernelHost.processRequest (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:212065)",
-        "KernelHost.run (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:211120)",
-        "Immediate._onImmediate (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:211164)",
+        "Kernel._Kernel_create (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:61224)",
+        "Kernel.create (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:51955)",
+        "KernelHost.processRequest (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:212065)",
+        "KernelHost.run (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:211120)",
+        "Immediate._onImmediate (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:211164)",
         "...node internals..."
       ]
     }
@@ -303,11 +303,11 @@
     {
       "type": "aws:cdk:creationStack",
       "data": [
-        "Kernel._Kernel_create (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:61224)",
-        "Kernel.create (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:51955)",
-        "KernelHost.processRequest (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:212065)",
-        "KernelHost.run (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:211120)",
-        "Immediate._onImmediate (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:211164)",
+        "Kernel._Kernel_create (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:61224)",
+        "Kernel.create (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:51955)",
+        "KernelHost.processRequest (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:212065)",
+        "KernelHost.run (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:211120)",
+        "Immediate._onImmediate (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:211164)",
         "...node internals..."
       ]
     }
@@ -347,11 +347,11 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...new Vpc2 in aws-cdk-lib...",
-        "Kernel._Kernel_create (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:61224)",
-        "Kernel.create (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:51955)",
-        "KernelHost.processRequest (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:212065)",
-        "KernelHost.run (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:211120)",
-        "Immediate._onImmediate (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:211164)",
+        "Kernel._Kernel_create (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:61224)",
+        "Kernel.create (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:51955)",
+        "KernelHost.processRequest (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:212065)",
+        "KernelHost.run (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:211120)",
+        "Immediate._onImmediate (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:211164)",
         "...node internals..."
       ]
     }
@@ -533,11 +533,11 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...new Vpc2 in aws-cdk-lib...",
-        "Kernel._Kernel_create (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:61224)",
-        "Kernel.create (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:51955)",
-        "KernelHost.processRequest (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:212065)",
-        "KernelHost.run (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:211120)",
-        "Immediate._onImmediate (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:211164)",
+        "Kernel._Kernel_create (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:61224)",
+        "Kernel.create (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:51955)",
+        "KernelHost.processRequest (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:212065)",
+        "KernelHost.run (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:211120)",
+        "Immediate._onImmediate (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:211164)",
         "...node internals..."
       ]
     }
@@ -551,11 +551,11 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...new Vpc2 in aws-cdk-lib...",
-        "Kernel._Kernel_create (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:61224)",
-        "Kernel.create (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:51955)",
-        "KernelHost.processRequest (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:212065)",
-        "KernelHost.run (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:211120)",
-        "Immediate._onImmediate (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:211164)",
+        "Kernel._Kernel_create (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:61224)",
+        "Kernel.create (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:51955)",
+        "KernelHost.processRequest (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:212065)",
+        "KernelHost.run (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:211120)",
+        "Immediate._onImmediate (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:211164)",
         "...node internals..."
       ]
     }
@@ -575,10 +575,10 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...new Vpc2 in aws-cdk-lib...",
-        "Kernel._Kernel_create (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:61224)",
-        "Kernel.create (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:51955)",
-        "KernelHost.processRequest (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:212065)",
-        "KernelHost.run (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:211120)"
+        "Kernel._Kernel_create (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:61224)",
+        "Kernel.create (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:51955)",
+        "KernelHost.processRequest (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:212065)",
+        "KernelHost.run (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:211120)"
       ]
     }
   ],
@@ -591,10 +591,10 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...new Vpc2 in aws-cdk-lib...",
-        "Kernel._Kernel_create (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:61224)",
-        "Kernel.create (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:51955)",
-        "KernelHost.processRequest (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:212065)",
-        "KernelHost.run (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:211120)"
+        "Kernel._Kernel_create (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:61224)",
+        "Kernel.create (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:51955)",
+        "KernelHost.processRequest (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:212065)",
+        "KernelHost.run (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:211120)"
       ]
     }
   ],
@@ -607,11 +607,11 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...new SecurityGroup2 in aws-cdk-lib...",
-        "Kernel._Kernel_create (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:61224)",
-        "Kernel.create (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:51955)",
-        "KernelHost.processRequest (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:212065)",
-        "KernelHost.run (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:211120)",
-        "Immediate._onImmediate (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:211164)",
+        "Kernel._Kernel_create (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:61224)",
+        "Kernel.create (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:51955)",
+        "KernelHost.processRequest (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:212065)",
+        "KernelHost.run (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:211120)",
+        "Immediate._onImmediate (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:211164)",
         "...node internals..."
       ]
     }
@@ -625,11 +625,11 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...new SecurityGroup2 in aws-cdk-lib...",
-        "Kernel._Kernel_create (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:61224)",
-        "Kernel.create (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:51955)",
-        "KernelHost.processRequest (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:212065)",
-        "KernelHost.run (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:211120)",
-        "Immediate._onImmediate (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:211164)",
+        "Kernel._Kernel_create (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:61224)",
+        "Kernel.create (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:51955)",
+        "KernelHost.processRequest (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:212065)",
+        "KernelHost.run (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:211120)",
+        "Immediate._onImmediate (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:211164)",
         "...node internals..."
       ]
     }
@@ -643,12 +643,12 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...WrappedClass.<anonymous> in aws-cdk-lib...",
-        "/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:542 (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:5429)",
-        "Kernel._Kernel_ensureSync (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:69840)",
-        "Kernel.invoke (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:54245)",
-        "KernelHost.processRequest (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:212065)",
-        "KernelHost.run (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:211120)",
-        "Immediate._onImmediate (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:211164)",
+        "/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:542 (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:5429)",
+        "Kernel._Kernel_ensureSync (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:69840)",
+        "Kernel.invoke (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:54245)",
+        "KernelHost.processRequest (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:212065)",
+        "KernelHost.run (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:211120)",
+        "Immediate._onImmediate (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:211164)",
         "...node internals..."
       ]
     }
@@ -662,11 +662,11 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...new SecurityGroup2 in aws-cdk-lib...",
-        "Kernel._Kernel_create (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:61224)",
-        "Kernel.create (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:51955)",
-        "KernelHost.processRequest (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:212065)",
-        "KernelHost.run (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:211120)",
-        "Immediate._onImmediate (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:211164)",
+        "Kernel._Kernel_create (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:61224)",
+        "Kernel.create (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:51955)",
+        "KernelHost.processRequest (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:212065)",
+        "KernelHost.run (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:211120)",
+        "Immediate._onImmediate (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:211164)",
         "...node internals..."
       ]
     }
@@ -680,11 +680,11 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...new SecurityGroup2 in aws-cdk-lib...",
-        "Kernel._Kernel_create (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:61224)",
-        "Kernel.create (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:51955)",
-        "KernelHost.processRequest (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:212065)",
-        "KernelHost.run (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:211120)",
-        "Immediate._onImmediate (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:211164)",
+        "Kernel._Kernel_create (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:61224)",
+        "Kernel.create (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:51955)",
+        "KernelHost.processRequest (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:212065)",
+        "KernelHost.run (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:211120)",
+        "Immediate._onImmediate (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:211164)",
         "...node internals..."
       ]
     }
@@ -698,12 +698,12 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...WrappedClass.<anonymous> in aws-cdk-lib...",
-        "/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:542 (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:5429)",
-        "Kernel._Kernel_ensureSync (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:69840)",
-        "Kernel.invoke (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:54245)",
-        "KernelHost.processRequest (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:212065)",
-        "KernelHost.run (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:211120)",
-        "Immediate._onImmediate (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:211164)",
+        "/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:542 (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:5429)",
+        "Kernel._Kernel_ensureSync (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:69840)",
+        "Kernel.invoke (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:54245)",
+        "KernelHost.processRequest (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:212065)",
+        "KernelHost.run (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:211120)",
+        "Immediate._onImmediate (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:211164)",
         "...node internals..."
       ]
     }
@@ -717,12 +717,12 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...WrappedClass.<anonymous> in aws-cdk-lib...",
-        "/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:542 (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:5429)",
-        "Kernel._Kernel_ensureSync (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:69840)",
-        "Kernel.invoke (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:54245)",
-        "KernelHost.processRequest (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:212065)",
-        "KernelHost.run (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:211120)",
-        "Immediate._onImmediate (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:211164)",
+        "/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:542 (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:5429)",
+        "Kernel._Kernel_ensureSync (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:69840)",
+        "Kernel.invoke (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:54245)",
+        "KernelHost.processRequest (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:212065)",
+        "KernelHost.run (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:211120)",
+        "Immediate._onImmediate (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:211164)",
         "...node internals..."
       ]
     }
@@ -736,11 +736,11 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...new SecurityGroup2 in aws-cdk-lib...",
-        "Kernel._Kernel_create (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:61224)",
-        "Kernel.create (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:51955)",
-        "KernelHost.processRequest (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:212065)",
-        "KernelHost.run (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:211120)",
-        "Immediate._onImmediate (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:211164)",
+        "Kernel._Kernel_create (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:61224)",
+        "Kernel.create (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:51955)",
+        "KernelHost.processRequest (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:212065)",
+        "KernelHost.run (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:211120)",
+        "Immediate._onImmediate (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:211164)",
         "...node internals..."
       ]
     }
@@ -754,12 +754,12 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...WrappedClass.<anonymous> in aws-cdk-lib...",
-        "/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:542 (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:5429)",
-        "Kernel._Kernel_ensureSync (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:69840)",
-        "Kernel.invoke (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:54245)",
-        "KernelHost.processRequest (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:212065)",
-        "KernelHost.run (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:211120)",
-        "Immediate._onImmediate (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:211164)",
+        "/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:542 (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:5429)",
+        "Kernel._Kernel_ensureSync (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:69840)",
+        "Kernel.invoke (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:54245)",
+        "KernelHost.processRequest (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:212065)",
+        "KernelHost.run (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:211120)",
+        "Immediate._onImmediate (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:211164)",
         "...node internals..."
       ]
     }
@@ -773,12 +773,12 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...WrappedClass.<anonymous> in aws-cdk-lib...",
-        "/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:542 (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:5429)",
-        "Kernel._Kernel_ensureSync (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:69840)",
-        "Kernel.invoke (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:54245)",
-        "KernelHost.processRequest (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:212065)",
-        "KernelHost.run (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:211120)",
-        "Immediate._onImmediate (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:211164)",
+        "/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:542 (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:5429)",
+        "Kernel._Kernel_ensureSync (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:69840)",
+        "Kernel.invoke (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:54245)",
+        "KernelHost.processRequest (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:212065)",
+        "KernelHost.run (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:211120)",
+        "Immediate._onImmediate (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:211164)",
         "...node internals..."
       ]
     }
@@ -792,11 +792,11 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...new Secret2 in aws-cdk-lib...",
-        "Kernel._Kernel_create (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:61224)",
-        "Kernel.create (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:51955)",
-        "KernelHost.processRequest (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:212065)",
-        "KernelHost.run (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:211120)",
-        "Immediate._onImmediate (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:211164)",
+        "Kernel._Kernel_create (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:61224)",
+        "Kernel.create (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:51955)",
+        "KernelHost.processRequest (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:212065)",
+        "KernelHost.run (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:211120)",
+        "Immediate._onImmediate (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:211164)",
         "...node internals..."
       ]
     }
@@ -810,8 +810,8 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...App.synth in aws-cdk-lib...",
-        "/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:542 (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:5429)",
-        "Kernel._Kernel_ensureSync (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:69840)"
+        "/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:542 (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:5429)",
+        "Kernel._Kernel_ensureSync (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:69840)"
       ]
     }
   ],
@@ -824,8 +824,8 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...App.synth in aws-cdk-lib...",
-        "/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:542 (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:5429)",
-        "Kernel._Kernel_ensureSync (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:69840)"
+        "/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:542 (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:5429)",
+        "Kernel._Kernel_ensureSync (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:69840)"
       ]
     }
   ],
@@ -838,8 +838,8 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...App.synth in aws-cdk-lib...",
-        "/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:542 (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:5429)",
-        "Kernel._Kernel_ensureSync (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:69840)"
+        "/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:542 (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:5429)",
+        "Kernel._Kernel_ensureSync (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:69840)"
       ]
     }
   ],
@@ -852,8 +852,8 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...App.synth in aws-cdk-lib...",
-        "/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:542 (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:5429)",
-        "Kernel._Kernel_ensureSync (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:69840)"
+        "/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:542 (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:5429)",
+        "Kernel._Kernel_ensureSync (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:69840)"
       ]
     }
   ],
@@ -866,8 +866,8 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...App.synth in aws-cdk-lib...",
-        "/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:542 (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:5429)",
-        "Kernel._Kernel_ensureSync (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:69840)"
+        "/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:542 (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:5429)",
+        "Kernel._Kernel_ensureSync (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:69840)"
       ]
     }
   ],
@@ -880,8 +880,8 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...App.synth in aws-cdk-lib...",
-        "/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:542 (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:5429)",
-        "Kernel._Kernel_ensureSync (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:69840)"
+        "/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:542 (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:5429)",
+        "Kernel._Kernel_ensureSync (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:69840)"
       ]
     }
   ],
@@ -894,8 +894,8 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...App.synth in aws-cdk-lib...",
-        "/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:542 (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:5429)",
-        "Kernel._Kernel_ensureSync (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:69840)"
+        "/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:542 (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:5429)",
+        "Kernel._Kernel_ensureSync (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:69840)"
       ]
     }
   ],
@@ -908,8 +908,8 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...App.synth in aws-cdk-lib...",
-        "/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:542 (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:5429)",
-        "Kernel._Kernel_ensureSync (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:69840)"
+        "/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:542 (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:5429)",
+        "Kernel._Kernel_ensureSync (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:69840)"
       ]
     }
   ],
@@ -921,7 +921,7 @@
     {
       "type": "aws:cdk:creationStack",
       "data": [
-        ".../tmp/claude-501/jsii-kernel-PC2szO/node_modules/aws-cdk-lib/aws-ec2/lib/vpc.js:1:268 in aws-cdk-lib...",
+        ".../var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/jsii-kernel-KyWB4Z/node_modules/aws-cdk-lib/aws-ec2/lib/vpc.js:1:268 in aws-cdk-lib...",
         "Array.forEach (:)",
         "...aws-cdk-lib..."
       ]
@@ -935,7 +935,7 @@
     {
       "type": "aws:cdk:creationStack",
       "data": [
-        ".../tmp/claude-501/jsii-kernel-PC2szO/node_modules/aws-cdk-lib/aws-ec2/lib/vpc.js:1:268 in aws-cdk-lib...",
+        ".../var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/jsii-kernel-KyWB4Z/node_modules/aws-cdk-lib/aws-ec2/lib/vpc.js:1:268 in aws-cdk-lib...",
         "Array.forEach (:)",
         "...aws-cdk-lib..."
       ]
@@ -949,7 +949,7 @@
     {
       "type": "aws:cdk:creationStack",
       "data": [
-        ".../tmp/claude-501/jsii-kernel-PC2szO/node_modules/aws-cdk-lib/aws-ec2/lib/vpc.js:1:268 in aws-cdk-lib...",
+        ".../var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/jsii-kernel-KyWB4Z/node_modules/aws-cdk-lib/aws-ec2/lib/vpc.js:1:268 in aws-cdk-lib...",
         "Array.forEach (:)",
         "...aws-cdk-lib..."
       ]
@@ -963,13 +963,13 @@
     {
       "type": "aws:cdk:creationStack",
       "data": [
-        ".../tmp/claude-501/jsii-kernel-PC2szO/node_modules/aws-cdk-lib/aws-ec2/lib/vpc.js:1:208 in aws-cdk-lib...",
+        ".../var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/jsii-kernel-KyWB4Z/node_modules/aws-cdk-lib/aws-ec2/lib/vpc.js:1:208 in aws-cdk-lib...",
         "Array.forEach (:)",
         "...new Vpc2 in aws-cdk-lib...",
-        "Kernel._Kernel_create (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:61224)",
-        "Kernel.create (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:51955)",
-        "KernelHost.processRequest (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:212065)",
-        "KernelHost.run (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:211120)"
+        "Kernel._Kernel_create (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:61224)",
+        "Kernel.create (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:51955)",
+        "KernelHost.processRequest (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:212065)",
+        "KernelHost.run (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:211120)"
       ]
     }
   ],
@@ -982,10 +982,10 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...new Vpc2 in aws-cdk-lib...",
-        "Kernel._Kernel_create (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:61224)",
-        "Kernel.create (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:51955)",
-        "KernelHost.processRequest (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:212065)",
-        "KernelHost.run (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:211120)"
+        "Kernel._Kernel_create (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:61224)",
+        "Kernel.create (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:51955)",
+        "KernelHost.processRequest (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:212065)",
+        "KernelHost.run (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:211120)"
       ]
     }
   ],
@@ -998,10 +998,10 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...new Vpc2 in aws-cdk-lib...",
-        "Kernel._Kernel_create (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:61224)",
-        "Kernel.create (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:51955)",
-        "KernelHost.processRequest (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:212065)",
-        "KernelHost.run (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:211120)"
+        "Kernel._Kernel_create (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:61224)",
+        "Kernel.create (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:51955)",
+        "KernelHost.processRequest (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:212065)",
+        "KernelHost.run (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:211120)"
       ]
     }
   ],
@@ -1013,7 +1013,7 @@
     {
       "type": "aws:cdk:creationStack",
       "data": [
-        ".../tmp/claude-501/jsii-kernel-PC2szO/node_modules/aws-cdk-lib/aws-ec2/lib/vpc.js:1:268 in aws-cdk-lib...",
+        ".../var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/jsii-kernel-KyWB4Z/node_modules/aws-cdk-lib/aws-ec2/lib/vpc.js:1:268 in aws-cdk-lib...",
         "Array.forEach (:)",
         "...aws-cdk-lib..."
       ]
@@ -1027,7 +1027,7 @@
     {
       "type": "aws:cdk:creationStack",
       "data": [
-        ".../tmp/claude-501/jsii-kernel-PC2szO/node_modules/aws-cdk-lib/aws-ec2/lib/vpc.js:1:268 in aws-cdk-lib...",
+        ".../var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/jsii-kernel-KyWB4Z/node_modules/aws-cdk-lib/aws-ec2/lib/vpc.js:1:268 in aws-cdk-lib...",
         "Array.forEach (:)",
         "...aws-cdk-lib..."
       ]
@@ -1041,7 +1041,7 @@
     {
       "type": "aws:cdk:creationStack",
       "data": [
-        ".../tmp/claude-501/jsii-kernel-PC2szO/node_modules/aws-cdk-lib/aws-ec2/lib/vpc.js:1:268 in aws-cdk-lib...",
+        ".../var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/jsii-kernel-KyWB4Z/node_modules/aws-cdk-lib/aws-ec2/lib/vpc.js:1:268 in aws-cdk-lib...",
         "Array.forEach (:)",
         "...aws-cdk-lib..."
       ]
@@ -1055,13 +1055,13 @@
     {
       "type": "aws:cdk:creationStack",
       "data": [
-        ".../tmp/claude-501/jsii-kernel-PC2szO/node_modules/aws-cdk-lib/aws-ec2/lib/vpc.js:1:208 in aws-cdk-lib...",
+        ".../var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/jsii-kernel-KyWB4Z/node_modules/aws-cdk-lib/aws-ec2/lib/vpc.js:1:208 in aws-cdk-lib...",
         "Array.forEach (:)",
         "...new Vpc2 in aws-cdk-lib...",
-        "Kernel._Kernel_create (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:61224)",
-        "Kernel.create (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:51955)",
-        "KernelHost.processRequest (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:212065)",
-        "KernelHost.run (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:211120)"
+        "Kernel._Kernel_create (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:61224)",
+        "Kernel.create (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:51955)",
+        "KernelHost.processRequest (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:212065)",
+        "KernelHost.run (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:211120)"
       ]
     }
   ],
@@ -1073,7 +1073,7 @@
     {
       "type": "aws:cdk:creationStack",
       "data": [
-        ".../tmp/claude-501/jsii-kernel-PC2szO/node_modules/aws-cdk-lib/aws-ec2/lib/vpc.js:1:270 in aws-cdk-lib...",
+        ".../var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/jsii-kernel-KyWB4Z/node_modules/aws-cdk-lib/aws-ec2/lib/vpc.js:1:270 in aws-cdk-lib...",
         "Array.forEach (:)",
         "...aws-cdk-lib..."
       ]
@@ -1087,7 +1087,7 @@
     {
       "type": "aws:cdk:creationStack",
       "data": [
-        ".../tmp/claude-501/jsii-kernel-PC2szO/node_modules/aws-cdk-lib/aws-ec2/lib/vpc.js:1:270 in aws-cdk-lib...",
+        ".../var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/jsii-kernel-KyWB4Z/node_modules/aws-cdk-lib/aws-ec2/lib/vpc.js:1:270 in aws-cdk-lib...",
         "Array.forEach (:)",
         "...aws-cdk-lib..."
       ]
@@ -1101,7 +1101,7 @@
     {
       "type": "aws:cdk:creationStack",
       "data": [
-        ".../tmp/claude-501/jsii-kernel-PC2szO/node_modules/aws-cdk-lib/aws-ec2/lib/vpc.js:1:270 in aws-cdk-lib...",
+        ".../var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/jsii-kernel-KyWB4Z/node_modules/aws-cdk-lib/aws-ec2/lib/vpc.js:1:270 in aws-cdk-lib...",
         "Array.forEach (:)",
         "...aws-cdk-lib..."
       ]
@@ -1116,9 +1116,9 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...new Vpc2 in aws-cdk-lib...",
-        "Kernel._Kernel_create (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:61224)",
-        "Kernel.create (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:51955)",
-        "KernelHost.processRequest (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:212065)"
+        "Kernel._Kernel_create (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:61224)",
+        "Kernel.create (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:51955)",
+        "KernelHost.processRequest (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:212065)"
       ]
     }
   ],
@@ -1130,7 +1130,7 @@
     {
       "type": "aws:cdk:creationStack",
       "data": [
-        ".../tmp/claude-501/jsii-kernel-PC2szO/node_modules/aws-cdk-lib/aws-ec2/lib/vpc.js:1:270 in aws-cdk-lib...",
+        ".../var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/jsii-kernel-KyWB4Z/node_modules/aws-cdk-lib/aws-ec2/lib/vpc.js:1:270 in aws-cdk-lib...",
         "Array.forEach (:)",
         "...aws-cdk-lib..."
       ]
@@ -1144,7 +1144,7 @@
     {
       "type": "aws:cdk:creationStack",
       "data": [
-        ".../tmp/claude-501/jsii-kernel-PC2szO/node_modules/aws-cdk-lib/aws-ec2/lib/vpc.js:1:270 in aws-cdk-lib...",
+        ".../var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/jsii-kernel-KyWB4Z/node_modules/aws-cdk-lib/aws-ec2/lib/vpc.js:1:270 in aws-cdk-lib...",
         "Array.forEach (:)",
         "...aws-cdk-lib..."
       ]
@@ -1158,7 +1158,7 @@
     {
       "type": "aws:cdk:creationStack",
       "data": [
-        ".../tmp/claude-501/jsii-kernel-PC2szO/node_modules/aws-cdk-lib/aws-ec2/lib/vpc.js:1:270 in aws-cdk-lib...",
+        ".../var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/jsii-kernel-KyWB4Z/node_modules/aws-cdk-lib/aws-ec2/lib/vpc.js:1:270 in aws-cdk-lib...",
         "Array.forEach (:)",
         "...aws-cdk-lib..."
       ]
@@ -1173,9 +1173,9 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...new Vpc2 in aws-cdk-lib...",
-        "Kernel._Kernel_create (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:61224)",
-        "Kernel.create (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:51955)",
-        "KernelHost.processRequest (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:212065)"
+        "Kernel._Kernel_create (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:61224)",
+        "Kernel.create (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:51955)",
+        "KernelHost.processRequest (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:212065)"
       ]
     }
   ],
@@ -1187,7 +1187,7 @@
     {
       "type": "aws:cdk:creationStack",
       "data": [
-        ".../tmp/claude-501/jsii-kernel-PC2szO/node_modules/aws-cdk-lib/aws-ec2/lib/vpc.js:1:272 in aws-cdk-lib...",
+        ".../var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/jsii-kernel-KyWB4Z/node_modules/aws-cdk-lib/aws-ec2/lib/vpc.js:1:272 in aws-cdk-lib...",
         "Array.forEach (:)",
         "...aws-cdk-lib..."
       ]
@@ -1201,7 +1201,7 @@
     {
       "type": "aws:cdk:creationStack",
       "data": [
-        ".../tmp/claude-501/jsii-kernel-PC2szO/node_modules/aws-cdk-lib/aws-ec2/lib/vpc.js:1:272 in aws-cdk-lib...",
+        ".../var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/jsii-kernel-KyWB4Z/node_modules/aws-cdk-lib/aws-ec2/lib/vpc.js:1:272 in aws-cdk-lib...",
         "Array.forEach (:)",
         "...aws-cdk-lib..."
       ]
@@ -1215,7 +1215,7 @@
     {
       "type": "aws:cdk:creationStack",
       "data": [
-        ".../tmp/claude-501/jsii-kernel-PC2szO/node_modules/aws-cdk-lib/aws-ec2/lib/vpc.js:1:272 in aws-cdk-lib...",
+        ".../var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/jsii-kernel-KyWB4Z/node_modules/aws-cdk-lib/aws-ec2/lib/vpc.js:1:272 in aws-cdk-lib...",
         "Array.forEach (:)",
         "...aws-cdk-lib..."
       ]
@@ -1229,7 +1229,7 @@
     {
       "type": "aws:cdk:creationStack",
       "data": [
-        ".../tmp/claude-501/jsii-kernel-PC2szO/node_modules/aws-cdk-lib/aws-ec2/lib/vpc.js:1:272 in aws-cdk-lib...",
+        ".../var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/jsii-kernel-KyWB4Z/node_modules/aws-cdk-lib/aws-ec2/lib/vpc.js:1:272 in aws-cdk-lib...",
         "Array.forEach (:)",
         "...aws-cdk-lib..."
       ]
@@ -1243,7 +1243,7 @@
     {
       "type": "aws:cdk:creationStack",
       "data": [
-        ".../tmp/claude-501/jsii-kernel-PC2szO/node_modules/aws-cdk-lib/aws-ec2/lib/vpc.js:1:272 in aws-cdk-lib...",
+        ".../var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/jsii-kernel-KyWB4Z/node_modules/aws-cdk-lib/aws-ec2/lib/vpc.js:1:272 in aws-cdk-lib...",
         "Array.forEach (:)",
         "...aws-cdk-lib..."
       ]
@@ -1257,7 +1257,7 @@
     {
       "type": "aws:cdk:creationStack",
       "data": [
-        ".../tmp/claude-501/jsii-kernel-PC2szO/node_modules/aws-cdk-lib/aws-ec2/lib/vpc.js:1:272 in aws-cdk-lib...",
+        ".../var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/jsii-kernel-KyWB4Z/node_modules/aws-cdk-lib/aws-ec2/lib/vpc.js:1:272 in aws-cdk-lib...",
         "Array.forEach (:)",
         "...aws-cdk-lib..."
       ]
@@ -1272,10 +1272,10 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...new Vpc2 in aws-cdk-lib...",
-        "Kernel._Kernel_create (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:61224)",
-        "Kernel.create (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:51955)",
-        "KernelHost.processRequest (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:212065)",
-        "KernelHost.run (/private/tmp/claude-501/tmpsikquqbq/lib/program.js:1:211120)"
+        "Kernel._Kernel_create (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:61224)",
+        "Kernel.create (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:51955)",
+        "KernelHost.processRequest (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:212065)",
+        "KernelHost.run (/private/var/folders/pl/l48j41_121vg1hb941hgvvj00000gn/T/tmpz743sx5r/lib/program.js:1:211120)"
       ]
     }
   ]

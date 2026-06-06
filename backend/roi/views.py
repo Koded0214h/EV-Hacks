@@ -63,9 +63,17 @@ def roi_calculate(request):
         return Response(STUB_ROI_RESULT)
 
     params = {k: request.data[k] for k in REQUIRED_FIELDS}
+    competitor_count = int(request.data.get("competitor_count", 0))
+    demand_score = request.data.get("demand_score")
+    if demand_score is None:
+        from zones.scoring import score_location
+        demand_score = score_location(
+            float(params["lat"]), float(params["lng"]),
+            competitor_count=competitor_count,
+        )
     params.update({
-        "demand_score": request.data.get("demand_score", 50),
-        "competitor_count": request.data.get("competitor_count", 0),
+        "demand_score": float(demand_score),
+        "competitor_count": competitor_count,
         "zone_name": request.data.get("zone_id", ""),
     })
 

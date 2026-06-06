@@ -5,6 +5,7 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from .stubs import STUB_ZONES, STUB_STATIONS
+from .scoring import score_location, score_to_tier
 
 USE_STUBS = True  # flip to False in Phase 4 once DB is seeded
 
@@ -220,3 +221,50 @@ def planted_list(request):
         "planted": True,
     } for p in qs]
     return Response({"count": len(stations), "stations": stations})
+
+
+@extend_schema(
+    summary="Score an arbitrary location",
+    description="Returns a demand score (0-100) and tier for any lat/lng. Mirrors the SageMaker contract.",
+    parameters=[
+        OpenApiParameter("lat", OpenApiTypes.FLOAT, required=True),
+        OpenApiParameter("lng", OpenApiTypes.FLOAT, required=True),
+        OpenApiParameter("hour_of_day", OpenApiTypes.INT, description="0-23, defaults to current UTC hour"),
+        OpenApiParameter("day_of_week", OpenApiTypes.INT, description="0=Mon..6=Sun, defaults to today"),
+        OpenApiParameter("competitor_count", OpenApiTypes.INT, description="Nearby station count"),
+    ],
+    responses={200: inline_serializer("LocationScore", fields={
+        "lat": serializers.FloatField(),
+        "lng": serializers.FloatField(),
+        "demand_score": serializers.FloatField(),
+        "tier": serializers.CharField(),
+        "source": serializers.CharField(),
+    }), 400: OpenApiTypes.OBJECT},
+)
+@api_view(["GET"])
+def score_arbitrary_location(request):
+    try:
+        lat = float(request.query_params["lat"])
+        lng = float(request.query_params["lng"])
+    except (KeyError, ValueError, TypeError):
+        return Response(
+            {"error": True, "message": "lat and lng required (float)", "code": "ERR_VALIDATION"},
+            status=400,
+        )
+
+    def _int_or_none(key):
+        v = request.query_params.get(key)
+        return int(v) if v not in (None, "") else None
+
+    hod = _int_or_none("hour_of_day")
+    dow = _int_or_none("day_of_week")
+    comp = _int_or_none("competitor_count") or 0
+
+    score = score_location(lat, lng, hour_of_day=hod, day_of_week=dow, competitor_count=comp)
+    return Response({
+        "lat": lat,
+        "lng": lng,
+        "demand_score": score,
+        "tier": score_to_tier(score),
+        "source": "deterministic_v1",
+    })

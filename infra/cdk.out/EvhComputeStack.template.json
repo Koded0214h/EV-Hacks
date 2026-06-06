@@ -210,14 +210,7 @@
   "AppHostFF64211A": {
    "Type": "AWS::EC2::Instance",
    "Properties": {
-    "AvailabilityZone": {
-     "Fn::Select": [
-      0,
-      {
-       "Fn::GetAZs": ""
-      }
-     ]
-    },
+    "AvailabilityZone": "eu-west-1a",
     "BlockDeviceMappings": [
      {
       "DeviceName": "/dev/xvda",
@@ -296,11 +289,7 @@
         {
          "Fn::ImportValue": "EvhNetworkStack:ExportsOutputRefDjangoSecretKey0A000B3C006EF65B"
         },
-        "\nexport AWS_REGION=eu-north-1\nexport ECR_REGISTRY=",
-        {
-         "Ref": "AWS::AccountId"
-        },
-        ".dkr.ecr.eu-north-1.amazonaws.com\nexport COGNITO_USER_POOL_ID=",
+        "\nexport AWS_REGION=eu-west-1\nexport ECR_REGISTRY=487054650567.dkr.ecr.eu-west-1.amazonaws.com\nexport COGNITO_USER_POOL_ID=",
         {
          "Fn::ImportValue": "EvhAuthStack:ExportsOutputRefEvhUserPool3528D28677FB2358"
         },
@@ -312,7 +301,7 @@
         {
          "Fn::ImportValue": "EvhAuthStack:ExportsOutputRefEvhUserPoolApiClient1C31AF0520359C48"
         },
-        "\nexport COGNITO_TOKEN_ISSUER=https://cognito-idp.eu-north-1.amazonaws.com/",
+        "\nexport COGNITO_TOKEN_ISSUER=https://cognito-idp.eu-west-1.amazonaws.com/",
         {
          "Fn::ImportValue": "EvhAuthStack:ExportsOutputRefEvhUserPool3528D28677FB2358"
         },

@@ -8,6 +8,7 @@ from infra.stacks.auth_stack import EvhAuthStack
 from infra.stacks.ingest_stack import EvhIngestStack
 from infra.stacks.compute_stack import EvhComputeStack
 from infra.stacks.cicd_stack import EvhCicdStack
+from infra.stacks.ml_stack import EvhMlStack
 
 
 app = cdk.App()
@@ -26,6 +27,9 @@ compute = EvhComputeStack(
     network=network, data=data, auth=auth, ingest=ingest, env=env,
 )
 EvhCicdStack(app, "EvhCicdStack", compute=compute, env=env)
+# EvhMlStack disabled — demand scoring runs in Django (zones/scoring.py).
+# Re-enable when a sklearn 1.2.1 + numpy<2 model.tar.gz is ready.
+# EvhMlStack(app, "EvhMlStack", data_bucket_name=data.data_bucket.bucket_name, env=env)
 
 cdk.Tags.of(app).add("Project", "EVHacks")
 cdk.Tags.of(app).add("Team", "EVHacks")
