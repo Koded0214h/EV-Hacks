@@ -1,6 +1,6 @@
 from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
-from rest_framework.authtoken.models import Token
+from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.response import Response
@@ -76,8 +76,8 @@ def register(request):
         vehicle=request.data.get("vehicle", ""),
     )
 
-    token, _ = Token.objects.get_or_create(user=user)
-    return Response({"token": token.key, "user": _user_data(user)}, status=201)
+    refresh = RefreshToken.for_user(user)
+    return Response({"access": str(refresh.access_token), "user": _user_data(user)}, status=201)
 
 
 @extend_schema(
@@ -107,18 +107,14 @@ def login(request):
             status=401,
         )
 
-    token, _ = Token.objects.get_or_create(user=user)
-    return Response({"token": token.key, "user": _user_data(user)})
+    refresh = RefreshToken.for_user(user)
+    return Response({"access": str(refresh.access_token), "user": _user_data(user)})
 
 
 @extend_schema(summary="Log out", responses={200: OpenApiTypes.OBJECT})
 @api_view(["POST"])
-@permission_classes([IsAuthenticated])
+@permission_classes([AllowAny])
 def logout(request):
-    try:
-        request.user.auth_token.delete()
-    except Exception:
-        pass
     return Response({"success": True})
 
 

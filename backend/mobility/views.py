@@ -4,7 +4,18 @@ from rest_framework import serializers
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
-USE_STUBS = True
+USE_STUBS = False
+
+
+def _find_zone_id(lat, lng):
+    from zones.stubs import STUB_ZONES
+    for zone in STUB_ZONES:
+        coords = zone["geometry"]["coordinates"][0]
+        lngs = [c[0] for c in coords]
+        lats = [c[1] for c in coords]
+        if min(lngs) <= lng <= max(lngs) and min(lats) <= lat <= max(lats):
+            return zone["zone_id"]
+    return None
 
 STUB_HEATMAP = {
     "type": "FeatureCollection",
@@ -45,24 +56,15 @@ def mobility_ping(request):
         return Response({"success": True, "zone_id": "lagos_lekki_1"})
 
     from .models import MobilityPing
-    from django.contrib.gis.geos import Point
-    from django.db import connection
 
     lat = float(request.data["lat"])
     lng = float(request.data["lng"])
-    point = Point(lng, lat, srid=4326)
-
-    with connection.cursor() as cursor:
-        cursor.execute(
-            "SELECT zone_id FROM zones WHERE ST_Contains(geometry, ST_SetSRID(ST_MakePoint(%s, %s), 4326)) LIMIT 1",
-            [lng, lat]
-        )
-        row = cursor.fetchone()
-    zone_id = row[0] if row else None
+    zone_id = _find_zone_id(lat, lng)
 
     MobilityPing.objects.create(
         session_id=request.data["session_id"],
-        location=point,
+        location_lat=lat,
+        location_lng=lng,
         speed_kmh=request.data.get("speed_kmh"),
         recorded_at=request.data["recorded_at"],
         zone_id=zone_id,
@@ -98,7 +100,7 @@ def mobility_heatmap(request):
     features = [
         {
             "type": "Feature",
-            "geometry": {"type": "Point", "coordinates": [p.location.x, p.location.y]},
+            "geometry": {"type": "Point", "coordinates": [p.location_lng, p.location_lat]},
             "properties": {"weight": 1},
         }
         for p in pings

@@ -4,8 +4,11 @@ from drf_spectacular.types import OpenApiTypes
 from rest_framework import serializers
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from zones.stubs import STUB_ROI_RESULT
+from zones.stubs import STUB_ROI_RESULT, STUB_ZONES
+from ml.client import predict_demand_score
 from .calculator import calculate_roi, input_hash
+
+_STUB_ZONE_MAP = {z["zone_id"]: z for z in STUB_ZONES}
 
 USE_STUBS = False
 
@@ -63,18 +66,29 @@ def roi_calculate(request):
         return Response(STUB_ROI_RESULT)
 
     params = {k: request.data[k] for k in REQUIRED_FIELDS}
-    competitor_count = int(request.data.get("competitor_count", 0))
-    demand_score = request.data.get("demand_score")
-    if demand_score is None:
-        from zones.scoring import score_location
-        demand_score = score_location(
-            float(params["lat"]), float(params["lng"]),
-            competitor_count=competitor_count,
-        )
+
+    # Enrich from STUB_ZONES when a zone_id is supplied
+    zone_id = request.data.get("zone_id", "")
+    zone_data = _STUB_ZONE_MAP.get(zone_id, {})
+
+    demand_score = float(request.data.get("demand_score") or zone_data.get("demand_score") or 50)
+    competitor_count = int(request.data.get("competitor_count") or zone_data.get("station_count") or 0)
+
+    # Override with SageMaker prediction when available
+    ml_score = predict_demand_score(
+        lat=float(params["lat"]),
+        lng=float(params["lng"]),
+        poi_count=int(zone_data.get("poi_count", 0)),
+        station_count=competitor_count,
+        ev_traffic=float(zone_data.get("ev_traffic", 0.5)),
+    )
+    if ml_score is not None:
+        demand_score = ml_score
+
     params.update({
-        "demand_score": float(demand_score),
+        "demand_score": demand_score,
         "competitor_count": competitor_count,
-        "zone_name": request.data.get("zone_id", ""),
+        "zone_name": zone_data.get("name", zone_id),
     })
 
     cache_key = f"roi:{input_hash(params)}"
@@ -112,13 +126,21 @@ def roi_compare(request):
     opex = float(request.query_params.get("opex_monthly_ngn", 450000))
     segment = request.query_params.get("target_segment", "mixed")
 
+    from zones.stubs import STUB_ZONES
+    stub_zone_map = {z["zone_id"]: z for z in STUB_ZONES}
+
     comparisons = []
     for zone_id in zone_ids:
+        zd = stub_zone_map.get(zone_id, {})
         params = {
-            "lat": 0, "lng": 0, "station_type": station_type,
+            "lat": zd.get("centroid", {}).get("lat", 0),
+            "lng": zd.get("centroid", {}).get("lng", 0),
+            "station_type": station_type,
             "num_ports": num_ports, "capex_ngn": capex,
             "opex_monthly_ngn": opex, "target_segment": segment,
-            "demand_score": 50, "competitor_count": 0, "zone_name": zone_id,
+            "demand_score": zd.get("demand_score", 50),
+            "competitor_count": zd.get("station_count", 0),
+            "zone_name": zd.get("name", zone_id),
         }
         cache_key = f"roi:{input_hash(params)}"
         cached = cache.get(cache_key)
