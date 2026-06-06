@@ -1,9 +1,14 @@
-const BASE = 'http://localhost:8000/api/v1'
+const BASE = import.meta.env.VITE_API_BASE ?? 'http://localhost:8000/api/v1'
 const TOKEN_KEY = 'evhacks_token'
 const USER_KEY  = 'evhacks_user'
 
 // ── Token storage ──────────────────────────────────────────────
-export function getToken()    { return localStorage.getItem(TOKEN_KEY) }
+export function getToken() {
+  const t = localStorage.getItem(TOKEN_KEY)
+  // Discard old DRF tokens (40-char hex) — not valid JWTs
+  if (t && !t.includes('.')) { localStorage.removeItem(TOKEN_KEY); return null }
+  return t
+}
 export function setToken(t)   { localStorage.setItem(TOKEN_KEY, t) }
 export function clearAuth()   { localStorage.removeItem(TOKEN_KEY); localStorage.removeItem(USER_KEY) }
 export function getCachedUser() {
@@ -14,7 +19,7 @@ export function setCachedUser(u) { localStorage.setItem(USER_KEY, JSON.stringify
 // ── Base fetch ─────────────────────────────────────────────────
 function authHeaders() {
   const t = getToken()
-  return t ? { Authorization: `Token ${t}` } : {}
+  return t ? { Authorization: `Bearer ${t}` } : {}
 }
 
 async function get(path) {
@@ -55,11 +60,10 @@ async function _makeErr(res, label) {
 // ── API surface ────────────────────────────────────────────────
 export const api = {
   auth: {
-    register: (form)           => post('/auth/register/', form),
-    login:    (email, password) => post('/auth/login/',    { email, password }),
-    logout:   ()               => post('/auth/logout/',   {}),
-    me:       ()               => get('/auth/me/'),
-    updateProfile: (fields)    => patch('/auth/profile/',  fields),
+    login:    (email, password)                => post('/auth/login/',    { email, password }),
+    register: (email, password, name, extra={}) => post('/auth/register/', { email, password, name, ...extra }),
+    logout:   ()                               => post('/auth/logout/',   {}).catch(() => {}),
+    me:       ()                               => get('/auth/me/'),
   },
   getZones:    ()       => get('/zones/'),
   getStations: (params = {}) => {

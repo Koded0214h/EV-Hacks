@@ -5,7 +5,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = config("SECRET_KEY", default="dev-secret-key-change-in-prod")
 DEBUG = config("DEBUG", default=True, cast=bool)
-ALLOWED_HOSTS = config("ALLOWED_HOSTS", default="localhost,127.0.0.1", cast=Csv())
+ALLOWED_HOSTS = config("ALLOWED_HOSTS", default="localhost,127.0.0.1,34.251.241.87", cast=Csv())
 
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -15,7 +15,6 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "rest_framework",
-    "rest_framework.authtoken",
     "corsheaders",
     "drf_spectacular",
     "accounts",
@@ -57,12 +56,28 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "evhacks.wsgi.application"
 
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+_DATABASE_URL = config("DATABASE_URL", default="")
+if _DATABASE_URL:
+    from urllib.parse import urlparse as _urlparse
+    _u = _urlparse(_DATABASE_URL)
+    DATABASES = {
+        "default": {
+            "ENGINE":   "django.db.backends.postgresql",
+            "NAME":     _u.path.lstrip("/"),
+            "USER":     _u.username,
+            "PASSWORD": _u.password,
+            "HOST":     _u.hostname,
+            "PORT":     str(_u.port or 5432),
+            "OPTIONS":  {"sslmode": "require"},
+        }
     }
-}
+else:
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.sqlite3",
+            "NAME": BASE_DIR / "db.sqlite3",
+        }
+    }
 
 CACHES = {
     "default": {
@@ -75,7 +90,7 @@ REST_FRAMEWORK = {
     "DEFAULT_PARSER_CLASSES": ["rest_framework.parsers.JSONParser"],
     "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
     "DEFAULT_AUTHENTICATION_CLASSES": [
-        "rest_framework.authentication.TokenAuthentication",
+        "rest_framework_simplejwt.authentication.JWTAuthentication",
     ],
     "DEFAULT_PERMISSION_CLASSES": [
         "rest_framework.permissions.AllowAny",
@@ -100,6 +115,21 @@ USE_TZ = True
 
 FLUXX_BRIEF_URL = config("FLUXX_BRIEF_URL", default="http://localhost:8001/internal/brief/generate/")
 GEMINI_API_KEY = config("GEMINI_API_KEY", default="")
+
+# ── AWS / SageMaker ───────────────────────────────────────────
+USE_SAGEMAKER            = config("USE_SAGEMAKER",            default=False, cast=bool)
+SAGEMAKER_ENDPOINT_NAME = config("SAGEMAKER_ENDPOINT_NAME",  default="evh-demand-v1")
+AWS_DEFAULT_REGION      = config("AWS_DEFAULT_REGION",        default="eu-west-1")
+AWS_ACCESS_KEY_ID       = config("AWS_ACCESS_KEY_ID",         default="")
+AWS_SECRET_ACCESS_KEY   = config("AWS_SECRET_ACCESS_KEY",     default="")
+AWS_SESSION_TOKEN       = config("AWS_SESSION_TOKEN",         default="")
+
+from datetime import timedelta
+SIMPLE_JWT = {
+    "ACCESS_TOKEN_LIFETIME":  timedelta(hours=12),
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=7),
+    "AUTH_HEADER_TYPES": ("Bearer",),
+}
 
 CELERY_BROKER_URL = config("REDIS_URL", default="redis://localhost:6379/0")
 CELERY_RESULT_BACKEND = config("REDIS_URL", default="redis://localhost:6379/0")

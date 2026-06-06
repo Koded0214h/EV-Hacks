@@ -8,7 +8,7 @@ import {
   ChevronUp, Map, History, ShoppingBag, Bolt,
 } from 'lucide-react'
 import './DriverView.css'
-import { api, mapDriverStation, getToken, setToken, setCachedUser, getCachedUser, clearAuth } from '../api.js'
+import { api, mapDriverStation, getToken, setToken, clearAuth, setCachedUser, getCachedUser } from '../api.js'
 
 const MAPBOX_TOKEN = import.meta.env.VITE_MAPBOX_TOKEN
 
@@ -163,8 +163,8 @@ function LoginScreen({ onLogin, onSignup }) {
     if (!email.trim() || !password.trim()) { setError('Fill in all fields'); return }
     setError(''); setLoading(true)
     try {
-      const data = await api.auth.login(email.trim().toLowerCase(), password)
-      setToken(data.token)
+      const data = await api.auth.login(email.trim(), password)
+      setToken(data.access)
       setCachedUser(data.user)
       onLogin(data.user)
     } catch (e) {
@@ -230,11 +230,11 @@ function LoginScreen({ onLogin, onSignup }) {
 
 // ── Signup ────────────────────────────────────────────────────
 function SignupScreen({ onBack, onDone }) {
-  const [step, setStep]       = useState(1)
-  const [form, setForm]       = useState({ name:'', phone:'', email:'', vehicle:'', password:'', confirm:'' })
+  const [step, setStep]         = useState(1)
+  const [form, setForm]         = useState({ name:'', phone:'', email:'', vehicle:'', password:'', confirm:'' })
   const [showPass, setShowPass] = useState(false)
-  const [loading, setLoading] = useState(false)
-  const [error,   setError]   = useState('')
+  const [loading, setLoading]   = useState(false)
+  const [error,   setError]     = useState('')
 
   const set = (k, v) => setForm(f => ({ ...f, [k]:v }))
 
@@ -246,16 +246,13 @@ function SignupScreen({ onBack, onDone }) {
   }
 
   const submit = async () => {
-    if (!form.vehicle) { setError('Select your vehicle'); return }
-    if (form.password.length < 8) { setError('Password must be at least 8 characters'); return }
-    if (form.password !== form.confirm) { setError("Passwords don't match"); return }
+    if (!form.vehicle)                    { setError('Select your vehicle'); return }
+    if (form.password.length < 8)         { setError('Password must be at least 8 characters'); return }
+    if (form.password !== form.confirm)   { setError("Passwords don't match"); return }
     setError(''); setLoading(true)
     try {
-      const data = await api.auth.register({
-        name: form.name, email: form.email.trim().toLowerCase(),
-        password: form.password, phone: form.phone, vehicle: form.vehicle,
-      })
-      setToken(data.token)
+      const data = await api.auth.register(form.email.trim(), form.password, form.name.trim(), { phone: form.phone, vehicle: form.vehicle })
+      setToken(data.access)
       setCachedUser(data.user)
       onDone(data.user)
     } catch (e) {
@@ -1119,22 +1116,17 @@ export default function DriverView() {
   const [screen, setScreen] = useState('splash')
   const [user,   setUser]   = useState(null)
 
-  const handleLogout = async () => {
-    api.auth.logout().catch(() => {})
+  const handleLogout = () => {
     clearAuth()
     setUser(null)
     setScreen('login')
   }
 
-  // After splash: if token present skip login
   const afterSplash = () => {
-    if (getToken() && getCachedUser()) {
-      api.auth.me()
-        .then(u => { setUser(u); setCachedUser(u); setScreen('home') })
-        .catch(() => { clearAuth(); setScreen('login') })
-    } else {
-      setScreen('login')
-    }
+    if (!getToken()) { setScreen('login'); return }
+    api.auth.me()
+      .then(u => { setUser(u); setCachedUser(u); setScreen('home') })
+      .catch(() => { clearAuth(); setScreen('login') })
   }
 
   return (
