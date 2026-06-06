@@ -1,0 +1,186 @@
+{
+  "info": {
+    "name": "EV Hacks API",
+    "description": "Nigeria's Missing EV Intelligence Layer. Base URL: http://localhost:8000/api/v1\n\nAll responses are JSON. Error shape: {\"error\": true, \"message\": \"...\", \"code\": \"ERR_CODE\"}",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:8000/api/v1",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Health Check",
+      "item": [
+        {
+          "name": "GET /",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/",
+            "description": "Health check. Returns {status: ok, version: 1.0.0}"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Zones",
+      "item": [
+        {
+          "name": "GET /zones/",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/zones/",
+            "description": "Returns all zone polygons with demand scores. Used by Koded to render the choropleth heatmap."
+          }
+        },
+        {
+          "name": "GET /zones/:zone_id/",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/zones/lagos_lekki_1/",
+            "description": "Returns a single zone. Called when user clicks a zone on the map."
+          }
+        },
+        {
+          "name": "GET /zones/bbox/",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/zones/bbox/?sw_lat=6.4&sw_lng=3.3&ne_lat=6.6&ne_lng=3.5",
+              "query": [
+                {"key": "sw_lat", "value": "6.4"},
+                {"key": "sw_lng", "value": "3.3"},
+                {"key": "ne_lat", "value": "6.6"},
+                {"key": "ne_lng", "value": "3.5"}
+              ]
+            },
+            "description": "Returns zones within a map bounding box. Used for progressive loading as user pans."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Stations",
+      "item": [
+        {
+          "name": "GET /stations/",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/stations/?lat=6.4281&lng=3.4219&radius_km=5",
+              "query": [
+                {"key": "lat", "value": "6.4281", "description": "optional"},
+                {"key": "lng", "value": "3.4219", "description": "optional"},
+                {"key": "radius_km", "value": "5", "description": "optional"},
+                {"key": "type", "value": "dc_fast", "disabled": true, "description": "optional: ac_level2 | dc_fast | swap"},
+                {"key": "status", "value": "available", "disabled": true, "description": "optional: available | busy | offline"}
+              ]
+            },
+            "description": "All stations with live status. Koded renders these as map pins."
+          }
+        },
+        {
+          "name": "POST /stations/report/",
+          "request": {
+            "method": "POST",
+            "url": "{{base_url}}/stations/report/",
+            "header": [{"key": "Content-Type", "value": "application/json"}],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"station_id\": \"sta-001\",\n  \"status\": \"busy\",\n  \"reporter_type\": \"driver\",\n  \"note\": \"Queue of 3 vehicles waiting\"\n}"
+            },
+            "description": "Crowdsourced station status update from driver or operator."
+          }
+        }
+      ]
+    },
+    {
+      "name": "ROI Engine",
+      "item": [
+        {
+          "name": "POST /roi/calculate/",
+          "request": {
+            "method": "POST",
+            "url": "{{base_url}}/roi/calculate/",
+            "header": [{"key": "Content-Type", "value": "application/json"}],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"lat\": 6.4281,\n  \"lng\": 3.4219,\n  \"zone_id\": \"lagos_lekki_1\",\n  \"station_type\": \"dc_fast\",\n  \"num_ports\": 4,\n  \"capex_ngn\": 12000000,\n  \"opex_monthly_ngn\": 450000,\n  \"target_segment\": \"mixed\",\n  \"demand_score\": 87.4,\n  \"competitor_count\": 2\n}"
+            },
+            "description": "Core ROI calculation. Returns 3 scenarios: conservative, base, optimistic. Results cached in Redis — same inputs return instantly."
+          }
+        },
+        {
+          "name": "GET /roi/compare/",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/roi/compare/?zone_ids=lagos_lekki_1,lagos_yaba_1&station_type=dc_fast&num_ports=4&capex_ngn=12000000&opex_monthly_ngn=450000&target_segment=mixed",
+              "query": [
+                {"key": "zone_ids", "value": "lagos_lekki_1,lagos_yaba_1"},
+                {"key": "station_type", "value": "dc_fast"},
+                {"key": "num_ports", "value": "4"},
+                {"key": "capex_ngn", "value": "12000000"},
+                {"key": "opex_monthly_ngn", "value": "450000"},
+                {"key": "target_segment", "value": "mixed"}
+              ]
+            },
+            "description": "Compare ROI across multiple zones side by side. Investor planning view."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Mobility",
+      "item": [
+        {
+          "name": "POST /mobility/ping/",
+          "request": {
+            "method": "POST",
+            "url": "{{base_url}}/mobility/ping/",
+            "header": [{"key": "Content-Type", "value": "application/json"}],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"session_id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"lat\": 6.4281,\n  \"lng\": 3.4219,\n  \"speed_kmh\": 34.2,\n  \"recorded_at\": \"2025-06-06T08:00:00Z\"\n}"
+            },
+            "description": "Ingest a GPS ping from the driver PWA. Returns zone_id of the zone containing the ping."
+          }
+        },
+        {
+          "name": "GET /mobility/heatmap/",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/mobility/heatmap/?hours=24",
+              "query": [
+                {"key": "hours", "value": "24", "description": "24 (default) or 168 (7 days)"}
+              ]
+            },
+            "description": "Returns aggregated ping density as GeoJSON FeatureCollection. Koded renders this as the mobility overlay layer."
+          }
+        }
+      ]
+    },
+    {
+      "name": "AI Brief",
+      "item": [
+        {
+          "name": "POST /brief/generate/",
+          "request": {
+            "method": "POST",
+            "url": "{{base_url}}/brief/generate/",
+            "header": [{"key": "Content-Type", "value": "application/json"}],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"zone_id\": \"lagos_lekki_1\",\n  \"roi_result\": {\n    \"location\": {\"lat\": 6.4281, \"lng\": 3.4219, \"name\": \"Lekki Phase 1\"},\n    \"station_type\": \"dc_fast\",\n    \"num_ports\": 4,\n    \"capex_ngn\": 12000000,\n    \"opex_monthly_ngn\": 450000,\n    \"scenarios\": {\n      \"conservative\": {\"daily_sessions_per_port\": 7.58, \"avg_revenue_per_session_ngn\": 1800, \"monthly_gross_ngn\": 1641600, \"monthly_net_ngn\": 1191600, \"payback_months\": 10.07, \"roi_12m_pct\": 19.16},\n      \"base\": {\"daily_sessions_per_port\": 10.82, \"avg_revenue_per_session_ngn\": 2000, \"monthly_gross_ngn\": 2596800, \"monthly_net_ngn\": 2146800, \"payback_months\": 5.59, \"roi_12m_pct\": 114.68},\n      \"optimistic\": {\"daily_sessions_per_port\": 14.61, \"avg_revenue_per_session_ngn\": 2300, \"monthly_gross_ngn\": 4042260, \"monthly_net_ngn\": 3592260, \"payback_months\": 3.34, \"roi_12m_pct\": 258.83}\n    },\n    \"demand_score\": 87.4,\n    \"competitor_count\": 2,\n    \"recommendation\": \"Strong investment case.\"\n  }\n}"
+            },
+            "description": "Proxies to Fluxx's internal LLM service. Returns AI-generated investor brief. Target: < 8 seconds."
+          }
+        }
+      ]
+    }
+  ]
+}

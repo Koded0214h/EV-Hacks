@@ -336,6 +336,12 @@
 /* competitor */
 .dp-competitor { display:flex; align-items:center; gap:8px; font-size:13px; color:#475569; }
 .dp-comp-count { font-size:20px; font-weight:700; color:#0F172A; }
+.dp-comp-list  { display:flex; flex-direction:column; gap:6px; margin-top:8px; }
+.dp-comp-item  { display:flex; align-items:center; gap:8px; font-size:12px; color:#475569; }
+.dp-comp-dot   { width:8px; height:8px; border-radius:50%; flex-shrink:0; }
+.dp-comp-name  { flex:1; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.dp-comp-dist  { font-weight:600; color:#94A3B8; flex-shrink:0; }
+.dp-comp-empty { font-size:12px; color:#16A34A; margin-top:6px; }
 
 /* AI Brief */
 .dp-brief-btn {
