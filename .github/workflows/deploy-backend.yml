@@ -21,7 +21,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Configure AWS credentials (OIDC)
+      - name: Configure AWS credentials (OIDC, for ECR only)
         uses: aws-actions/configure-aws-credentials@v4
         with:
           role-to-assume: arn:aws:iam::487054650567:role/evh-github-actions
@@ -34,7 +34,7 @@ jobs:
       - name: Build and push image
         env:
           ECR_REGISTRY: ${{ steps.ecr.outputs.registry }}
-          IMAGE_TAG: ${{ github.sha }}
+          IMAGE_TAG: ${{ github.run_number }}-${{ github.sha }}
         run: |
           docker build \
             -t $ECR_REGISTRY/$ECR_REPO:$IMAGE_TAG \
@@ -43,61 +43,40 @@ jobs:
           docker push $ECR_REGISTRY/$ECR_REPO:$IMAGE_TAG
           docker push $ECR_REGISTRY/$ECR_REPO:latest
 
-      - name: Find EC2 instance
-        id: ec2
-        run: |
-          INSTANCE_ID=$(aws ec2 describe-instances \
-            --filters "Name=tag:Name,Values=evh-app" "Name=instance-state-name,Values=running" \
-            --query 'Reservations[0].Instances[0].InstanceId' --output text)
-          if [ "$INSTANCE_ID" = "None" ] || [ -z "$INSTANCE_ID" ]; then
-            echo "::error::No running EC2 instance tagged Name=evh-app"
+      - name: Deploy on EC2 via SSH
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          key: ${{ secrets.EC2_SSH_PRIVATE_KEY }}
+          script: |
+            set -e
+            source /etc/profile.d/evhacks.sh
+            cd /opt/evhacks/app
+
+            aws ecr get-login-password --region "$AWS_REGION" \
+              | docker login --username AWS --password-stdin "$ECR_REGISTRY"
+
+            docker compose pull api
+            docker compose up -d --no-deps --force-recreate api
+            docker compose ps
+
+      - name: Health check
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          key: ${{ secrets.EC2_SSH_PRIVATE_KEY }}
+          script: |
+            for i in $(seq 1 30); do
+              STATUS=$(docker inspect --format '{{.State.Status}}' evhacks-api 2>/dev/null || echo "missing")
+              echo "[$i] container status: $STATUS"
+              if [ "$STATUS" = "running" ] && curl -fs -m 3 http://localhost:8000/ >/dev/null 2>&1; then
+                echo "Healthy"
+                exit 0
+              fi
+              sleep 2
+            done
+            echo "::error::API didn't respond within 60s"
+            docker compose logs api --tail 100
             exit 1
-          fi
-          echo "instance-id=$INSTANCE_ID" >> $GITHUB_OUTPUT
-          echo "Found instance: $INSTANCE_ID"
-
-      - name: Deploy via SSM
-        env:
-          INSTANCE_ID: ${{ steps.ec2.outputs.instance-id }}
-        run: |
-          CMD_ID=$(aws ssm send-command \
-            --instance-ids "$INSTANCE_ID" \
-            --document-name AWS-RunShellScript \
-            --comment "Deploy ${{ github.sha }}" \
-            --parameters '{"commands":["sudo -u ec2-user -i bash /opt/evhacks/bootstrap.sh"]}' \
-            --query 'Command.CommandId' --output text)
-          echo "SSM command: $CMD_ID"
-
-          for i in $(seq 1 60); do
-            STATUS=$(aws ssm get-command-invocation \
-              --command-id "$CMD_ID" --instance-id "$INSTANCE_ID" \
-              --query Status --output text 2>/dev/null || echo "Pending")
-            echo "[$i] status: $STATUS"
-            case "$STATUS" in
-              Success) exit 0 ;;
-              Failed|Cancelled|TimedOut)
-                aws ssm get-command-invocation \
-                  --command-id "$CMD_ID" --instance-id "$INSTANCE_ID" \
-                  --query StandardErrorContent --output text
-                exit 1 ;;
-            esac
-            sleep 5
-          done
-          echo "::error::Deploy timed out"
-          exit 1
-
-      - name: Smoke test
-        env:
-          INSTANCE_ID: ${{ steps.ec2.outputs.instance-id }}
-        run: |
-          PUBLIC_IP=$(aws ec2 describe-instances --instance-ids "$INSTANCE_ID" \
-            --query 'Reservations[0].Instances[0].PublicIpAddress' --output text)
-          echo "Hitting http://$PUBLIC_IP:8000/healthz"
-          for i in $(seq 1 30); do
-            if curl -fs -m 3 "http://$PUBLIC_IP:8000/healthz"; then
-              echo "Healthy"
-              exit 0
-            fi
-            sleep 2
-          done
-          echo "::warning::Healthz never responded — check /var/log on the EC2"
