@@ -22,7 +22,7 @@ services:
   api:
     # Local dev:  builds from ./Dockerfile (ECR_REGISTRY empty → falls back to "evh/api")
     # Production: pulls ${ECR_REGISTRY}/evh/api:${IMAGE_TAG}
-    image: ${ECR_REGISTRY:-evh}/api:${IMAGE_TAG:-latest}
+    image: ${ECR_REGISTRY:-localhost}/evh/api:${IMAGE_TAG:-latest}
     build: .
     container_name: evhacks-api
     ports:
